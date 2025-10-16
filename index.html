@@ -3,262 +3,398 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>News for Minecraft</title>
-  <meta name="description" content="Minecraft news and version changelogs" />
-  <link rel="icon" href="data:," />
+  <title>News for Minecraft — Versions & AI</title>
+  <meta name="description" content="Minecraft changelogs (1.16.5..1.20), screenshots, and AI news — animated transitions." />
+  <!-- Favicon: inline SVG data URI -->
+  <link rel="icon" href='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect rx="6" width="32" height="32" fill="%2300417f"/><text x="50%" y="55%" font-size="16" text-anchor="middle" fill="%23fff" font-family="Segoe UI, Arial">MC</text></svg>'>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- HEADER -->
-  <div class="header" role="banner">
+  <header class="site-header">
     <div class="brand">
-      <div class="logo">MC</div>
-      <div class="site-title">News for Minecraft</div>
+      <div class="logo" aria-hidden="true">
+        <!-- inline SVG logo -->
+        <svg width="36" height="36" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+              <stop offset="0" stop-color="#4fb3ff"/>
+              <stop offset="1" stop-color="#7b61ff"/>
+            </linearGradient>
+          </defs>
+          <rect rx="16" width="100" height="100" fill="url(#g)"></rect>
+          <text x="50" y="60" font-size="55" text-anchor="middle" fill="#041328" font-family="Segoe UI, Arial">MC</text>
+        </svg>
+      </div>
+      <div class="title">News for Minecraft</div>
     </div>
 
     <div class="header-controls">
-      <button class="menu-btn" id="openPanel" aria-haspopup="dialog" aria-expanded="false">☰ Menu</button>
+      <button id="openPanel" class="btn ghost">Menu ☰</button>
+    </div>
+  </header>
+
+  <!-- PANEL OVERLAY -->
+  <div id="panelBackdrop" class="backdrop" aria-hidden="true">
+    <div class="panel" role="dialog" aria-modal="true" aria-label="Navigation">
+      <div class="panel-top">
+        <div class="panel-title">Navigate</div>
+        <button id="closePanel" class="icon-btn" aria-label="Close">✕</button>
+      </div>
+
+      <div class="panel-search">
+        <input id="searchInput" placeholder="Search versions or news (e.g. 1.18)" aria-label="Search">
+      </div>
+
+      <div id="panelLinks" class="panel-links">
+        <!-- links injected by JS -->
+      </div>
     </div>
   </div>
 
-  <!-- PANEL (overlay) -->
-  <div class="panel-backdrop" id="panelBackdrop" aria-hidden="true">
-    <div class="panel" role="dialog" aria-modal="true" aria-label="Navigation panel">
-      <div class="panel-top">
-        <div class="panel-left">
-          <div style="font-weight:700; font-size:1rem; margin-right:8px">Navigate</div>
+  <!-- MAIN -->
+  <main class="main">
+    <section id="landing" class="panel-page active">
+      <div class="hero">
+        <h1>Версии Minecraft — подробно, со скриншотами</h1>
+        <p class="lead">Нажми Menu ☰ → выбери версию. Между переходами — мощные анимации.</p>
+        <div class="quick-buttons">
+          <button class="btn accent" data-target="1.16.5">1.16.5</button>
+          <button class="btn accent" data-target="1.17">1.17</button>
+          <button class="btn accent" data-target="1.18">1.18</button>
+          <button class="btn accent" data-target="1.19">1.19</button>
+          <button class="btn accent" data-target="1.20">1.20</button>
+        </div>
+      </div>
 
-          <div class="panel-search" role="search">
-            <input id="panelSearch" placeholder="Search versions or news (e.g. 1.18)" aria-label="Search versions or news">
+      <div class="grid">
+        <article class="card">
+          <h3>Latest news (highlights)</h3>
+          <ul>
+            <li>15 Oct 2025 — Mojang testing new world generation</li>
+            <li>10 Sep 2025 — New frog variants</li>
+            <li>25 Aug 2025 — Snapshot 1.21.1 performance</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>AI in Minecraft</h3>
+          <p>Mods and tools with AI: NPCs with ChatGPT, MineGPT Builder, AI redstone engineers.</p>
+        </article>
+
+        <article class="card">
+          <h3>About this site</h3>
+          <p>Fan project. All changelogs are summaries — for full details use Minecraft Wiki.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- VERSION SECTIONS -->
+    <!-- Each section has: description, features list, screenshot (SVG placeholder), and "back" button -->
+    <section id="1.16.5" class="version-page panel-page">
+      <div class="version-top">
+        <h2>Minecraft 1.16.5 — Nether Update (details)</h2>
+        <div class="meta">Release: 15 Jan 2021</div>
+      </div>
+
+      <div class="version-body">
+        <div class="left">
+          <div class="screenshot">
+            <img alt="Screenshot 1.16.5" src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700"><rect width="100%" height="100%" fill="%230b1220"/><text x="50%" y="50%" font-size="28" fill="%23ffffff" text-anchor="middle" font-family="Segoe UI">Screenshot placeholder — 1.16.5</text></svg>'>
+          </div>
+
+          <div class="features">
+            <h3>Main highlights</h3>
+            <ul>
+              <li>New Nether biomes: Crimson Forest, Warped Forest, Soul Sand Valley, Basalt Deltas.</li>
+              <li>Piglins: trade with gold, aggressive behaviour in certain cases.</li>
+              <li>Netherite: new top-tier material — armor and tools that don't burn in lava.</li>
+              <li>Ancient Debris and crafting of Netherite ingots.</li>
+              <li>New mobs: Hoglins, Zoglins, and Striders for lava traversal.</li>
+              <li>Respawn Anchor to respawn in the Nether.</li>
+            </ul>
           </div>
         </div>
 
-        <div style="display:flex; gap:8px; align-items:center;">
-          <button class="panel-close" id="closePanel" aria-label="Close panel">✕</button>
+        <div class="right">
+          <h4>Why it mattered</h4>
+          <p>Nether Update transformed the Nether from a single biome into a full world with exploration, resources and distinct biomes — greatly impacting mid/late game goals.</p>
+
+          <div class="notes card">
+            <strong>Notes:</strong> Many servers stayed on 1.16.x for long due to plugin compatibility; 1.16.5 was the stable long-term release for that line.
+          </div>
+
+          <div class="actions">
+            <button class="btn" data-target="landing">Back</button>
+            <a class="btn ghost" href="#1.17" data-target="1.17">Next: 1.17 →</a>
+          </div>
         </div>
       </div>
+    </section>
 
-      <div class="panel-links" id="panelLinks">
-        <!-- links inserted by JS -->
-      </div>
-    </div>
-  </div>
-
-  <!-- MAIN CONTENT -->
-  <div class="container" role="main">
-    <div class="version-header card" style="margin-bottom:18px;">
-      <h2 style="margin:0">Welcome — News for Minecraft</h2>
-      <p style="margin:6px 0 0; color:var(--muted);">Choose a version or news item from the menu (top right).</p>
-    </div>
-
-    <div class="grid">
-      <div class="card">
-        <h3 style="color:var(--accent); margin:0 0 8px">Latest</h3>
-        <p style="color:var(--muted); margin:0 0 12px">Short highlights — keep site content in HTML for now (no JSON).</p>
-        <ul style="color:var(--muted); margin-top:8px">
-          <li>Oct 15, 2025 — Mojang testing new world gen</li>
-          <li>Sep 10, 2025 — New frogs variants</li>
-          <li>Aug 25, 2025 — Snapshot 1.21.1 performance</li>
-        </ul>
+    <section id="1.17" class="version-page panel-page">
+      <div class="version-top">
+        <h2>Minecraft 1.17 — Caves & Cliffs Part I</h2>
+        <div class="meta">Release: 8 Jun 2021</div>
       </div>
 
-      <div class="card">
-        <h3 style="color:var(--accent); margin:0 0 8px">Versions</h3>
-        <p style="color:var(--muted)">Quick jump to changelogs (use the menu).</p>
-        <div style="display:flex; gap:8px; margin-top:12px; flex-wrap:wrap">
-          <button class="menu-btn" data-target="1.16.5">1.16.5</button>
-          <button class="menu-btn" data-target="1.17">1.17</button>
-          <button class="menu-btn" data-target="1.18">1.18</button>
-          <button class="menu-btn" data-target="1.19">1.19</button>
-          <button class="menu-btn" data-target="1.20">1.20</button>
+      <div class="version-body">
+        <div class="left">
+          <div class="screenshot">
+            <img alt="Screenshot 1.17" src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700"><rect width="100%" height="100%" fill="%230b1220"/><text x="50%" y="50%" font-size="28" fill="%23ffffff" text-anchor="middle" font-family="Segoe UI">Screenshot placeholder — 1.17</text></svg>'>
+          </div>
+
+          <div class="features">
+            <h3>Main highlights</h3>
+            <ul>
+              <li>Axolotls — helpful aquatic companions for combat and exploration.</li>
+              <li>Glow Squid — new luminescent mob with special drops.</li>
+              <li>Copper ore & Oxidation mechanics; Spyglass and Lightning Rod.</li>
+              <li>Amethyst geodes and tinted glass for decorative options.</li>
+              <li>Dripstone and pointed dripstone mechanics.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="right">
+          <h4>Why it mattered</h4>
+          <p>1.17 introduced many technical blocks and mobs that later shaped base building, exploration and automation possibilities.</p>
+
+          <div class="actions">
+            <button class="btn" data-target="1.16.5">← Back</button>
+            <button class="btn accent" data-target="1.18">Next: 1.18 →</button>
+          </div>
         </div>
       </div>
+    </section>
 
-      <div class="card">
-        <h3 style="color:var(--accent); margin:0 0 8px">About</h3>
-        <p style="color:var(--muted)">Fan-made news site. All changelogs are summaries — use official Wiki for full details.</p>
+    <section id="1.18" class="version-page panel-page">
+      <div class="version-top">
+        <h2>Minecraft 1.18 — Caves & Cliffs Part II</h2>
+        <div class="meta">Release: 30 Nov 2021</div>
       </div>
-    </div>
 
-    <!-- hidden sections (same as before) -->
-    <section id="home" class="active" style="display:block; margin-top:18px">
-      <div class="card">
-        <h3 style="margin-top:0">Welcome</h3>
-        <p style="color:var(--muted)">Use the menu to open specific version pages or AI/news sections.</p>
+      <div class="version-body">
+        <div class="left">
+          <div class="screenshot">
+            <img alt="Screenshot 1.18" src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700"><rect width="100%" height="100%" fill="%230b1220"/><text x="50%" y="50%" font-size="28" fill="%23ffffff" text-anchor="middle" font-family="Segoe UI">Screenshot placeholder — 1.18</text></svg>'>
+          </div>
+
+          <div class="features">
+            <h3>Main highlights</h3>
+            <ul>
+              <li>Full world generation overhaul — dramatically changed mountains and cave systems.</li>
+              <li>World height changes (new min/max), new ore distribution.</li>
+              <li>New cave biomes: lush caves and dripstone caves.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="right">
+          <h4>Why it mattered</h4>
+          <p>1.18 was the real generational update — it changed exploration, resource distribution and map generation for all players and servers.</p>
+
+          <div class="actions">
+            <button class="btn" data-target="1.17">← Back</button>
+            <button class="btn accent" data-target="1.19">Next: 1.19 →</button>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section id="1.16.5" style="display:none; margin-top:18px">
-      <div class="card">
-        <h3> Minecraft 1.16.5 — Nether Update</h3>
-        <p style="color:var(--muted)"><b>Release:</b> Jan 15, 2021</p>
-        <ul style="color:var(--muted)">
-          <li>Nether biomes and netherite</li>
-          <li>Piglins, bastions, hoglins, striders</li>
-        </ul>
+    <section id="1.19" class="version-page panel-page">
+      <div class="version-top">
+        <h2>Minecraft 1.19 — The Wild Update</h2>
+        <div class="meta">Release: 7 Jun 2022</div>
+      </div>
+
+      <div class="version-body">
+        <div class="left">
+          <div class="screenshot">
+            <img alt="Screenshot 1.19" src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700"><rect width="100%" height="100%" fill="%230b1220"/><text x="50%" y="50%" font-size="28" fill="%23ffffff" text-anchor="middle" font-family="Segoe UI">Screenshot placeholder — 1.19</text></svg>'>
+          </div>
+
+          <div class="features">
+            <h3>Main highlights</h3>
+            <ul>
+              <li>Deep Dark biome and the terrifying Warden boss.</li>
+              <li>Ancient Cities with unique loot and dangers.</li>
+              <li>Mangrove swamp biome and frogs, mud blocks.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="right">
+          <h4>Why it mattered</h4>
+          <p>Introduced truly dangerous late-game content (Warden) plus atmospheric biomes that impacted how players explored underground areas.</p>
+
+          <div class="actions">
+            <button class="btn" data-target="1.18">← Back</button>
+            <button class="btn accent" data-target="1.20">Next: 1.20 →</button>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section id="1.17" style="display:none; margin-top:18px">
-      <div class="card">
-        <h3> Minecraft 1.17 — Caves & Cliffs (Part I)</h3>
-        <p style="color:var(--muted)"><b>Release:</b> Jun 8, 2021</p>
-        <ul style="color:var(--muted)">
-          <li>Axolotls, golems, amethyst, copper</li>
-        </ul>
+    <section id="1.20" class="version-page panel-page">
+      <div class="version-top">
+        <h2>Minecraft 1.20 — Trails & Tales</h2>
+        <div class="meta">Release: 7 Jun 2023</div>
+      </div>
+
+      <div class="version-body">
+        <div class="left">
+          <div class="screenshot">
+            <img alt="Screenshot 1.20" src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700"><rect width="100%" height="100%" fill="%230b1220"/><text x="50%" y="50%" font-size="28" fill="%23ffffff" text-anchor="middle" font-family="Segoe UI">Screenshot placeholder — 1.20</text></svg>'>
+          </div>
+
+          <div class="features">
+            <h3>Main highlights</h3>
+            <ul>
+              <li>Archaeology system and Sniffer mob (voted mob).</li>
+              <li>Cherry grove biome, armor trims (decorative armor patterns).</li>
+              <li>Camels and new building blocks (bamboo options, hanging signs, etc.).</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="right">
+          <h4>Why it mattered</h4>
+          <p>1.20 focused on creativity and world flavor — archaeology and cosmetic options expanded storytelling and decoration in builds.</p>
+
+          <div class="actions">
+            <button class="btn" data-target="1.19">← Back</button>
+            <button class="btn accent" data-target="landing">Back to start</button>
+          </div>
+        </div>
       </div>
     </section>
+  </main>
 
-    <section id="1.18" style="display:none; margin-top:18px">
-      <div class="card">
-        <h3> Minecraft 1.18 — Caves & Cliffs (Part II)</h3>
-        <p style="color:var(--muted)"><b>Release:</b> Nov 30, 2021</p>
-        <ul style="color:var(--muted)">
-          <li>World height changes, cave revamp</li>
-        </ul>
-      </div>
-    </section>
+  <footer class="site-footer">© 2025 News for Minecraft — fan project</footer>
 
-    <section id="1.19" style="display:none; margin-top:18px">
-      <div class="card">
-        <h3> Minecraft 1.19 — The Wild Update</h3>
-        <p style="color:var(--muted)"><b>Release:</b> Jun 7, 2022</p>
-        <ul style="color:var(--muted)">
-          <li>Deep Dark, Warden, mangrove</li>
-        </ul>
-      </div>
-    </section>
-
-    <section id="1.20" style="display:none; margin-top:18px">
-      <div class="card">
-        <h3> Minecraft 1.20 — Trails & Tales</h3>
-        <p style="color:var(--muted)"><b>Release:</b> Jun 7, 2023</p>
-        <ul style="color:var(--muted)">
-          <li>Archaeology, sniffer, cherry groves</li>
-        </ul>
-      </div>
-    </section>
-
-  </div>
-
-  <div class="footer">© 2025 News for Minecraft — fan project</div>
-
+  <!-- SCRIPT: transitions, panel, search, animations -->
   <script>
-    // ELEMENTS
-    const openBtn = document.getElementById('openPanel');
-    const panelBackdrop = document.getElementById('panelBackdrop');
-    const closeBtn = document.getElementById('closePanel');
-    const panelLinks = document.getElementById('panelLinks');
-    const searchInput = document.getElementById('panelSearch');
-
-    // links data
+    /* ======================
+       UI boot
+       ====================== */
     const LINKS = [
-      {id:'home', title:'Home', desc:'Main page', ico:'🏠'},
+      {id:'landing', title:'Home', desc:'Main page', ico:'🏠'},
       {id:'1.16.5', title:'1.16.5 — Nether', desc:'Nether Update', ico:'🔥'},
       {id:'1.17', title:'1.17 — Caves & Cliffs I', desc:'Axolotls, copper', ico:'⛰️'},
-      {id:'1.18', title:'1.18 — Caves & Cliffs II', desc:'World height & caves', ico:'🏔️'},
+      {id:'1.18', title:'1.18 — Caves & Cliffs II', desc:'Cave & mountain revamp', ico:'🏔️'},
       {id:'1.19', title:'1.19 — The Wild', desc:'Deep Dark & Warden', ico:'🌑'},
       {id:'1.20', title:'1.20 — Trails & Tales', desc:'Archaeology & sniffer', ico:'🐫'},
-      {id:'news', title:'News', desc:'Latest news', ico:'📰'},
+      {id:'news', title:'News', desc:'Latest highlights', ico:'📰'},
       {id:'about', title:'About', desc:'About this site', ico:'📘'}
     ];
 
-    // build panel links
-    function renderLinks(filter = ''){
+    const panelBackdrop = document.getElementById('panelBackdrop');
+    const openPanel = document.getElementById('openPanel');
+    const closePanel = document.getElementById('closePanel');
+    const panelLinks = document.getElementById('panelLinks');
+    const searchInput = document.getElementById('searchInput');
+
+    // render panel links
+    function renderPanel(q = '') {
       panelLinks.innerHTML = '';
-      const q = filter.trim().toLowerCase();
-      LINKS.filter(l => (l.title + ' ' + l.desc + ' ' + l.ico).toLowerCase().includes(q))
-        .forEach(l => {
-          const el = document.createElement('button');
-          el.className = 'link';
-          el.type = 'button';
-          el.setAttribute('data-target', l.id);
-          el.innerHTML = `<div class="ico">${l.ico}</div>
-                          <div style="text-align:left">
-                            <div style="font-weight:700">${l.title}</div>
-                            <div style="font-size:0.86rem; color:var(--muted)">${l.desc}</div>
-                          </div>`;
-          el.addEventListener('click', () => { openSection(l.id); hidePanel(); });
-          panelLinks.appendChild(el);
-      });
+      const query = (q||'').toLowerCase();
+      LINKS.filter(l=> (l.title+' '+l.desc).toLowerCase().includes(query) || l.ico.includes(query))
+        .forEach(l=>{
+          const btn = document.createElement('button');
+          btn.className = 'panel-link';
+          btn.type = 'button';
+          btn.innerHTML = `<div class="pl-ico">${l.ico}</div><div class="pl-body"><div class="pl-title">${l.title}</div><div class="pl-desc">${l.desc}</div></div>`;
+          btn.addEventListener('click', ()=> navigateTo(l.id));
+          panelLinks.appendChild(btn);
+        });
     }
+    renderPanel();
 
-    renderLinks();
-
-    // open / close
-    function showPanel(){
-      panelBackdrop.classList.add('show');
+    // open/close panel
+    openPanel.addEventListener('click', ()=> {
+      panelBackdrop.classList.add('visible');
       panelBackdrop.setAttribute('aria-hidden','false');
-      openBtn.setAttribute('aria-expanded','true');
       searchInput.focus();
-    }
+    });
+    closePanel.addEventListener('click', ()=> hidePanel());
+    panelBackdrop.addEventListener('click', (e)=> { if(e.target === panelBackdrop) hidePanel(); });
+    document.addEventListener('keydown', e=> { if(e.key === 'Escape') hidePanel(); });
+
     function hidePanel(){
-      panelBackdrop.classList.remove('show');
+      panelBackdrop.classList.remove('visible');
       panelBackdrop.setAttribute('aria-hidden','true');
-      openBtn.setAttribute('aria-expanded','false');
-      openBtn.focus();
+      openPanel.focus();
     }
 
-    openBtn.addEventListener('click', showPanel);
-    closeBtn.addEventListener('click', hidePanel);
-    panelBackdrop.addEventListener('click', (e) => {
-      if(e.target === panelBackdrop) hidePanel();
-    });
+    searchInput.addEventListener('input', (e)=> renderPanel(e.target.value));
 
-    // escape closes
-    document.addEventListener('keydown', (e) => {
-      if(e.key === 'Escape') hidePanel();
-    });
+    /* ======================
+       SECTION TRANSITIONS
+       ====================== */
+    const pages = document.querySelectorAll('.panel-page');
 
-    // search
-    searchInput.addEventListener('input', (e) => {
-      renderLinks(e.target.value);
-    });
+    function currentPage(){
+      return document.querySelector('.panel-page.active');
+    }
 
-    // sections handling
-    function openSection(id){
-      // hide all sections
-      document.querySelectorAll('main section, .container section').forEach(s => {
-        s.style.display = 'none';
+    // heavy animation: out -> in
+    function animateSwitch(fromEl, toEl){
+      return new Promise(resolve=>{
+        if(!fromEl){
+          // simply show
+          toEl.classList.add('active','anim-in');
+          toEl.addEventListener('animationend', ()=> {
+            toEl.classList.remove('anim-in');
+            resolve();
+          }, {once:true});
+          return;
+        }
+
+        // out animation
+        fromEl.classList.add('anim-out');
+        fromEl.addEventListener('animationend', ()=>{
+          fromEl.classList.remove('anim-out','active');
+          // in animation
+          toEl.classList.add('active','anim-in');
+          toEl.addEventListener('animationend', ()=>{
+            toEl.classList.remove('anim-in');
+            resolve();
+          }, {once:true});
+        }, {once:true});
       });
-      // special ids
-      if(id === 'news'){
-        // open news section: we don't have separate element, so show home and scroll to top
-        document.getElementById('home').style.display = 'block';
-        window.scrollTo({top:0, behavior:'smooth'});
-        return;
-      }
-      if(id === 'about'){
-        document.getElementById('home').style.display = 'block';
-        window.scrollTo({top:0, behavior:'smooth'});
-        return;
-      }
-      const el = document.getElementById(id);
-      if(el) el.style.display = 'block';
+    }
+
+    // navigateTo with heavy animation and hide panel
+    function navigateTo(id){
+      hidePanel();
+      const from = currentPage();
+      const to = document.getElementById(id);
+      if(!to) return;
+      animateSwitch(from, to);
+      // scroll to top for dramatic effect
       window.scrollTo({top:0, behavior:'smooth'});
     }
 
-    // quick header buttons (version quick buttons)
-    document.querySelectorAll('[data-target]').forEach(btn=>{
-      btn.addEventListener('click', (e)=>{
+    // quick buttons in hero
+    document.querySelectorAll('.quick-buttons .btn').forEach(btn=>{
+      btn.addEventListener('click', ()=> {
         const t = btn.getAttribute('data-target');
-        openSection(t);
+        navigateTo(t);
       });
     });
 
-    // mobile swipe down to close (simple)
-    let startY = null;
-    panelBackdrop.addEventListener('touchstart', (e)=> {
-      if(e.touches && e.touches[0]) startY = e.touches[0].clientY;
-    }, {passive:true});
-    panelBackdrop.addEventListener('touchmove', (e)=> {
-      if(!startY) return;
-      const currentY = e.touches[0].clientY;
-      if(currentY - startY > 120) { // swipe down
-        hidePanel();
-        startY = null;
-      }
-    }, {passive:true});
+    // header quick target buttons inside sections
+    document.querySelectorAll('[data-target]').forEach(btn=>{
+      btn.addEventListener('click', (e)=>{
+        const t = btn.getAttribute('data-target');
+        navigateTo(t);
+      });
+    });
+
+    // initial: ensure landing visible
+    document.querySelectorAll('.panel-page').forEach(p=>{
+      if(p.id === 'landing') { p.classList.add('active'); } else { p.classList.remove('active'); }
+    });
 
   </script>
 </body>
