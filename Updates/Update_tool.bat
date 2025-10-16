@@ -3,7 +3,7 @@ title Git Update Tool - by Ironcarrier
 color 0a
 
 echo ================================================
-echo        🚀 Git Update Manager for Website
+echo         Git Update Manager for Website
 echo ================================================
 echo [1] Safe Auto Update (commit + pull + push)
 echo [2] Hard Reset (discard all local changes)
@@ -30,13 +30,13 @@ echo [3/3] Pulling and pushing...
 git pull --rebase origin main
 git push -u origin main
 
-echo ✅ Done! Repository updated safely.
+echo  Done! Repository updated safely.
 pause
 goto end
 
 :hard
 echo --------------------------------
-echo ⚠ WARNING: This will remove all local changes!
+echo  WARNING: This will remove all local changes!
 pause
 
 echo [1/2] Resetting local files...
@@ -45,7 +45,7 @@ git reset --hard
 echo [2/2] Pulling latest from GitHub...
 git pull origin main
 
-echo ✅ Done! Repository fully synced with GitHub.
+echo  Done! Repository fully synced with GitHub.
 pause
 goto end
 
@@ -63,7 +63,7 @@ git commit -m "Force push update"
 echo [3/3] Forcing push to GitHub...
 git push origin main --force
 
-echo ✅ Done! Remote repository overwritten successfully.
+echo Done! Remote repository overwritten successfully.
 pause
 goto end
 
