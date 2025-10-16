@@ -3,7 +3,7 @@ title Git Update Tool - Smart Version
 color 0a
 
 echo ===================================================
-echo      Git Update & Sync Tool by Ironcarrier
+echo      Git Update Tool by Ironcarrier
 echo ===================================================
 echo [1] Safe Auto Update (commit + pull + push)
 echo [2] Hard Reset (discard all local changes)
