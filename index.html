@@ -5,145 +5,272 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Новости Minecraft</title>
   <style>
-    /* === СТИЛИ ОБЩИЕ === */
+    :root {
+      --bg-color: #1e1e1e;
+      --panel-color: #2a2a2a;
+      --accent: #00bfff;
+      --text: #f1f1f1;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #1e1e1e;
-      color: #f1f1f1;
-      padding-top: 60px;
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--bg-color);
+      color: var(--text);
     }
 
-    a {
-      text-decoration: none;
-      color: #00bfff;
-    }
-
-    a:hover {
-      color: #1e90ff;
-    }
-
-    /* === ВЕРХНЯЯ ПАНЕЛЬ === */
-    .top-panel {
+    /* ==== Верхняя панель ==== */
+    header {
       position: fixed;
-      top: -60px;
-      left: 0;
-      right: 0;
-      height: 60px;
-      background: rgba(30, 30, 30, 0.95);
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 20px;
-      transition: top 0.3s ease;
-      z-index: 999;
-      border-bottom: 2px solid #444;
-    }
-
-    .top-panel.show {
       top: 0;
+      left: 0;
+      width: 100%;
+      background: var(--panel-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
     }
 
-    .nav-links a {
-      margin: 0 15px;
-      color: #f1f1f1;
-      font-weight: bold;
+    header h1 {
+      font-size: 1.2rem;
+      color: var(--accent);
+      margin: 0;
     }
 
-    .nav-links a:hover {
-      color: #00bfff;
+    .menu-btn {
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 1.6rem;
+      cursor: pointer;
     }
 
-    /* === ВЫПАДАЮЩЕЕ МЕНЮ ВЕРСИЙ === */
-    .version-dropdown {
-      position: relative;
-      display: inline-block;
+    /* ==== Выезжающее меню ==== */
+    nav {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 70%;
+      height: 100vh;
+      background: var(--panel-color);
+      display: flex;
+      flex-direction: column;
+      padding-top: 70px;
+      transition: right 0.3s ease;
     }
 
-    .version-dropdown-content {
-      display: none;
-      position: absolute;
-      background-color: #2a2a2a;
-      min-width: 160px;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-      z-index: 1;
-      border-radius: 5px;
-      padding: 10px;
+    nav.show {
+      right: 0;
     }
 
-    .version-dropdown-content a {
-      color: #f1f1f1;
-      padding: 8px 12px;
-      display: block;
-      border-radius: 5px;
+    nav a {
+      color: var(--text);
+      padding: 15px 25px;
+      border-bottom: 1px solid #333;
+      text-decoration: none;
+      font-size: 1.1rem;
     }
 
-    .version-dropdown-content a:hover {
-      background-color: #333;
+    nav a:hover {
+      background: #333;
+      color: var(--accent);
     }
 
-    .version-dropdown:hover .version-dropdown-content {
-      display: block;
-    }
-
-    /* === КОНТЕНТ === */
-    .content {
+    /* ==== Контент ==== */
+    main {
+      padding: 90px 20px 40px;
       max-width: 900px;
-      margin: 40px auto;
-      padding: 20px;
-      background: #252525;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+      margin: auto;
     }
 
-    h1, h2 {
-      color: #00bfff;
+    section {
+      display: none;
+      animation: fade 0.3s ease;
+    }
+
+    section.active {
+      display: block;
+    }
+
+    @keyframes fade {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+      color: var(--accent);
+    }
+
+    ul {
+      padding-left: 20px;
     }
 
     footer {
       text-align: center;
-      margin-top: 40px;
       color: #777;
+      margin-top: 40px;
+      padding: 10px;
+    }
+
+    /* ==== Адаптивность ==== */
+    @media (min-width: 768px) {
+      nav {
+        position: static;
+        height: auto;
+        flex-direction: row;
+        justify-content: flex-end;
+        width: auto;
+        background: none;
+        padding: 0;
+        transition: none;
+      }
+
+      nav a {
+        border: none;
+        margin: 0 10px;
+      }
+
+      .menu-btn {
+        display: none;
+      }
+
+      header {
+        justify-content: flex-start;
+      }
+
+      header h1 {
+        margin-right: 40px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="top-panel" id="topPanel">
-    <div class="nav-links">
-      <a href="index.html">Главная</a>
-      <a href="news.html">Новости</a>
-      <a href="about.html">О Minecraft</a>
-      <div class="version-dropdown">
-        <a href="#">Версии ▼</a>
-        <div class="version-dropdown-content">
-          <a href="versions/1.16.5.html">1.16.5</a>
-          <a href="versions/1.17.html">1.17</a>
-          <a href="versions/1.18.html">1.18</a>
-          <a href="versions/1.19.html">1.19</a>
-          <a href="versions/1.20.html">1.20</a>
-        </div>
-      </div>
-    </div>
-  </div>
+  <header>
+    <h1>Новости Minecraft</h1>
+    <button class="menu-btn" id="menuBtn">☰</button>
+    <nav id="menu">
+      <a href="#" data-page="home">🏠 Главная</a>
+      <a href="#" data-page="news">📰 Новости</a>
+      <a href="#" data-page="about">📘 О Minecraft</a>
+      <a href="#" data-page="1.16.5">1.16.5</a>
+      <a href="#" data-page="1.17">1.17</a>
+      <a href="#" data-page="1.18">1.18</a>
+      <a href="#" data-page="1.19">1.19</a>
+      <a href="#" data-page="1.20">1.20</a>
+    </nav>
+  </header>
 
-  <div class="content">
-    <h1>Добро пожаловать в новости Minecraft!</h1>
-    <p>Этот сайт рассказывает об обновлениях, версиях и самых свежих новостях Minecraft.</p>
-    <p>Наведи курсор вверх, чтобы открыть панель навигации.</p>
-  </div>
+  <main>
+    <!-- Главная -->
+    <section id="home" class="active">
+      <h2>Добро пожаловать!</h2>
+      <p>Здесь вы найдёте новости, обновления и историю версий Minecraft.</p>
+      <p>Используйте меню ☰ для навигации между разделами.</p>
+    </section>
 
-  <footer>© 2025 Minecraft News — фанатский сайт</footer>
+    <!-- Новости -->
+    <section id="news">
+      <h2>Свежие новости Minecraft</h2>
+      <ul>
+        <li>🧱 <b>15 октября 2025</b> — Mojang тестирует новую систему генерации миров.</li>
+        <li>🐸 <b>10 сентября 2025</b> — В игру добавлены новые виды лягушек.</li>
+        <li>⚙️ <b>25 августа 2025</b> — Вышел снапшот 1.21.1 с оптимизациями.</li>
+      </ul>
+    </section>
+
+    <!-- О Minecraft -->
+    <section id="about">
+      <h2>О Minecraft</h2>
+      <p>Minecraft — это песочница, созданная Mojang Studios. Игроки могут строить, исследовать и выживать в бесконечном мире из блоков.</p>
+      <p>С 2011 года игра получила множество обновлений, включая новые блоки, биомы, мобов и возможности для творчества.</p>
+    </section>
+
+    <!-- Версии -->
+    <section id="1.16.5">
+      <h2>Minecraft 1.16.5 — Nether Update</h2>
+      <p><b>Дата выхода:</b> 15 января 2021 года</p>
+      <ul>
+        <li>Исправлены ошибки, связанные с серверами.</li>
+        <li>Обновление завершает эпоху Nether Update.</li>
+        <li>Введены стабильные механики пиглинов и бастионов.</li>
+      </ul>
+    </section>
+
+    <section id="1.17">
+      <h2>Minecraft 1.17 — Caves & Cliffs (часть I)</h2>
+      <p><b>Дата выхода:</b> 8 июня 2021 года</p>
+      <ul>
+        <li>Добавлены аметисты, медь, телескоп и новые руды.</li>
+        <li>Появились Аксолотли и светящиеся кальмары.</li>
+        <li>Добавлены новые декоративные блоки и предметы.</li>
+      </ul>
+    </section>
+
+    <section id="1.18">
+      <h2>Minecraft 1.18 — Caves & Cliffs (часть II)</h2>
+      <p><b>Дата выхода:</b> 30 ноября 2021 года</p>
+      <ul>
+        <li>Переработана генерация пещер и гор.</li>
+        <li>Изменён лимит высоты мира (от -64 до 319).</li>
+        <li>Более реалистичная генерация руд и биомов.</li>
+      </ul>
+    </section>
+
+    <section id="1.19">
+      <h2>Minecraft 1.19 — The Wild Update</h2>
+      <p><b>Дата выхода:</b> 7 июня 2022 года</p>
+      <ul>
+        <li>Добавлен биом Deep Dark и Вардена.</li>
+        <li>Появились мангровые болота и лягушки.</li>
+        <li>Добавлены огненные мушки и новые блоки.</li>
+      </ul>
+    </section>
+
+    <section id="1.20">
+      <h2>Minecraft 1.20 — Trails & Tales Update</h2>
+      <p><b>Дата выхода:</b> 7 июня 2023 года</p>
+      <ul>
+        <li>Добавлена археология и узоры доспехов.</li>
+        <li>Появился верблюд и новая древесина.</li>
+        <li>Добавлены новые элементы декора и биомы.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    © 2025 Minecraft News | Сделано фанатами, не Mojang
+  </footer>
 
   <script>
-    const topPanel = document.getElementById("topPanel");
+    const menuBtn = document.getElementById('menuBtn');
+    const menu = document.getElementById('menu');
+    const links = document.querySelectorAll('nav a');
+    const sections = document.querySelectorAll('section');
 
-    document.addEventListener("mousemove", (e) => {
-      if (e.clientY < 50) {
-        topPanel.classList.add("show");
-      } else {
-        topPanel.classList.remove("show");
-      }
+    // Открыть / закрыть меню
+    menuBtn.addEventListener('click', () => {
+      menu.classList.toggle('show');
+    });
+
+    // Переключение страниц
+    links.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const page = link.dataset.page;
+
+        sections.forEach(sec => sec.classList.remove('active'));
+        document.getElementById(page).classList.add('active');
+
+        menu.classList.remove('show');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
     });
   </script>
 </body>
