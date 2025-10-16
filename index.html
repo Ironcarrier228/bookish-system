@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Новости Minecraft</title>
+  <style>
+    /* === СТИЛИ ОБЩИЕ === */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #1e1e1e;
+      color: #f1f1f1;
+      padding-top: 60px;
+    }
+
+    a {
+      text-decoration: none;
+      color: #00bfff;
+    }
+
+    a:hover {
+      color: #1e90ff;
+    }
+
+    /* === ВЕРХНЯЯ ПАНЕЛЬ === */
+    .top-panel {
+      position: fixed;
+      top: -60px;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: rgba(30, 30, 30, 0.95);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      transition: top 0.3s ease;
+      z-index: 999;
+      border-bottom: 2px solid #444;
+    }
+
+    .top-panel.show {
+      top: 0;
+    }
+
+    .nav-links a {
+      margin: 0 15px;
+      color: #f1f1f1;
+      font-weight: bold;
+    }
+
+    .nav-links a:hover {
+      color: #00bfff;
+    }
+
+    /* === ВЫПАДАЮЩЕЕ МЕНЮ ВЕРСИЙ === */
+    .version-dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .version-dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #2a2a2a;
+      min-width: 160px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+      z-index: 1;
+      border-radius: 5px;
+      padding: 10px;
+    }
+
+    .version-dropdown-content a {
+      color: #f1f1f1;
+      padding: 8px 12px;
+      display: block;
+      border-radius: 5px;
+    }
+
+    .version-dropdown-content a:hover {
+      background-color: #333;
+    }
+
+    .version-dropdown:hover .version-dropdown-content {
+      display: block;
+    }
+
+    /* === КОНТЕНТ === */
+    .content {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #252525;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+
+    h1, h2 {
+      color: #00bfff;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+  <div class="top-panel" id="topPanel">
+    <div class="nav-links">
+      <a href="index.html">Главная</a>
+      <a href="news.html">Новости</a>
+      <a href="about.html">О Minecraft</a>
+      <div class="version-dropdown">
+        <a href="#">Версии ▼</a>
+        <div class="version-dropdown-content">
+          <a href="versions/1.16.5.html">1.16.5</a>
+          <a href="versions/1.17.html">1.17</a>
+          <a href="versions/1.18.html">1.18</a>
+          <a href="versions/1.19.html">1.19</a>
+          <a href="versions/1.20.html">1.20</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content">
+    <h1>Добро пожаловать в новости Minecraft!</h1>
+    <p>Этот сайт рассказывает об обновлениях, версиях и самых свежих новостях Minecraft.</p>
+    <p>Наведи курсор вверх, чтобы открыть панель навигации.</p>
+  </div>
+
+  <footer>© 2025 Minecraft News — фанатский сайт</footer>
+
+  <script>
+    const topPanel = document.getElementById("topPanel");
+
+    document.addEventListener("mousemove", (e) => {
+      if (e.clientY < 50) {
+        topPanel.classList.add("show");
+      } else {
+        topPanel.classList.remove("show");
+      }
+    });
+  </script>
+</body>
+</html>
