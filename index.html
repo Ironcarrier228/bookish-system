@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" data-theme="auto">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Версии и поиск — Minecraft Sky Realm</title>
-  <meta name="description" content="Выберите версию Minecraft Sky Realm или найдите её через поиск." />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <title>Minecraft Sky Realm — версии 1.16–1.20</title>
+  <meta name="description" content="Каталог версий Minecraft Sky Realm 1.16–1.20, поиск, таймлайн, светлая/тёмная тема." />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -13,20 +12,21 @@
     <div class="container header-inner">
       <h1 class="brand">
         <span class="brand-accent">Minecraft</span> Sky Realm
+        <span class="author">Автор: <strong>Ironcarrier</strong></span>
       </h1>
-      <button class="theme-toggle" aria-label="Переключить тему">🌓</button>
+      <button class="theme-toggle" aria-label="Переключить тему" title="Светлая/тёмная тема">🌓</button>
     </div>
   </header>
 
   <main class="container">
     <section class="intro">
-      <p>Выберите версию или используйте поиск. Скриншоты лежат в папке <code>/images</code> (формат .png). Тексты можно редактировать напрямую, сайт статический.</p>
+      <p>Версии 1.16–1.20. Пользуйся поиском и сортировкой. Скриншоты лежат в <code>/images</code> (.png).</p>
     </section>
 
     <section class="controls">
       <div class="search">
-        <label for="search-input" class="search-label">Поиск версий</label>
-        <input id="search-input" type="search" placeholder="Например: 1.20, Nether, Forge…" autocomplete="off" />
+        <label for="search-input" class="sr-only">Поиск версий</label>
+        <input id="search-input" type="search" placeholder="Например: 1.16, Nether, Forge…" autocomplete="off" />
       </div>
       <div class="filters">
         <select id="sort-select" aria-label="Сортировка">
@@ -42,20 +42,20 @@
     </section>
 
     <section class="history">
-      <h2>История версий</h2>
-      <p>Ниже — хронология релизов и заметок. Это фан‑проект, созданный вручную, без CMS.</p>
+      <h2>История версий 1.16–1.20</h2>
       <ul class="timeline" id="timeline">
-        <!-- Элементы заполняются из scripts.js -->
+        <!-- Заполняется из scripts.js -->
       </ul>
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="container footer-inner">
-      <small>Сайт создан как фан‑проект. Вы можете менять тексты и заменять скриншоты в /images (.png).</small>
+      <small>Фан‑проект. Тексты и изображения редактируются вручную.</small>
       <nav class="footer-nav">
-        <a href="#" id="about-link">О проекте</a>
-        <a href="#" id="ai-link">AI-помощь</a>
+        <span class="author-inline">Автор: <strong>Ironcarrier</strong></span>
+        <a href="about.html">О проекте</a>
+        <a href="news.html">Новости</a>
       </nav>
     </div>
   </footer>
@@ -64,7 +64,7 @@
   <dialog id="modal" class="modal">
     <form method="dialog" class="modal-content">
       <button class="modal-close" aria-label="Закрыть">✕</button>
-      <div id="modal-body"><!-- Контент версии --></div>
+      <div id="modal-body"></div>
     </form>
   </dialog>
 
