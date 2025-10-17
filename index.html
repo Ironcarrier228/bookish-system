@@ -1,73 +1,52 @@
 <!DOCTYPE html>
-<html lang="ru" data-theme="auto">
+<html lang="ru">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Minecraft Sky Realm — версии 1.16–1.20</title>
-  <meta name="description" content="Каталог версий Minecraft Sky Realm 1.16–1.20, поиск, таймлайн, светлая/тёмная тема." />
+  <title>Minecraft 1.16 — Nether Update</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header class="site-header">
     <div class="container header-inner">
-      <h1 class="brand">
-        <span class="brand-accent">Minecraft</span> Sky Realm
-        <span class="author">Автор: <strong>Ironcarrier</strong></span>
-      </h1>
-      <button class="theme-toggle" aria-label="Переключить тему" title="Светлая/тёмная тема">🌓</button>
+      <h1 class="brand"><span class="brand-accent">Minecraft</span> Sky Realm</h1>
+      <nav><a href="index.html">← На главную</a></nav>
     </div>
   </header>
 
   <main class="container">
-    <section class="intro">
-      <p>Версии 1.16–1.20. Пользуйся поиском и сортировкой. Скриншоты лежат в <code>/images</code> (.png).</p>
-    </section>
+    <article class="version-page">
+      <h2>Minecraft 1.16 — Nether Update</h2>
+      <img src="/images/1-16.png" alt="Скриншот Nether Update" class="hero-img">
 
-    <section class="controls">
-      <div class="search">
-        <label for="search-input" class="sr-only">Поиск версий</label>
-        <input id="search-input" type="search" placeholder="Например: 1.16, Nether, Forge…" autocomplete="off" />
-      </div>
-      <div class="filters">
-        <select id="sort-select" aria-label="Сортировка">
-          <option value="newest">Сначала новые</option>
-          <option value="oldest">Сначала старые</option>
-          <option value="name">По названию</option>
-        </select>
-      </div>
-    </section>
+      <p><strong>Дата выхода:</strong> 23 июня 2020</p>
+      <p><strong>Ключевые особенности:</strong> новые биомы Незера, пиглины, древние обломки, блоки и музыка.</p>
 
-    <section class="grid" id="version-grid" aria-live="polite">
-      <!-- Карточки версий генерируются из scripts.js -->
-    </section>
+      <section>
+        <h3>Описание</h3>
+        <p>Обновление полностью изменило Незер, добавив четыре новых биома: Crimson Forest, Warped Forest, Basalt Deltas и Soulsand Valley. Появились пиглины, хоглины и новые структуры — бастионы. Введён материал «незерит», прочнее алмаза.</p>
+      </section>
 
-    <section class="history">
-      <h2>История версий 1.16–1.20</h2>
-      <ul class="timeline" id="timeline">
-        <!-- Заполняется из scripts.js -->
-      </ul>
-    </section>
+      <section>
+        <h3>Скриншоты</h3>
+        <img src="/images/1-16-2.png" alt="Crimson Forest">
+        <img src="/images/1-16-3.png" alt="Bastion Remnant">
+      </section>
+
+      <section>
+        <h3>Интересные факты</h3>
+        <ul>
+          <li>Это первое обновление, где добавили новый материал прочнее алмаза.</li>
+          <li>Музыку для Незера написала Lena Raine.</li>
+        </ul>
+      </section>
+    </article>
   </main>
 
   <footer class="site-footer">
     <div class="container footer-inner">
-      <small>Фан‑проект. Тексты и изображения редактируются вручную.</small>
-      <nav class="footer-nav">
-        <span class="author-inline">Автор: <strong>Ironcarrier</strong></span>
-        <a href="about.html">О проекте</a>
-        <a href="news.html">Новости</a>
-      </nav>
+      <small>Автор: Ironcarrier</small>
     </div>
   </footer>
-
-  <!-- Модальное окно -->
-  <dialog id="modal" class="modal">
-    <form method="dialog" class="modal-content">
-      <button class="modal-close" aria-label="Закрыть">✕</button>
-      <div id="modal-body"></div>
-    </form>
-  </dialog>
-
-  <script src="scripts.js" defer></script>
 </body>
 </html>
