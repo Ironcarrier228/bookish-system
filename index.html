@@ -1,865 +1,338 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>News for Minecraft — Versions & AI</title>
-<meta name="description" content="Multilingual Minecraft version changelogs with heavy animations" />
-<link rel="icon" href='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect rx="6" width="32" height="32" fill="%2300417f"/><text x="50%" y="55%" font-size="16" text-anchor="middle" fill="%23fff" font-family="Segoe UI, Arial">MC</text></svg>'>
-<style>
-/* =========================
-   Powerful neon / glass UI
-   ========================= */
-:root{
-  --bg1:#050816; --bg2:#081026;
-  --glass: rgba(255,255,255,0.03);
-  --muted:#9fb3c8;
-  --accent1:#4fb3ff;
-  --accent2:#7b61ff;
-  --accent3:#00ffd1;
-  --card: rgba(255,255,255,0.02);
-  --radius:14px;
-  --maxw:1200px;
-  --ff: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-}
-*{box-sizing:border-box}
-html,body{height:100%}
-body{
-  margin:0; font-family:var(--ff); color:#eaf6ff;
-  background: linear-gradient(180deg,var(--bg1),var(--bg2));
-  -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
-  display:flex; flex-direction:column; align-items:center;
-}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minecraft Sky Realm</title>
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <style>
+    :root {
+      --bg-color: #0b0c10;
+      --accent: #00f5ff;
+      --accent2: #ffd166;
+      --text: #f1f1f1;
+      --panel: rgba(20, 20, 25, 0.7);
+    }
 
-/* header */
-.header{
-  position:fixed; top:0; left:0; right:0; height:72px;
-  display:flex; align-items:center; justify-content:space-between;
-  padding:10px 18px; z-index:1400;
-  backdrop-filter: blur(8px) saturate(1.1);
-  background: linear-gradient(180deg, rgba(2,6,12,0.45), rgba(2,6,12,0.25));
-  border-bottom:1px solid rgba(255,255,255,0.03);
-}
-.brand{display:flex;align-items:center;gap:12px}
-.logo{width:46px;height:46px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--accent1),var(--accent2));font-weight:800;color:#041328}
-.title{font-weight:800;font-size:1rem;color:#eaf6ff}
-.header-right{display:flex;gap:10px;align-items:center}
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-/* language switcher simple */
-.lang-select{
-  background:var(--glass); border:1px solid rgba(255,255,255,0.03);
-  padding:8px 10px; border-radius:10px; color:var(--muted); cursor:pointer; font-weight:700;
-}
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      color: var(--text);
+      background: var(--bg-color);
+      overflow-x: hidden;
+    }
 
-/* menu button */
-.menu-btn{
-  background:transparent;border:1px solid rgba(255,255,255,0.03);
-  color:var(--muted); padding:8px 12px;border-radius:10px; cursor:pointer; font-weight:800;
-}
-.menu-btn:hover{ color:var(--accent1); transform:translateY(-2px) }
+    /* 🌌 Background */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: url("images/minecraft_sky.jpg") center/cover no-repeat;
+      z-index: -2;
+      filter: brightness(0.6) blur(1px);
+      animation: moveBg 60s linear infinite;
+    }
 
-/* backdrop panel */
-.backdrop{ position:fixed; inset:0; display:flex; align-items:flex-start; justify-content:center; pointer-events:none; opacity:0; transition:opacity .18s; z-index:1500 }
-.backdrop.show{ pointer-events:auto; opacity:1 }
+    @keyframes moveBg {
+      from { background-position: center top; }
+      to { background-position: center bottom; }
+    }
 
-/* panel window */
-.panel{
-  width:calc(100% - 40px); max-width:980px; margin-top:28px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-  border-radius:14px; padding:18px; border:1px solid rgba(255,255,255,0.04);
-  box-shadow: 0 20px 70px rgba(3,8,20,0.75);
-  transform: translateY(-16px) scale(.995); opacity:0; transition: transform .28s cubic-bezier(.22,.9,.2,1), opacity .18s;
-}
-.backdrop.show .panel{ transform:none; opacity:1 }
+    /* 🔝 Header */
+    header {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      background: var(--panel);
+      backdrop-filter: blur(10px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 25px;
+      z-index: 1000;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
 
-/* panel contents */
-.panel-top{ display:flex; justify-content:space-between; align-items:center; gap:8px; margin-bottom:10px }
-.panel-search{ display:flex; background:var(--glass); padding:8px 10px; border-radius:10px; border:1px solid rgba(255,255,255,0.02) }
-.panel-search input{ background:transparent; border:0; outline:0; color:#eaf6ff; width:320px }
-.panel-links{ display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin-top:10px }
+    header h1 {
+      font-size: 1.3rem;
+      color: var(--accent);
+      text-shadow: 0 0 10px var(--accent);
+    }
 
-/* link */
-.plink{ display:flex; gap:12px; align-items:center; padding:12px; border-radius:12px; cursor:pointer;
-  background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.02)
-}
-.plink .ico{ width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent1),var(--accent2));display:flex;align-items:center;justify-content:center;font-weight:800;color:#041328 }
-.plink .meta{ display:flex; flex-direction:column }
-.plink .meta .t{ font-weight:800 }
-.plink .meta .d{ color:var(--muted); font-size:0.86rem }
+    nav {
+      display: flex;
+      gap: 15px;
+    }
 
-/* main layout */
-.main{ width:100%; max-width:var(--maxw); margin-top:96px; padding:18px; }
-.hero{ padding:22px; border-radius:12px; margin-bottom:18px; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.02) }
-.hero h1{ margin:0 0 8px; font-size:1.5rem }
-.lead{ color:var(--muted) }
-.quick{ display:flex; gap:8px; margin-top:12px; flex-wrap:wrap }
+    nav button {
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
 
-/* grid cards */
-.grid{ display:grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap:12px; margin-top:18px }
-.card{ padding:14px; border-radius:12px; background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.02) }
+    nav button:hover {
+      color: var(--accent);
+      text-shadow: 0 0 5px var(--accent);
+    }
 
-/* version pages */
-.version{ display:none; padding:18px 0 }
-.version.active{ display:block }
-.vtop{ display:flex; justify-content:space-between; align-items:baseline; gap:8px; flex-wrap:wrap }
-.vtitle{ font-size:1.25rem; font-weight:800 }
-.meta{ color:var(--muted); font-size:0.92rem }
-.vbody{ display:flex; gap:18px; margin-top:14px; flex-wrap:wrap }
-.left{ flex:1 1 520px; min-width:260px }
-.right{ width:320px; min-width:220px }
+    #langSwitcher {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: var(--text);
+      padding: 5px;
+      border-radius: 5px;
+    }
 
-/* screenshot placeholder */
-.sshot{ width:100%; border-radius:12px; overflow:hidden; border:1px solid rgba(255,255,255,0.03) }
-.sshot img{ width:100%; height:auto; display:block }
+    /* 📜 Main sections */
+    main {
+      max-width: 1000px;
+      margin: 120px auto 60px;
+      padding: 0 20px;
+    }
 
-/* features */
-.features ul{ color:var(--muted); padding-left:18px }
+    section {
+      display: none;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
 
-/* notes and actions */
-.notes{ margin-top:12px; padding:10px; border-radius:10px; background: rgba(255,255,255,0.01); border:1px solid rgba(255,255,255,0.02); color:var(--muted) }
-.actions{ display:flex; gap:8px; margin-top:12px; flex-wrap:wrap }
+    section.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+      animation: fadeIn 1s ease;
+    }
 
-/* footer */
-.footer{ margin:28px 0 46px; color:var(--muted); font-size:0.9rem; text-align:center }
+    @keyframes fadeIn {
+      from { opacity: 0; filter: blur(10px); }
+      to { opacity: 1; filter: blur(0); }
+    }
 
-/* responsive */
-@media(max-width:900px){ .panel-links{ grid-template-columns:1fr } .panel-search input{ width:100% } .right{ order:2 } .left{ order:1 } .panel{ max-width:100%; height:100vh; border-radius:0; margin-top:0; padding:16px } }
-@media(max-width:420px){ .header{padding:8px} .title{font-size:0.95rem} .logo{width:40px;height:40px} }
+    h2 {
+      color: var(--accent2);
+      text-shadow: 0 0 5px var(--accent2);
+      margin-bottom: 10px;
+    }
 
-/* ======================================================
-   HEAVY ANIMATIONS (out / in) — dramatic transitions
-   ====================================================== */
-@keyframes outAnim {
-  0% { transform: none; opacity:1; filter:none; }
-  30% { transform: translateY(-8vh) rotate(-8deg) skewX(-6deg) scale(.98); opacity:.8; filter: blur(2px); }
-  70% { transform: translateY(-42vh) rotate(-30deg) skewX(-14deg) scale(.6); opacity:.12; filter: blur(8px) grayscale(.4); }
-  100% { transform: translateY(-80vh) rotate(-54deg) skewX(-24deg) scale(.4); opacity:0; filter: blur(18px) grayscale(.6); }
-}
-@keyframes inAnim {
-  0% { transform: translateY(40vh) rotate(18deg) scale(.6) skewX(12deg); opacity:0; filter: blur(14px) grayscale(.6); }
-  40% { transform: translateY(6vh) rotate(-6deg) scale(.92); opacity:.6; filter: blur(4px); }
-  75% { transform: translateY(-2vh) rotate(3deg) scale(1.03); opacity:.95; filter: none; }
-  100% { transform: none; opacity:1; filter:none; }
-}
-.anim-out{ animation: outAnim .9s cubic-bezier(.2,.8,.25,1) forwards; transform-origin:center; }
-.anim-in{ animation: inAnim .85s cubic-bezier(.18,.9,.25,1) forwards; transform-origin:center; }
+    p, ul {
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
 
-/* access focus */
-input:focus, button:focus { outline: 3px solid rgba(79,179,255,0.12); outline-offset:3px; border-radius:8px; }
-</style>
+    ul li {
+      margin-bottom: 5px;
+    }
+
+    img {
+      width: 100%;
+      border-radius: 10px;
+      margin: 15px 0;
+      box-shadow: 0 0 15px rgba(0,0,0,0.6);
+      transition: transform 0.4s ease, filter 0.4s ease;
+    }
+
+    img:hover {
+      transform: scale(1.02);
+      filter: brightness(1.1);
+    }
+
+    footer {
+      text-align: center;
+      color: #888;
+      margin-top: 40px;
+      padding: 15px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      background: var(--panel);
+      backdrop-filter: blur(10px);
+    }
+
+    @media (max-width: 768px) {
+      header { flex-direction: column; gap: 8px; }
+      nav { flex-wrap: wrap; justify-content: center; }
+    }
+  </style>
 </head>
 <body>
+  <header>
+    <h1>Minecraft Sky Realm</h1>
+    <nav>
+      <button data-page="home">Home</button>
+      <button data-page="about">About</button>
+      <button data-page="versions">Versions</button>
+      <button data-page="contact">Contact</button>
+      <select id="langSwitcher">
+        <option value="ru">Русский</option>
+        <option value="en">English</option>
+        <option value="uk">Українська</option>
+        <option value="kk">Қазақша</option>
+        <option value="es">Español</option>
+      </select>
+    </nav>
+  </header>
 
-<!-- HEADER -->
-<header class="header" role="banner">
-  <div class="brand">
-    <div class="logo" aria-hidden="true">MC</div>
-    <div class="title" id="ui_siteTitle">News for Minecraft</div>
-  </div>
+  <main>
+    <section id="home" class="active">
+      <h2 data-lang="home_title">Добро пожаловать в Minecraft Sky Realm!</h2>
+      <p data-lang="home_text">Исследуй историю обновлений, узнай о любимой игре больше и почувствуй дух приключений!</p>
+      <img src="images/home.jpg" alt="Minecraft Sky World">
+    </section>
 
-  <div class="header-right">
-    <select id="lang" class="lang-select" aria-label="Language switcher">
-      <option value="en">English</option>
-      <option value="ru">Русский</option>
-      <option value="uk">Українська</option>
-      <option value="kk">Қазақша</option>
-      <option value="es">Español</option>
-    </select>
-    <button class="menu-btn" id="menuBtn" aria-haspopup="dialog" aria-expanded="false">☰ Menu</button>
-  </div>
-</header>
+    <section id="about">
+      <h2 data-lang="about_title">О проекте</h2>
+      <p data-lang="about_text">
+        Этот сайт создан фанатом Minecraft — Ironcarrier.  
+        Это не просто сайт, а результат множества часов работы, вдохновения и любви к игре.  
+        Цель — собрать воедино всё, что делает Minecraft таким магическим.
+      </p>
+      <img src="images/about.jpg" alt="About Minecraft Project">
+    </section>
 
-<!-- PANEL -->
-<div class="backdrop" id="backdrop" aria-hidden="true">
-  <div class="panel" role="dialog" aria-modal="true" aria-label="Navigation panel">
-    <div class="panel-top">
-      <div style="font-weight:800" id="ui_navTitle">Navigate</div>
-      <button id="closePanel" class="menu-btn" aria-label="Close">✕</button>
-    </div>
+    <section id="versions">
+      <h2 data-lang="ver_title">История версий</h2>
 
-    <div class="panel-search">
-      <input id="search" placeholder="Search versions or news (e.g. 1.18)" />
-    </div>
-
-    <div class="panel-links" id="panelLinks"></div>
-  </div>
-</div>
-
-<!-- MAIN -->
-<main class="main" role="main">
-  <section class="hero" id="hero">
-    <h1 id="ui_heroTitle">Versions of Minecraft — detailed</h1>
-    <p class="lead" id="ui_heroLead">Pick a version in the menu or use quick buttons. Translations available.</p>
-    <div class="quick" id="quickBtns">
-      <button class="menu-btn" data-target="v1.16.5">1.16.5</button>
-      <button class="menu-btn" data-target="v1.17">1.17</button>
-      <button class="menu-btn" data-target="v1.18">1.18</button>
-      <button class="menu-btn" data-target="v1.19">1.19</button>
-      <button class="menu-btn" data-target="v1.20">1.20</button>
-    </div>
-  </section>
-
-  <div class="grid" id="gridIntro">
-    <article class="card"><h3 id="ui_latestTitle">Latest</h3><ul id="latestList"><li>15 Oct 2025 — Mojang testing new world gen</li><li>10 Sep 2025 — New frog variants</li></ul></article>
-    <article class="card"><h3 id="ui_aiTitle">AI in Minecraft</h3><p id="ui_aiText">AI mods: NPCs, builders, redstone engineers.</p></article>
-    <article class="card"><h3 id="ui_aboutTitle">About</h3><p id="ui_aboutText">Fan project. Summaries only — use official sources for full changelogs.</p></article>
-  </div>
-
-  <!-- VERSIONS (each is .version) -->
-  <!-- IDs used in JS: v1.16.5, v1.17, v1.18, v1.19, v1.20 -->
-  <section id="v1.16.5" class="version" role="region" aria-labelledby="v1_16_5_title">
-    <div class="vtop">
-      <div>
-        <div id="v1_16_5_title" class="vtitle">Minecraft 1.16.5 — Nether Update</div>
-        <div class="meta" id="v1_16_5_meta">Release: 15 Jan 2021</div>
+      <div class="ver">
+        <h3>Minecraft 1.16.5 — Nether Update</h3>
+        <img src="images/1.16.5.jpg" alt="1.16.5">
+        <ul>
+          <li>Исправлены критические ошибки серверов</li>
+          <li>Завершено обновление Нижнего мира</li>
+          <li>Пиглины и бастионы получили стабильную механику</li>
+        </ul>
       </div>
-    </div>
-    <div class="vbody">
-      <div class="left">
-        <div class="sshot"><img alt="1.16.5 screenshot" src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700"><rect width="100%" height="100%" fill="%230b1220"/><text x="50%" y="50%" fill="%23fff" font-size="28" text-anchor="middle" font-family="Segoe UI">Screenshot: 1.16.5 (placeholder)</text></svg>'></div>
-        <div class="features">
-          <h3 id="v1_16_5_features_title">Main highlights</h3>
-          <ul id="v1_16_5_features"></ul>
-        </div>
+
+      <div class="ver">
+        <h3>Minecraft 1.17 — Caves & Cliffs (Part I)</h3>
+        <img src="images/1.17.jpg" alt="1.17">
+        <ul>
+          <li>Добавлены аметисты, медь, телескоп и аксолотли</li>
+          <li>Появились новые декоративные блоки</li>
+          <li>Светящиеся кальмары и новые материалы</li>
+        </ul>
       </div>
-      <aside class="right">
-        <h4 id="v1_16_5_why">Why it mattered</h4>
-        <p id="v1_16_5_desc"></p>
-        <div class="notes" id="v1_16_5_notes"></div>
-        <div class="actions">
-          <button class="menu-btn" data-target="home" id="v1_16_5_back">Back</button>
-          <button class="menu-btn" data-target="v1.17" id="v1_16_5_next">Next: 1.17 →</button>
-        </div>
-      </aside>
-    </div>
-  </section>
 
-  <section id="v1.17" class="version" role="region">
-    <div class="vtop">
-      <div>
-        <div class="vtitle" id="v1_17_title">Minecraft 1.17 — Caves & Cliffs I</div>
-        <div class="meta" id="v1_17_meta">Release: 8 Jun 2021</div>
+      <div class="ver">
+        <h3>Minecraft 1.18 — Caves & Cliffs (Part II)</h3>
+        <img src="images/1.18.jpg" alt="1.18">
+        <ul>
+          <li>Полная переработка пещер и гор</li>
+          <li>Высота мира теперь от -64 до 319</li>
+          <li>Улучшенная генерация руд и биомов</li>
+        </ul>
       </div>
-    </div>
-    <div class="vbody">
-      <div class="left">
-        <div class="sshot"><img alt="1.17 screenshot" src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700"><rect width="100%" height="100%" fill="%230b1220"/><text x="50%" y="50%" fill="%23fff" font-size="28" text-anchor="middle" font-family="Segoe UI">Screenshot: 1.17 (placeholder)</text></svg>'></div>
-        <div class="features"><h3>Main highlights</h3><ul id="v1_17_features"></ul></div>
+
+      <div class="ver">
+        <h3>Minecraft 1.19 — The Wild Update</h3>
+        <img src="images/1.19.jpg" alt="1.19">
+        <ul>
+          <li>Добавлен Вардэн и биом Deep Dark</li>
+          <li>Мангровые болота и лягушки</li>
+          <li>Новые звуки, блоки и атмосфера</li>
+        </ul>
       </div>
-      <aside class="right">
-        <h4>Why it mattered</h4><p id="v1_17_desc"></p>
-        <div class="actions"><button class="menu-btn" data-target="v1.16.5">← Back</button><button class="menu-btn" data-target="v1.18">Next: 1.18 →</button></div>
-      </aside>
-    </div>
-  </section>
 
-  <section id="v1.18" class="version" role="region">
-    <div class="vtop">
-      <div><div class="vtitle" id="v1_18_title">Minecraft 1.18 — Caves & Cliffs II</div><div class="meta" id="v1_18_meta">Release: 30 Nov 2021</div></div>
-    </div>
-    <div class="vbody">
-      <div class="left"><div class="sshot"><img alt="1.18 screenshot" src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700"><rect width="100%" height="100%" fill="%230b1220"/><text x="50%" y="50%" fill="%23fff" font-size="28" text-anchor="middle" font-family="Segoe UI">Screenshot: 1.18 (placeholder)</text></svg>'></div><div class="features"><h3>Main highlights</h3><ul id="v1_18_features"></ul></div></div>
-      <aside class="right"><h4>Why it mattered</h4><p id="v1_18_desc"></p><div class="actions"><button class="menu-btn" data-target="v1.17">← Back</button><button class="menu-btn" data-target="v1.19">Next: 1.19 →</button></div></aside>
-    </div>
-  </section>
+      <div class="ver">
+        <h3>Minecraft 1.20 — Trails & Tales</h3>
+        <img src="images/1.20.jpg" alt="1.20">
+        <ul>
+          <li>Добавлены археология, верблюды и новая древесина</li>
+          <li>Узоры на броню и новые декорации</li>
+          <li>Новые биомы и элементы путешествий</li>
+        </ul>
+      </div>
+    </section>
 
-  <section id="v1.19" class="version" role="region">
-    <div class="vtop"><div><div class="vtitle" id="v1_19_title">Minecraft 1.19 — The Wild Update</div><div class="meta" id="v1_19_meta">Release: 7 Jun 2022</div></div></div>
-    <div class="vbody">
-      <div class="left"><div class="sshot"><img alt="1.19 screenshot" src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700"><rect width="100%" height="100%" fill="%230b1220"/><text x="50%" y="50%" fill="%23fff" font-size="28" text-anchor="middle" font-family="Segoe UI">Screenshot: 1.19 (placeholder)</text></svg>'></div><div class="features"><h3>Main highlights</h3><ul id="v1_19_features"></ul></div></div>
-      <aside class="right"><h4>Why it mattered</h4><p id="v1_19_desc"></p><div class="actions"><button class="menu-btn" data-target="v1.18">← Back</button><button class="menu-btn" data-target="v1.20">Next: 1.20 →</button></div></aside>
-    </div>
-  </section>
+    <section id="contact">
+      <h2 data-lang="contact_title">Связаться со мной</h2>
+      <p data-lang="contact_text">Хочешь предложить идею или улучшение? Пиши на <b>ironcarrier.dev@gmail.com</b></p>
+    </section>
+  </main>
 
-  <section id="v1.20" class="version" role="region">
-    <div class="vtop"><div><div class="vtitle" id="v1_20_title">Minecraft 1.20 — Trails & Tales</div><div class="meta" id="v1_20_meta">Release: 7 Jun 2023</div></div></div>
-    <div class="vbody">
-      <div class="left"><div class="sshot"><img alt="1.20 screenshot" src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700"><rect width="100%" height="100%" fill="%230b1220"/><text x="50%" y="50%" fill="%23fff" font-size="28" text-anchor="middle" font-family="Segoe UI">Screenshot: 1.20 (placeholder)</text></svg>'></div><div class="features"><h3>Main highlights</h3><ul id="v1_20_features"></ul></div></div>
-      <aside class="right"><h4>Why it mattered</h4><p id="v1_20_desc"></p><div class="actions"><button class="menu-btn" data-target="v1.19">← Back</button><button class="menu-btn" data-target="home">Back to Home</button></div></aside>
-    </div>
-  </section>
+  <footer>
+    © 2025 Minecraft Sky Realm | Created by Ironcarrier
+  </footer>
 
-  <div class="footer" id="ui_footer">© 2025 News for Minecraft — fan project</div>
-</main>
+  <script>
+    const buttons = document.querySelectorAll("nav button");
+    const sections = document.querySelectorAll("section");
 
-<script>
-/* =========================
-   Multilanguage content (5 langs)
-   keys: en, ru, uk, kk, es
-   ========================= */
-const I18N = {
-  en: {
-    siteTitle: "News for Minecraft",
-    nav: "Navigate",
-    heroTitle: "Versions of Minecraft — detailed",
-    heroLead: "Pick a version from menu or quick buttons. Heavy animated transitions between pages.",
-    latestTitle: "Latest",
-    aiTitle: "AI in Minecraft",
-    aiText: "AI mods and tools: NPC chatbots, builders, redstone engineers.",
-    aboutTitle: "About",
-    aboutText: "Fan project. Changelogs are summaries — use official sources for full details.",
-    panelSearchPlaceholder: "Search versions or news (e.g. 1.18)",
-    versions: {
-      "1.16.5": {
-        title: "Minecraft 1.16.5 — Nether Update",
-        meta: "Release: 15 Jan 2021",
-        features: [
-          "New Nether biomes: Crimson Forest, Warped Forest, Soul Sand Valley, Basalt Deltas.",
-          "Piglins: trading and special behavior.",
-          "Netherite: top-tier material, does not burn in lava.",
-          "Ancient Debris for Netherite crafting.",
-          "Hoglins, Zoglins and Striders.",
-          "Respawn Anchor to respawn in the Nether."
-        ],
-        why: "Nether Update transformed the Nether into a diverse, explorable dimension with valuable resources and unique biomes.",
-        notes: "Many servers stayed on 1.16.x due to plugin compatibility; 1.16.5 was the long-term stable release."
-      },
-      "1.17": {
-        title: "Minecraft 1.17 — Caves & Cliffs Part I",
-        meta: "Release: 8 Jun 2021",
-        features: [
-          "Axolotls — aquatic companions for combat.",
-          "Glow Squid — luminescent mob with special drops.",
-          "Copper ore and oxidation mechanics; Spyglass and Lightning Rod.",
-          "Amethyst geodes and tinted glass.",
-          "Dripstone: stalactites and stalagmites."
-        ],
-        why: "Introduced many technical blocks and mobs that enriched exploration and building options.",
-        notes: "1.17 focused on adding materials and creatures ahead of terrain overhaul."
-      },
-      "1.18": {
-        title: "Minecraft 1.18 — Caves & Cliffs Part II",
-        meta: "Release: 30 Nov 2021",
-        features: [
-          "World generation overhaul — new mountains and caves.",
-          "World height changes and reorganized ore distribution.",
-          "New cave biomes: lush caves and dripstone caves."
-        ],
-        why: "A generational update changing how maps, exploration and resources behave game-wide.",
-        notes: "1.18 required world re-seeding for new terrain — existing worlds need conversion."
-      },
-      "1.19": {
-        title: "Minecraft 1.19 — The Wild Update",
-        meta: "Release: 7 Jun 2022",
-        features: [
-          "Deep Dark biome and the Warden boss.",
-          "Ancient Cities with unique loot and danger.",
-          "Mangrove swamps, frogs and mud blocks."
-        ],
-        why: "Added late-game threats and atmospheric biomes that changed underground exploration.",
-        notes: "Warden encourages stealth and changes mob tactics."
-      },
-      "1.20": {
-        title: "Minecraft 1.20 — Trails & Tales",
-        meta: "Release: 7 Jun 2023",
-        features: [
-          "Archaeology system and Sniffer mob.",
-          "Cherry grove biome and armor trims.",
-          "Camels and new building blocks (bamboo options, hanging signs)."
-        ],
-        why: "Focused on creativity and world flavor — archaeology and cosmetic options expanded storytelling.",
-        notes: "1.20 is cosmetic-heavy and adds building/storytelling tools."
-      }
-    }
-  },
-
-  ru: {
-    siteTitle: "Новости Minecraft",
-    nav: "Навигация",
-    heroTitle: "Версии Minecraft — подробно",
-    heroLead: "Выберите версию в меню или с помощью быстрых кнопок. Между страницами — мощные анимации.",
-    latestTitle: "Последние",
-    aiTitle: "ИИ в Minecraft",
-    aiText: "Моды и инструменты с ИИ: NPC-чатботы, строители, инженеры на редстоуне.",
-    aboutTitle: "О сайте",
-    aboutText: "Фан-проект. Changelog — краткие сводки. Для полного списка см. официальные источники.",
-    panelSearchPlaceholder: "Поиск версий или новостей (например, 1.18)",
-    versions: {
-      "1.16.5": {
-        title: "Minecraft 1.16.5 — Nether Update",
-        meta: "Релиз: 15 января 2021",
-        features: [
-          "Новые биомы Незера: Crimson Forest, Warped Forest, Soul Sand Valley, Basalt Deltas.",
-          "Пиглины: торговля золотом и особое поведение.",
-          "Незерит: лучшая броня/инструменты, не сгорает в лаве.",
-          "Ancient Debris для крафта незерита.",
-          "Хоглины, зоглины и страйдеры.",
-          "Respawn Anchor — возрождение в Незере."
-        ],
-        why: "Nether Update превратил Незер в полноценное измерение с ресурсами и уникальными биомами.",
-        notes: "Многие серверы долго сидели на 1.16.x из-за совместимости плагинов; 1.16.5 — стабильный релиз."
-      },
-      "1.17": {
-        title: "Minecraft 1.17 — Caves & Cliffs Часть I",
-        meta: "Релиз: 8 июня 2021",
-        features: [
-          "Аксолотли — подводные помощники в бою.",
-          "Светящиеся кальмары — новый моб с дропом.",
-          "Медь и механика окисления; подзорная труба и громоотвод.",
-          "Аметистовые жеоды и тонированное стекло.",
-          "Капельники: сталагмиты и сталагтиты."
-        ],
-        why: "Добавлены блоки и мобы, расширяющие механики строительства и исследования.",
-        notes: "1.17 добавил материалы перед переработкой террейна."
-      },
-      "1.18": {
-        title: "Minecraft 1.18 — Caves & Cliffs Часть II",
-        meta: "Релиз: 30 ноября 2021",
-        features: [
-          "Переработка генерации мира — новые горы и пещеры.",
-          "Изменение высот мира и перераспределение руд.",
-          "Новые подземные биомы: пышные пещеры и капельниковые пещеры."
-        ],
-        why: "Крупное обновление генерации, изменившее исследования и добычу ресурсов.",
-        notes: "1.18 требовал конверсии мира для новой генерации."
-      },
-      "1.19": {
-        title: "Minecraft 1.19 — The Wild Update",
-        meta: "Релиз: 7 июня 2022",
-        features: [
-          "Глубокая тьма и босс Вардэн.",
-          "Ancient Cities с уникальными лутами и опасностями.",
-          "Мангровые болота, лягушки и блоки грязи."
-        ],
-        why: "Добавлен опасный контент поздней игры и атмосферные биомы.",
-        notes: "Вардэн поощряет скрытность и меняет стиль исследования."
-      },
-      "1.20": {
-        title: "Minecraft 1.20 — Trails & Tales",
-        meta: "Релиз: 7 июня 2023",
-        features: [
-          "Археология и моб Sniffer.",
-          "Вишнёвая роща и узоры для брони.",
-          "Верблюды и новые строительные блоки."
-        ],
-        why: "1.20 — акцент на креативности и атмосферности мира.",
-        notes: "Обновление добавляет инструменты для истории и декора."
-      }
-    }
-  },
-
-  uk: {
-    siteTitle: "Новини Minecraft",
-    nav: "Навігація",
-    heroTitle: "Версії Minecraft — докладно",
-    heroLead: "Оберіть версію в меню або швидкими кнопками. Між сторінками — потужні анімації.",
-    latestTitle: "Останні",
-    aiTitle: "ШІ в Minecraft",
-    aiText: "Моди та інструменти ШІ: NPC-чатботи, будівники, інженери на редстоуні.",
-    aboutTitle: "Про сайт",
-    aboutText: "Фан-проєкт. Changelogs — короткі підсумки. Для повних даних — офіційні джерела.",
-    panelSearchPlaceholder: "Пошук версій або новин (наприклад, 1.18)",
-    versions: {
-      "1.16.5": {
-        title: "Minecraft 1.16.5 — Nether Update",
-        meta: "Реліз: 15 січня 2021",
-        features: [
-          "Нові біоми Незера: Crimson Forest, Warped Forest, Soul Sand Valley, Basalt Deltas.",
-          "Пігліни: торгівля золотом та особлива поведінка.",
-          "Незерит: найкращий матеріал, не горить у лаві.",
-          "Ancient Debris для крафту незериту.",
-          "Хогліни, зогліни і страйдери.",
-          "Respawn Anchor — відродження в Незері."
-        ],
-        why: "Nether Update перетворив Незер на різноманітне вимірювання з ресурсами та біомами.",
-        notes: "Багато серверів довго залишалися на 1.16.x через плагіни; 1.16.5 — стабільний випуск."
-      },
-      "1.17": {
-        title: "Minecraft 1.17 — Caves & Cliffs Частина I",
-        meta: "Реліз: 8 червня 2021",
-        features: [
-          "Аксолотлі — підводні супутники в бою.",
-          "Світляні кальмари — новий моб з дропом.",
-          "Мідь і механіка окиснення; підзорна труба, громовідвід.",
-          "Аметистові жеоди і тоноване скло.",
-          "Краплинники: сталактити і сталагміти."
-        ],
-        why: "Додані блоки та моби, що розширили можливості побудови й дослідження.",
-        notes: "1.17 додав матеріали перед оновленням террейну."
-      },
-      "1.18": {
-        title: "Minecraft 1.18 — Caves & Cliffs Частина II",
-        meta: "Реліз: 30 листопада 2021",
-        features: [
-          "Переробка генерації світу — нові гори і печери.",
-          "Зміни висоти світу і перерозподіл руд.",
-          "Нові підземні біоми: пишні печери і краплинникові печери."
-        ],
-        why: "Оновлення змінило дослідження та видобуток ресурсів у всій грі.",
-        notes: "1.18 вимагав конверсії світу для нової генерації."
-      },
-      "1.19": {
-        title: "Minecraft 1.19 — The Wild Update",
-        meta: "Реліз: 7 червня 2022",
-        features: [
-          "Deep Dark і босс Варден.",
-          "Ancient Cities з унікальними лутами та небезпеками.",
-          "Мангрові болота, жаби і блоки мулу."
-        ],
-        why: "Додано небезпечний контент пізньої гри і атмосферні біоми.",
-        notes: "Варден змушує ховатись та змінює тактику гравців."
-      },
-      "1.20": {
-        title: "Minecraft 1.20 — Trails & Tales",
-        meta: "Реліз: 7 червня 2023",
-        features: [
-          "Археологія і моб Sniffer.",
-          "Вишнева роща і візерунки для броні.",
-          "Верблюди та нові будівельні блоки."
-        ],
-        why: "1.20 — акцент на креативності та атмосфері світу.",
-        notes: "Оновлення додає засоби для історій та декору."
-      }
-    }
-  },
-
-  kk: {
-    siteTitle: "Minecraft жаңалықтары",
-    nav: "Навигация",
-    heroTitle: "Minecraft нұсқалары — толық",
-    heroLead: "Мәзірден нұсқаны таңдап немесе жылдам батырмаларды пайдаланыңыз. Беттер арасында әсерлі анимациялар бар.",
-    latestTitle: "Жаңа",
-    aiTitle: "ЖИ Minecraft-та",
-    aiText: "ЖИ модтары: NPC чатботтар, құрылысшылар, редстоун инженерлері.",
-    aboutTitle: "Сайт туралы",
-    aboutText: "Фан-жоба. Changelog — қысқаша мәліметтер. Толық ақпарат үшін ресми көздерге жүгініңіз.",
-    panelSearchPlaceholder: "Нұсқалар немесе жаңалықтарды іздеу (мысалы, 1.18)",
-    versions: {
-      "1.16.5": {
-        title: "Minecraft 1.16.5 — Nether Update",
-        meta: "Шығарылым: 15 қаңтар 2021",
-        features: [
-          "Незердің жаңа биомдары: Crimson Forest, Warped Forest, Soul Sand Valley, Basalt Deltas.",
-          "Piglin-дер: алтынмен сауда.",
-          "Netherite: ең мықты материал, лавада жанбайды.",
-          "Ancient Debris — Netherite жасауға.",
-          "Hoglin, Zoglin және Strider мобы.",
-          "Respawn Anchor — Незерде оралуға мүмкіндік."
-        ],
-        why: "Nether Update Незерді әр алуан, зерттелетін өлшемге айналдырды.",
-        notes: "Плагиндерге байланысты серверлер ұзақ уақыт 1.16.x нұсқасында қалды."
-      },
-      "1.17": {
-        title: "Minecraft 1.17 — Caves & Cliffs I",
-        meta: "Шығарылым: 8 маусым 2021",
-        features: [
-          "Axolotl-дар — суасты серіктері.",
-          "Glow Squid — жарқылдағыш кальмар.",
-          "Мыс (Copper) және тот басу механикасы; телескоп, найзағай өткізгіш.",
-          "Аметист геодтары және түрлі әшекейлер.",
-          "Dripstone — сталактиттер мен сталагмиттер."
-        ],
-        why: "1.17 жаңа материалдар мен мобтарды қосып, зерттеуді байытты.",
-        notes: "1.17 — террейн жаңартуларға дайындық үшін материалдар енгізді."
-      },
-      "1.18": {
-        title: "Minecraft 1.18 — Caves & Cliffs II",
-        meta: "Шығарылым: 30 қараша 2021",
-        features: [
-          "Әлем генерациясының толық өзгерісі — таулар мен үңгірлер.",
-          "Әлем биіктігінің өзгеруі және руда таралымының жаңартылуы.",
-          "Жаңа үңгір биомдары: lush және dripstone."
-        ],
-        why: "1.18 зерттеу мен ресурс жинауды түбегейлі өзгертті.",
-        notes: "1.18 жаңа генерацияға әлемді ауыстыруды талап етті."
-      },
-      "1.19": {
-        title: "Minecraft 1.19 — The Wild Update",
-        meta: "Шығарылым: 7 маусым 2022",
-        features: [
-          "Deep Dark және Warden босс.",
-          "Ancient Cities пен ерекше олжа.",
-          "Mangrove батпақтығы, бақалар және балшық блоктары."
-        ],
-        why: "Кеш деңгейдегі қауіп-қатерлер мен атмосфералық биомдар енгізілді.",
-        notes: "Warden ойыншыларды жасырынуға итермелейді."
-      },
-      "1.20": {
-        title: "Minecraft 1.20 — Trails & Tales",
-        meta: "Шығарылым: 7 маусым 2023",
-        features: [
-          "Археология және Sniffer моб.",
-          "Черри өсік (Cherry grove) және сауыт үлгілері.",
-          "Верблюдтар және жаңа құрылыс блоктары."
-        ],
-        why: "1.20 креативтілік пен әлемді әсемдеуге бағытталған.",
-        notes: "Әсемдікке көп көңіл бөлінген жаңарту."
-      }
-    }
-  },
-
-  es: {
-    siteTitle: "Noticias de Minecraft",
-    nav: "Navegar",
-    heroTitle: "Versiones de Minecraft — detalles",
-    heroLead: "Elige una versión en el menú o usa los botones rápidos. Transiciones animadas potentes entre páginas.",
-    latestTitle: "Últimas",
-    aiTitle: "IA en Minecraft",
-    aiText: "Mods y herramientas IA: NPCs con chat, constructores, ingenieros redstone.",
-    aboutTitle: "Acerca de",
-    aboutText: "Proyecto de fans. Los changelogs son resúmenes — usa fuentes oficiales para detalles completos.",
-    panelSearchPlaceholder: "Buscar versiones o noticias (ej. 1.18)",
-    versions: {
-      "1.16.5": {
-        title: "Minecraft 1.16.5 — Nether Update",
-        meta: "Lanzamiento: 15 ene 2021",
-        features: [
-          "Nuevos biomas del Nether: Crimson Forest, Warped Forest, Soul Sand Valley, Basalt Deltas.",
-          "Piglins: comercio con oro y comportamientos especiales.",
-          "Netherite: material superior, no se quema en lava.",
-          "Ancient Debris para fabricar Netherite.",
-          "Hoglins, Zoglins y Striders.",
-          "Respawn Anchor para reaparecer en el Nether."
-        ],
-        why: "Transformó el Nether en un mundo diverso y explorablе con recursos exclusivos.",
-        notes: "Muchos servidores permanecieron en 1.16.x por compatibilidad con plugins."
-      },
-      "1.17": {
-        title: "Minecraft 1.17 — Caves & Cliffs I",
-        meta: "Lanzamiento: 8 jun 2021",
-        features: [
-          "Axolotls — compañeros acuáticos útiles en combate.",
-          "Glow Squid — calamar luminoso con drops especiales.",
-          "Cobre y mecánica de oxidación; Spyglass y Lightning Rod.",
-          "Geodas de amatista y vidrio tintado.",
-          "Dripstone: estalactitas y estalagmitas."
-        ],
-        why: "Añadió bloques y mobs que expandieron construcción y exploración.",
-        notes: "1.17 introdujo materiales previos a la revisión del terreno."
-      },
-      "1.18": {
-        title: "Minecraft 1.18 — Caves & Cliffs II",
-        meta: "Lanzamiento: 30 nov 2021",
-        features: [
-          "Reforma de generación del mundo — nuevas montañas y cuevas.",
-          "Cambios en la altura del mundo y redistribución de minerales.",
-          "Nuevos biomas subterráneos: lush caves y dripstone caves."
-        ],
-        why: "Actualización generacional que cambió la exploración y distribución de recursos.",
-        notes: "1.18 exigió conversión del mundo para la nueva generación."
-      },
-      "1.19": {
-        title: "Minecraft 1.19 — The Wild Update",
-        meta: "Lanzamiento: 7 jun 2022",
-        features: [
-          "Deep Dark y el jefe Warden.",
-          "Ancient Cities con botín único y peligros.",
-          "Mangrove swamp, ranas y bloques de barro."
-        ],
-        why: "Añadió contenido tardío desafiante y biomas atmosféricos.",
-        notes: "Warden promueve el sigilo y cambia la estrategia de exploración."
-      },
-      "1.20": {
-        title: "Minecraft 1.20 — Trails & Tales",
-        meta: "Lanzamiento: 7 jun 2023",
-        features: [
-          "Arqueología y el mob Sniffer.",
-          "Cherry grove y patrones de armadura.",
-          "Camellos y nuevos bloques de construcción."
-        ],
-        why: "Centrado en creatividad y sabor del mundo — nuevas opciones de narrativa y decoración.",
-        notes: "1.20 amplía las herramientas estéticas."
-      }
-    }
-  }
-};
-
-/* =========================
-   DOM references
-   ========================= */
-const langSelect = document.getElementById('lang');
-const menuBtn = document.getElementById('menuBtn');
-const backdrop = document.getElementById('backdrop');
-const closePanel = document.getElementById('closePanel');
-const panelLinks = document.getElementById('panelLinks');
-const searchInput = document.getElementById('search');
-
-// UI nodes to update
-const UI = {
-  siteTitle: document.getElementById('ui_siteTitle'),
-  navTitle: document.getElementById('ui_navTitle'),
-  heroTitle: document.getElementById('ui_heroTitle'),
-  heroLead: document.getElementById('ui_heroLead'),
-  latestTitle: document.getElementById('ui_latestTitle'),
-  aiTitle: document.getElementById('ui_aiTitle'),
-  aiText: document.getElementById('ui_aiText'),
-  aboutTitle: document.getElementById('ui_aboutTitle'),
-  aboutText: document.getElementById('ui_aboutText'),
-  footer: document.getElementById('ui_footer')
-};
-
-/* =========================
-   Helper: render panel links
-   ========================= */
-function buildPanelLinks(query = '', lang = 'en') {
-  panelLinks.innerHTML = '';
-  const items = [
-    {id:'home', ico:'🏠', title: I18N[lang].siteTitle, desc: I18N[lang].aboutText},
-    {id:'news', ico:'📰', title: I18N[lang].latestTitle, desc: I18N[lang].latestTitle},
-    ...Object.keys(I18N[lang].versions).map(k => ({ id: 'v'+k, ico:'⛏️', title: I18N[lang].versions[k].title, desc: I18N[lang].versions[k].meta }))
-  ];
-
-  const q = (query || '').toLowerCase();
-  items.filter(it => (it.title + ' ' + it.desc + ' ' + it.ico).toLowerCase().includes(q)).forEach(it=>{
-    const b = document.createElement('div');
-    b.className = 'plink';
-    b.tabIndex = 0;
-    b.innerHTML = `<div class="ico">${it.ico}</div><div class="meta"><div class="t">${it.title}</div><div class="d">${it.desc}</div></div>`;
-    b.onclick = ()=> { navigate(it.id); hidePanel(); };
-    b.onkeydown = (e)=> { if(e.key==='Enter') { navigate(it.id); hidePanel(); } };
-    panelLinks.appendChild(b);
-  });
-}
-
-/* =========================
-   Language switching
-   ========================= */
-function setLanguage(lang) {
-  // update static UI
-  const dict = I18N[lang];
-  UI.siteTitle.textContent = dict.siteTitle;
-  UI.navTitle && (document.getElementById('ui_navTitle').textContent = dict.nav);
-  UI.heroTitle.textContent = dict.heroTitle;
-  UI.heroLead.textContent = dict.heroLead;
-  UI.latestTitle.textContent = dict.latestTitle;
-  UI.aiTitle.textContent = dict.aiTitle;
-  UI.aiText.textContent = dict.aiText;
-  UI.aboutTitle.textContent = dict.aboutTitle;
-  UI.aboutText.textContent = dict.aboutText;
-  UI.footer.textContent = dict.siteTitle + " — fan project © 2025";
-
-  searchInput.placeholder = dict.panelSearchPlaceholder;
-
-  // fill versions
-  Object.keys(dict.versions).forEach(k=>{
-    const key = k;
-    const v = dict.versions[k];
-    // title & meta
-    const elTitle = document.getElementById('v'+key).querySelector('.vtitle');
-    if(elTitle) elTitle.textContent = v.title;
-    const elMeta = document.getElementById('v'+key).querySelector('.meta');
-    if(elMeta) elMeta.textContent = v.meta;
-    // features list
-    const featuresUl = document.getElementById('v'+key).querySelector('ul');
-    if(featuresUl) {
-      featuresUl.innerHTML = '';
-      v.features.forEach(f=> {
-        const li = document.createElement('li'); li.textContent = f; featuresUl.appendChild(li);
+    buttons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        sections.forEach(s => s.classList.remove("active"));
+        document.getElementById(btn.dataset.page).classList.add("active");
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       });
-    }
-    // why and notes
-    const why = document.getElementById('v'+key).querySelector('[id$="_desc"]') || document.getElementById('v'+key).querySelector('p');
-    if(why) why.textContent = v.why;
-    const notesEl = document.getElementById('v'+key).querySelector('.notes');
-    if(notesEl) notesEl.textContent = v.notes || '';
-  });
+    });
 
-  // rebuild panel links for search
-  buildPanelLinks(searchInput.value || '', lang);
-}
+    // 🌍 Translations
+    const translations = {
+      en: {
+        home_title: "Welcome to Minecraft Sky Realm!",
+        home_text: "Explore version history and feel the adventure of Minecraft!",
+        about_title: "About Project",
+        about_text: "This site was created by Minecraft fan Ironcarrier. It’s a tribute to creativity, dedication and love for cubes!",
+        ver_title: "Version History",
+        contact_title: "Contact Me",
+        contact_text: "Want to share ideas or feedback? Write to ironcarrier.dev@gmail.com"
+      },
+      ru: {
+        home_title: "Добро пожаловать в Minecraft Sky Realm!",
+        home_text: "Исследуй историю обновлений и почувствуй дух приключений!",
+        about_title: "О проекте",
+        about_text: "Этот сайт создан фанатом Minecraft — Ironcarrier. Это результат многих часов работы и любви к игре.",
+        ver_title: "История версий",
+        contact_title: "Связаться со мной",
+        contact_text: "Есть идея или предложение? Напиши на ironcarrier.dev@gmail.com"
+      },
+      uk: {
+        home_title: "Ласкаво просимо до Minecraft Sky Realm!",
+        home_text: "Досліджуй історію оновлень і відчуй дух пригод!",
+        about_title: "Про проєкт",
+        about_text: "Цей сайт створено фанатом Minecraft — Ironcarrier. Це результат натхнення і любові до гри.",
+        ver_title: "Історія версій",
+        contact_title: "Зв’язатися зі мною",
+        contact_text: "Маєш ідеї чи побажання? Пиши на ironcarrier.dev@gmail.com"
+      },
+      kk: {
+        home_title: "Minecraft Sky Realm-ға қош келдіңіз!",
+        home_text: "Жаңартулар тарихын зерттеп, Minecraft рухын сезініңіз!",
+        about_title: "Жоба туралы",
+        about_text: "Бұл сайтты Minecraft жанкүйері Ironcarrier жасады. Бұл еңбектің және махаббаттың нәтижесі.",
+        ver_title: "Нұсқалар тарихы",
+        contact_title: "Байланыс",
+        contact_text: "Ұсыныстарыңыз бар ма? ironcarrier.dev@gmail.com мекенжайына жазыңыз"
+      },
+      es: {
+        home_title: "¡Bienvenido a Minecraft Sky Realm!",
+        home_text: "Explora la historia de las versiones y siente la aventura de Minecraft.",
+        about_title: "Sobre el proyecto",
+        about_text: "Este sitio fue creado por el fan de Minecraft Ironcarrier. Es el resultado del trabajo y amor por el juego.",
+        ver_title: "Historial de versiones",
+        contact_title: "Contáctame",
+        contact_text: "¿Tienes ideas o sugerencias? Escríbeme a ironcarrier.dev@gmail.com"
+      }
+    };
 
-/* =========================
-   Navigation & transitions
-   ========================= */
-const versions = Array.from(document.querySelectorAll('.version')).map(s=>s.id);
-function hidePanel(){ backdrop.classList.remove('show'); menuBtn.setAttribute('aria-expanded','false'); }
-function showPanel(){ backdrop.classList.add('show'); menuBtn.setAttribute('aria-expanded','true'); searchInput.focus(); }
-
-menuBtn.addEventListener('click', ()=> { if(backdrop.classList.contains('show')) hidePanel(); else showPanel(); });
-closePanel.addEventListener('click', hidePanel);
-backdrop.addEventListener('click', (e)=> { if(e.target === backdrop) hidePanel(); });
-searchInput.addEventListener('input', (e)=> buildPanelLinks(e.target.value, langSelect.value) );
-
-/* animate switch: heavy out-in */
-function animateSwitch(fromEl, toEl) {
-  return new Promise(resolve => {
-    if(!fromEl) {
-      toEl.classList.add('active','anim-in');
-      toEl.addEventListener('animationend', ()=> { toEl.classList.remove('anim-in'); resolve(); }, {once:true});
-      return;
-    }
-    fromEl.classList.add('anim-out');
-    fromEl.addEventListener('animationend', ()=>{
-      fromEl.classList.remove('anim-out','active');
-      toEl.classList.add('active','anim-in');
-      toEl.addEventListener('animationend', ()=> { toEl.classList.remove('anim-in'); resolve(); }, {once:true});
-    }, {once:true});
-  });
-}
-
-function getCurrent(){ return document.querySelector('.version.active'); }
-async function navigate(id) {
-  // normalize id: 'home' or 'news' or 'v1.17'
-  if(id === 'home') id = null;
-  const from = getCurrent();
-  let to = null;
-  if(!id) {
-    // show hero + intro (we'll hide all versions)
-    to = document.getElementById('hero').parentElement; // main container; we'll treat hero visible by hiding versions
-    // implement by hiding versions and scrolling hero into view after animation
-    if(from) {
-      await animateSwitch(from, document.createElement('div')); // fake to trigger out
-      // hide all versions
-      document.querySelectorAll('.version').forEach(v=> v.classList.remove('active'));
-      window.scrollTo({top:0, behavior:'smooth'});
-    }
-    return;
-  }
-  // id could be 'news' or 'v1.16.5'
-  if(id === 'news') { alert(I18N[langSelect.value].latestTitle + " — " + I18N[langSelect.value].latestTitle); return; }
-  // find element
-  to = document.getElementById(id);
-  if(!to) return;
-  // hide hero if visible
-  // ensure hero's parent has no .active versions
-  const allVersions = document.querySelectorAll('.version');
-  // show 'to' using animation
-  const current = getCurrent();
-  await animateSwitch(current, to);
-  // scroll top
-  window.scrollTo({top:0, behavior:'smooth'});
-}
-
-/* quick buttons (hero) */
-document.querySelectorAll('[data-target]').forEach(btn=>{
-  btn.addEventListener('click', ()=> {
-    const t = btn.getAttribute('data-target');
-    if(t === 'home') { navigate(null); return; }
-    navigate(t.startsWith('v') ? t : 'v'+t);
-  });
-});
-
-/* quick internal buttons inside versions */
-document.querySelectorAll('.actions [data-target]').forEach(btn=>{
-  btn.addEventListener('click', ()=> {
-    const t = btn.getAttribute('data-target');
-    if(t === 'home') { navigate(null); return; }
-    navigate(t.startsWith('v') ? t : 'v'+t);
-  });
-});
-
-/* language change event */
-langSelect.addEventListener('change', ()=> {
-  setLanguage(langSelect.value);
-  // focus rebuild panel
-  buildPanelLinks(searchInput.value || '', langSelect.value);
-});
-
-/* init */
-(function init(){
-  // default lang
-  setLanguage('en');
-  // build panel
-  buildPanelLinks('', 'en');
-  // ensure no version active initially
-  document.querySelectorAll('.version').forEach(v=> v.classList.remove('active'));
-  // expose global navigate for panel buttons
-  window.navigate = navigate;
-})();
-
-/* Accessibility: close panel on ESC */
-document.addEventListener('keydown', (e)=> { if(e.key === 'Escape') hidePanel(); });
-
-</script>
+    const langSelect = document.getElementById("langSwitcher");
+    langSelect.addEventListener("change", () => {
+      const lang = langSelect.value;
+      document.querySelectorAll("[data-lang]").forEach(el => {
+        const key = el.getAttribute("data-lang");
+        if (translations[lang][key]) {
+          el.innerText = translations[lang][key];
+        }
+      });
+    });
+  </script>
 </body>
 </html>
