@@ -1,11 +1,11 @@
-/* styles.css — с боковой панелью и улучшенным функционалом */
+/* styles.css — с улучшенной читаемостью */
 
 :root {
   --bg-dark: #0d1b2a;
   --bg-card: #1b263b;
   --accent-gold: #d4af37;
   --accent-red: #ff6b6b;
-  --text-light: #e0e1dd;
+  --text-light: #f0f2f5;
   --shadow: rgba(0, 0, 0, 0.6);
 }
 
@@ -30,9 +30,9 @@ body {
 /* Боковая панель */
 .sidebar {
   width: 260px;
-  background: rgba(13, 27, 42, 0.92);
+  background: rgba(13, 27, 42, 0.94);
   backdrop-filter: blur(10px);
-  border-right: 1px solid rgba(212, 175, 55, 0.2);
+  border-right: 1px solid rgba(212, 175, 55, 0.25);
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
@@ -48,25 +48,27 @@ body {
 
 .sidebar-title {
   font-family: 'Press Start 2P', cursive;
-  font-size: 1.3rem;
+  font-size: 1.35rem;
   color: var(--accent-gold);
-  text-shadow: 0 0 8px rgba(212, 175, 55, 0.6);
+  text-shadow: 0 0 8px rgba(212, 175, 55, 0.7);
   line-height: 1.3;
 }
 
 .author {
-  font-size: 0.95rem;
-  color: #a0b0c0;
+  font-size: 1.05rem; /* ↑ увеличено */
+  color: #b0c0d0;
 }
 
 .author strong {
   color: var(--accent-gold);
+  font-weight: bold;
 }
 
 .desc {
-  font-size: 0.9rem;
-  color: #c0c5d0;
+  font-size: 1rem; /* ↑ увеличено */
+  color: #d0d5e0;
   font-style: italic;
+  line-height: 1.5;
 }
 
 .sidebar-nav {
@@ -77,17 +79,18 @@ body {
 
 .nav-link {
   display: block;
-  padding: 0.6rem;
+  padding: 0.65rem;
   text-decoration: none;
   color: var(--text-light);
   border-radius: 6px;
   transition: all 0.3s ease;
-  font-size: 0.95rem;
+  font-size: 1.05rem; /* ↑ увеличено */
+  font-family: 'Caveat', cursive;
 }
 
 .nav-link:hover,
 .nav-link.active {
-  background: rgba(212, 175, 55, 0.15);
+  background: rgba(212, 175, 55, 0.2);
   color: var(--accent-gold);
   border-left: 3px solid var(--accent-gold);
 }
@@ -101,55 +104,81 @@ body {
 }
 
 .container {
-  max-width: 800px;
+  max-width: 850px;
   margin: 0 auto;
 }
 
 .title {
   font-family: 'Press Start 2P', cursive;
-  font-size: 1.8rem;
+  font-size: 2.1rem; /* ↑ увеличено с 1.8rem */
   color: var(--accent-gold);
-  margin: 0 0 1.8rem;
-  text-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
+  margin: 0 0 2rem;
+  text-shadow: 0 0 12px rgba(212, 175, 55, 0.8);
   text-align: center;
   letter-spacing: 1px;
   animation: glow 2s infinite alternate;
 }
 
 @keyframes glow {
-  from { text-shadow: 0 0 5px var(--accent-gold), 0 0 10px var(--accent-gold); }
-  to { text-shadow: 0 0 15px var(--accent-gold), 0 0 25px var(--accent-red); }
+  from { text-shadow: 0 0 6px var(--accent-gold), 0 0 12px var(--accent-gold); }
+  to { text-shadow: 0 0 18px var(--accent-gold), 0 0 30px var(--accent-red); }
 }
 
 .updates {
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
+  gap: 1.4rem;
 }
 
 .update-card {
   display: block;
   background: var(--bg-card);
   border: 2px solid var(--accent-gold);
-  border-radius: 12px;
-  padding: 1.4rem;
+  border-radius: 14px;
+  padding: 1.6rem; /* ↑ увеличено */
   text-decoration: none;
   color: inherit;
   transition: all 0.4s ease;
-  box-shadow: 0 6px 15px var(--shadow);
+  box-shadow: 0 8px 20px var(--shadow);
   animation: fadeInUp 0.6s ease forwards;
 }
 
-.update-card:nth-child(1) { animation-delay: 0.1s; }
-.update-card:nth-child(2) { animation-delay: 0.2s; }
-.update-card:nth-child(3) { animation-delay: 0.3s; }
-.update-card:nth-child(4) { animation-delay: 0.4s; }
-.update-card:nth-child(5) { animation-delay: 0.5s; }
+.update-card h2 {
+  font-size: 1.7rem; /* ↑ было 1.4rem — теперь ЧЁТКО видно! */
+  margin-bottom: 0.6rem;
+  color: white;
+  font-family: 'Press Start 2P', cursive; /* игровой шрифт для заголовков */
+  letter-spacing: 0.5px;
+}
 
+.update-card .subtitle {
+  font-size: 1.35rem; /* ↑ увеличено */
+  color: var(--accent-gold);
+  margin: 0;
+  font-family: 'Caveat', cursive;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.update-card:hover {
+  transform: translateY(-6px) scale(1.015);
+  box-shadow: 0 12px 28px rgba(212, 175, 55, 0.5);
+  border-color: var(--accent-red);
+}
+
+.footer {
+  text-align: center;
+  margin-top: 2.8rem;
+  font-size: 1.05rem; /* ↑ увеличено */
+  color: #b0b5c0;
+  font-family: 'Caveat', cursive;
+}
+
+/* Анимации */
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(20px) scale(0.98);
+    transform: translateY(25px) scale(0.98);
   }
   to {
     opacity: 1;
@@ -157,32 +186,7 @@ body {
   }
 }
 
-.update-card:hover {
-  transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
-  border-color: var(--accent-red);
-}
-
-.update-card h2 {
-  font-size: 1.4rem;
-  margin-bottom: 0.5rem;
-  color: white;
-}
-
-.update-card .subtitle {
-  margin: 0;
-  font-size: 1.1rem;
-  color: var(--accent-gold);
-}
-
-.footer {
-  text-align: center;
-  margin-top: 2.5rem;
-  font-size: 0.9rem;
-  color: #a0a0a0;
-}
-
-/* Адаптивность: на мобильных скрываем sidebar */
+/* Адаптивность */
 @media (max-width: 768px) {
   body {
     flex-direction: column;
@@ -191,8 +195,8 @@ body {
   .sidebar {
     width: 100%;
     border-right: none;
-    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-    padding: 1rem;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+    padding: 1.2rem;
   }
 
   .main-content {
@@ -200,14 +204,19 @@ body {
   }
 
   .title {
-    font-size: 1.4rem;
+    font-size: 1.7rem;
+    padding: 0 0.5rem;
   }
 
   .update-card h2 {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
   }
 
   .update-card .subtitle {
+    font-size: 1.25rem;
+  }
+
+  .author, .desc, .nav-link {
     font-size: 1rem;
   }
 }
