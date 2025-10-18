@@ -177,6 +177,34 @@ body {
   font-size: 0.9rem;
   color: #a0a0a0;
 }
+ 
+/* Блок автора и вступления */
+.author-box {
+  background: var(--bg-card);
+  padding: 1.6rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  text-align: center;
+  box-shadow: 0 6px 15px var(--shadow);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.author-box p {
+  margin: 0.6rem 0;
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+.author-box .intro {
+  color: #c0c5d0;
+  font-style: italic;
+  margin-top: 1rem;
+}
+
+.author-box strong {
+  color: var(--accent-gold);
+  font-weight: bold;
+}
 
 /* Адаптивность */
 @media (max-width: 600px) {
