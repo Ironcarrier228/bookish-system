@@ -1,418 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru" data-theme="auto">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Minecraft Sky Realm — Versions</title>
-<meta name="description" content="Multilingual Minecraft changelogs with parallax background and heavy transitions" />
-<link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect rx='6' width='32' height='32' fill='%2300417f'/><text x='50%' y='55%' font-size='14' text-anchor='middle' fill='%23fff' font-family='Segoe UI'>MC</text></svg>">
-<style>
-:root{
-  --bg1:#041026; --bg2:#07142a;
-  --accent1:#00e5ff; --accent2:#8b5cff;
-  --muted:#98aebf; --glass: rgba(255,255,255,0.02);
-  --radius:12px; --maxw:1180px; --ff:"Segoe UI", Roboto, Arial, sans-serif;
-  --out-time:0.82s; --in-time:0.78s;
-}
-*{box-sizing:border-box}
-html,body{height:100%}
-body{
-  margin:0; font-family:var(--ff); color:#eaf6ff;
-  background: linear-gradient(180deg,var(--bg1),var(--bg2));
-  -webkit-font-smoothing:antialiased; overflow-x:hidden;
-}
-
-/* PARALLAX BACKGROUND LAYERS */
-.bg-layer{
-  position:fixed; inset:0; z-index:-4;
-  background-image:url('images/sky_parallax.png');
-  background-size:cover; background-position:center top;
-  transform-origin:center;
-  filter:brightness(.62) contrast(.95) saturate(1.02);
-  will-change: transform;
-}
-.bg-overlay{
-  position:fixed; inset:0; z-index:-3; pointer-events:none;
-  background: linear-gradient(180deg, rgba(3,8,16,0.15), rgba(3,8,16,0.35));
-}
-
-/* HEADER */
-header.site{
-  position:fixed; top:0; left:0; right:0; height:72px; z-index:1200;
-  display:flex; align-items:center; justify-content:space-between; gap:12px;
-  padding:10px 20px; background: linear-gradient(180deg, rgba(2,6,12,0.25), rgba(2,6,12,0.15));
-  border-bottom:1px solid rgba(255,255,255,0.03);
-}
-.brand{display:flex; gap:12px; align-items:center}
-.logo{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--accent1),var(--accent2)); font-weight:800;color:#021428}
-.title{font-weight:800; font-size:1.02rem}
-.top-controls{display:flex; gap:10px; align-items:center}
-nav.top-nav{display:flex; gap:12px; align-items:center}
-nav.top-nav button{background:transparent;border:0;color:var(--muted);font-weight:700;cursor:pointer;padding:8px 10px;border-radius:8px}
-nav.top-nav button:hover{color:var(--accent1); transform:translateY(-2px)}
-.search-inline{display:flex;align-items:center;gap:8px;padding:6px;background:var(--glass);border-radius:10px;border:1px solid rgba(255,255,255,0.02)}
-.search-inline input{background:transparent;border:0;outline:0;color:#eaf6ff;padding:6px;width:220px}
-#lang{background:transparent;border:1px solid rgba(255,255,255,0.03);padding:6px 8px;border-radius:8px;color:var(--muted)}
-
-/* MAIN */
-.main{max-width:var(--maxw);margin:100px auto 80px;padding:18px;position:relative;z-index:10;width:100%}
-.hero{padding:22px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.008)); border:1px solid rgba(255,255,255,0.02); box-shadow:0 20px 60px rgba(2,6,23,0.6)}
-.hero h1{margin:0 0 8px;font-size:1.5rem;color:var(--accent1)}
-.hero p{color:var(--muted);margin:0 0 12px}
-.btn{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#06151f;border:0;padding:10px 12px;border-radius:10px;font-weight:800;cursor:pointer}
-.btn.ghost{background:transparent;color:var(--muted);border:1px solid rgba(255,255,255,0.03)}
-
-/* GRID CARDS */
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:16px}
-.card{padding:14px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.012), rgba(255,255,255,0.006));border:1px solid rgba(255,255,255,0.02)}
-.card h3{margin:0 0 8px;color:var(--accent2)}.card p{color:var(--muted)}
-
-/* VERSIONS LIST & PAGES */
-.versions-list{margin-top:18px;display:grid;gap:12px}
-.version-tile{display:flex;gap:12px;align-items:center;padding:12px;border-radius:12px;background:rgba(255,255,255,0.012);border:1px solid rgba(255,255,255,0.02);cursor:pointer}
-.version-tile:hover{transform:translateY(-6px);box-shadow:0 18px 50px rgba(0,0,0,0.5)}
-.version{display:none;opacity:0;transform:translateY(18px) scale(.995);transition:all .6s cubic-bezier(.2,.9,.2,1)}
-.version.active{display:block;opacity:1;transform:none}
-
-/* split layout */
-.vwrap{display:flex;gap:18px;margin-top:12px;flex-wrap:wrap}
-.left{flex:1 1 560px;min-width:260px}
-.right{width:320px;min-width:220px;align-self:flex-start}
-
-/* screenshot area using .png images */
-.sshot{border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.03);box-shadow:0 12px 40px rgba(2,6,23,0.55)}
-.sshot img{width:100%;height:auto;display:block;transition:transform .45s ease, filter .45s ease}
-.sshot img:hover{transform:scale(1.02);filter:brightness(1.06)}
-.features ul{padding-left:18px;color:var(--muted)}
-.notes{margin-top:12px;color:var(--muted);background:rgba(255,255,255,0.01);padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.02)}
-.actions{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
-
-/* footer */
-.footer{text-align:center;color:var(--muted);margin-top:36px;padding:20px}
-
-/* heavy animations */
-@keyframes outAnim {0%{transform:none;opacity:1}40%{transform:translateY(-8vh) rotate(-6deg) scale(.96);opacity:.8;filter:blur(2px) }100%{transform:translateY(-48vh) rotate(-34deg) scale(.5);opacity:0;filter:blur(14px)}}
-@keyframes inAnim {0%{transform:translateY(40vh) rotate(18deg) scale(.6);opacity:0;filter:blur(12px)}60%{transform:translateY(6vh) rotate(-6deg) scale(.9);opacity:.7;filter:blur(3px)}100%{transform:none;opacity:1}}
-.anim-out{animation:outAnim var(--out-time) cubic-bezier(.22,.9,.2,1) forwards}
-.anim-in{animation:inAnim var(--in-time) cubic-bezier(.18,.9,.25,1) forwards}
-
-/* scroll reveal for sections */
-.reveal { opacity:0; transform: translateY(14px); transition: all .7s cubic-bezier(.2,.9,.2,1); will-change:transform,opacity; }
-.reveal.visible { opacity:1; transform:none }
-
-/* responsive */
-@media(max-width:900px){ .right{width:100%} .search-inline input{width:120px} }
-@media(max-width:520px){ header.site{height:auto;padding:12px;flex-direction:column;gap:8px;align-items:flex-start} .brand{gap:8px} .search-inline input{width:90px} }
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Minecraft Sky Realm — версии 1.16–1.20</title>
+  <meta name="description" content="Каталог версий Minecraft Sky Realm 1.16–1.20, поиск, таймлайн, светлая/тёмная тема." />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-
-<!-- parallax bg -->
-<div class="bg-layer" id="bgLayer"></div>
-<div class="bg-overlay"></div>
-
-<header class="site">
-  <div class="brand">
-    <div class="logo">MC</div>
-    <div class="title" id="siteTitle">Minecraft Sky Realm</div>
-  </div>
-
-  <div class="top-controls">
-    <nav class="top-nav" role="navigation" aria-label="Top">
-      <button data-page="home" class="navbtn">Home</button>
-      <button data-page="about" class="navbtn">About</button>
-      <button data-page="versions" class="navbtn">Versions</button>
-      <button data-page="contact" class="navbtn">Contact</button>
-    </nav>
-
-    <div class="search-inline" title="Search">
-      <input id="globalSearch" placeholder="Search versions / features (press Enter)" />
+  <header class="site-header">
+    <div class="container header-inner">
+      <h1 class="brand">
+        <span class="brand-accent">Minecraft</span> Sky Realm
+        <span class="author">Автор: <strong>Ironcarrier</strong></span>
+      </h1>
+      <button class="theme-toggle" aria-label="Переключить тему" title="Светлая/тёмная тема">🌓</button>
     </div>
 
-    <select id="lang" aria-label="Language select" title="Language">
-      <option value="en">EN</option>
-      <option value="ru">RU</option>
-      <option value="uk">UK</option>
-      <option value="kk">KK</option>
-      <option value="es">ES</option>
-    </select>
-  </div>
-</header>
+  <main class="container">
+    <section class="intro">
+      <p>Версии 1.16–1.20. Пользуйся поиском и сортировкой. Скриншоты лежат в <code>/images</code> (.png).</p>
+    </section>
 
-<main class="main" id="main">
-  <!-- HOME -->
-  <section id="home" class="page active reveal">
-    <div class="hero">
-      <h1 id="ui_hero_title">Versions & AI — Minecraft Sky Realm</h1>
-      <p id="ui_hero_lead">Choose a version below or use the search. Replace screenshots in /images/ with your own .png files.</p>
-      <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;">
-        <button class="btn" data-target="v1.16.5">1.16.5</button>
-        <button class="btn" data-target="v1.17">1.17</button>
-        <button class="btn" data-target="v1.18">1.18</button>
-        <button class="btn" data-target="v1.19">1.19</button>
-        <button class="btn" data-target="v1.20">1.20</button>
+    <section class="controls">
+      <div class="search">
+        <label for="search-input" class="sr-only">Поиск версий</label>
+        <input id="search-input" type="search" placeholder="Например: 1.16, Nether, Forge…" autocomplete="off" />
       </div>
+      <div class="filters">
+        <select id="sort-select" aria-label="Сортировка">
+          <option value="newest">Сначала новые</option>
+          <option value="oldest">Сначала старые</option>
+          <option value="name">По названию</option>
+        </select>
+      </div>
+    </section>
+
+    <section class="grid" id="version-grid" aria-live="polite">
+      <!-- Карточки версий генерируются из scripts.js -->
+    </section>
+
+    <section class="history">
+      <h2>История версий 1.16–1.20</h2>
+      <ul class="timeline" id="timeline">
+        <!-- Заполняется из scripts.js -->
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <small>Фан‑проект. Тексты и изображения редактируются вручную.</small>
+      <nav class="footer-nav">
+        <span class="author-inline">Автор: <strong>Ironcarrier</strong></span>
+        <a href="about.html">О проекте</a>
+        <a href="news.html">Новости</a>
+      </nav>
     </div>
+  </footer>
 
-    <div class="grid reveal" style="margin-top:16px;">
-      <div class="card"><h3 id="ui_latest_title">Latest highlights</h3><p id="ui_latest_text" style="color:var(--muted)">15 Oct 2025 — Mojang testing new world gen; 10 Sep 2025 — New frog variants.</p></div>
-      <div class="card"><h3 id="ui_ai_title">AI in Minecraft</h3><p id="ui_ai_text" style="color:var(--muted)">Mods: NPC chat, builders, MineGPT and AI-assisted redstone.</p></div>
-      <div class="card"><h3 id="ui_about_title">About</h3><p id="ui_about_text" style="color:var(--muted)">Fan-made project by Ironcarrier. Built manually with HTML/CSS/JS.</p></div>
-    </div>
-  </section>
+  <!-- Модальное окно -->
+  <dialog id="modal" class="modal">
+    <form method="dialog" class="modal-content">
+      <button class="modal-close" aria-label="Закрыть">✕</button>
+      <div id="modal-body"></div>
+    </form>
+  </dialog>
 
-  <!-- ABOUT (no image) -->
-  <section id="about" class="page reveal">
-    <h2 id="ui_about_h">About the project</h2>
-    <p id="ui_about_body">This site was created by Ironcarrier as a fan project. It took many hours and a lot of trial & error — all done manually. You can edit any text and replace screenshots in the images folder (use .png).</p>
-  </section>
-
-  <!-- VERSIONS LIST & PAGES -->
-  <section id="versions" class="page reveal">
-    <h2 id="ui_versions_h">Version history</h2>
-
-    <!-- quick tiles -->
-    <div class="versions-list reveal" id="versionsList" style="margin-top:12px;">
-      <div class="version-tile" data-target="v1.16.5"><div style="width:64px"><img src="images/1.16.5.png" alt="1.16.5" style="width:64px;height:40px;object-fit:cover;border-radius:6px"></div><div><strong>1.16.5</strong><div style="color:var(--muted);font-size:0.9rem">Nether Update</div></div></div>
-      <div class="version-tile" data-target="v1.17"><div style="width:64px"><img src="images/1.17.png" alt="1.17" style="width:64px;height:40px;object-fit:cover;border-radius:6px"></div><div><strong>1.17</strong><div style="color:var(--muted);font-size:0.9rem">Caves & Cliffs I</div></div></div>
-      <div class="version-tile" data-target="v1.18"><div style="width:64px"><img src="images/1.18.png" alt="1.18" style="width:64px;height:40px;object-fit:cover;border-radius:6px"></div><div><strong>1.18</strong><div style="color:var(--muted);font-size:0.9rem">Caves & Cliffs II</div></div></div>
-      <div class="version-tile" data-target="v1.19"><div style="width:64px"><img src="images/1.19.png" alt="1.19" style="width:64px;height:40px;object-fit:cover;border-radius:6px"></div><div><strong>1.19</strong><div style="color:var(--muted);font-size:0.9rem">The Wild Update</div></div></div>
-      <div class="version-tile" data-target="v1.20"><div style="width:64px"><img src="images/1.20.png" alt="1.20" style="width:64px;height:40px;object-fit:cover;border-radius:6px"></div><div><strong>1.20</strong><div style="color:var(--muted);font-size:0.9rem">Trails & Tales</div></div></div>
-    </div>
-
-    <!-- details (each .version) -->
-    <article id="v1.16.5" class="version reveal">
-      <div class="vhead"><h3 id="v1165_title">Minecraft 1.16.5 — Nether Update</h3><div class="meta">Release: 15 Jan 2021</div></div>
-      <div class="vwrap">
-        <div class="left">
-          <div class="sshot"><img src="images/1.16.5.png" alt="1.16.5 screenshot (replace)"></div>
-          <div class="features"><h4>Main highlights</h4><ul id="v1165_features"></ul></div>
-        </div>
-        <aside class="right">
-          <h4>Why it mattered</h4><p id="v1165_why">Nether Update transformed the Nether into an explorable dimension with unique biomes and resources.</p>
-          <div class="notes" id="v1165_notes">Many servers remained on 1.16.x for plugin compatibility; 1.16.5 was a stable LTS variant.</div>
-          <div class="actions"><button class="btn ghost" data-target="versions">Back</button><button class="btn" data-target="v1.17">Next: 1.17 →</button></div>
-        </aside>
-      </div>
-    </article>
-
-    <article id="v1.17" class="version reveal">
-      <div class="vhead"><h3 id="v117_title">Minecraft 1.17 — Caves & Cliffs I</h3><div class="meta">Release: 8 Jun 2021</div></div>
-      <div class="vwrap">
-        <div class="left"><div class="sshot"><img src="images/1.17.png" alt="1.17 screenshot (replace)"></div><div class="features"><h4>Main highlights</h4><ul id="v117_features"></ul></div></div>
-        <aside class="right"><h4>Why it mattered</h4><p id="v117_why">Added materials and mobs that expanded exploration and building before terrain overhaul.</p><div class="actions"><button class="btn ghost" data-target="v1.16.5">← Back</button><button class="btn" data-target="v1.18">Next: 1.18 →</button></div></aside>
-      </div>
-    </article>
-
-    <article id="v1.18" class="version reveal">
-      <div class="vhead"><h3 id="v118_title">Minecraft 1.18 — Caves & Cliffs II</h3><div class="meta">Release: 30 Nov 2021</div></div>
-      <div class="vwrap">
-        <div class="left"><div class="sshot"><img src="images/1.18.png" alt="1.18 screenshot (replace)"></div><div class="features"><h4>Main highlights</h4><ul id="v118_features"></ul></div></div>
-        <aside class="right"><h4>Why it mattered</h4><p id="v118_why">Generational change to world generation, caves and mountain systems.</p><div class="actions"><button class="btn ghost" data-target="v1.17">← Back</button><button class="btn" data-target="v1.19">Next: 1.19 →</button></div></aside>
-      </div>
-    </article>
-
-    <article id="v1.19" class="version reveal">
-      <div class="vhead"><h3 id="v119_title">Minecraft 1.19 — The Wild Update</h3><div class="meta">Release: 7 Jun 2022</div></div>
-      <div class="vwrap">
-        <div class="left"><div class="sshot"><img src="images/1.19.png" alt="1.19 screenshot (replace)"></div><div class="features"><h4>Main highlights</h4><ul id="v119_features"></ul></div></div>
-        <aside class="right"><h4>Why it mattered</h4><p id="v119_why">Added Deep Dark, Warden and atmospheric biomes changing late-game exploration.</p><div class="actions"><button class="btn ghost" data-target="v1.18">← Back</button><button class="btn" data-target="v1.20">Next: 1.20 →</button></div></aside>
-      </div>
-    </article>
-
-    <article id="v1.20" class="version reveal">
-      <div class="vhead"><h3 id="v120_title">Minecraft 1.20 — Trails & Tales</h3><div class="meta">Release: 7 Jun 2023</div></div>
-      <div class="vwrap">
-        <div class="left"><div class="sshot"><img src="images/1.20.png" alt="1.20 screenshot (replace)"></div><div class="features"><h4>Main highlights</h4><ul id="v120_features"></ul></div></div>
-        <aside class="right"><h4>Why it mattered</h4><p id="v120_why">Focused on archaeology, cosmetics and world flavor.</p><div class="actions"><button class="btn ghost" data-target="v1.19">← Back</button><button class="btn" data-target="home">Back to home</button></div></aside>
-      </div>
-    </article>
-
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact" class="page reveal">
-    <h2>Contact</h2>
-    <p>If you want to suggest something — email: <b>ironcarrier.dev@gmail.com</b></p>
-  </section>
-
-  <div class="footer">© 2025 Minecraft Sky Realm — fan project by Ironcarrier</div>
-</main>
-
-<script>
-/* DATA (multilang) */
-const DATA = {
-  en: {
-    ui:{ hero_title:"Versions & AI — Minecraft Sky Realm", hero_lead:"Choose a version or use search. Replace screenshots in /images/ (.png).", latest:"Latest highlights", ai:"AI in Minecraft", about:"About" },
-    versions: {
-      "1.16.5": { title:"Minecraft 1.16.5 — Nether Update", meta:"Release: 15 Jan 2021", features:[
-        "New Nether biomes (Crimson/Warped/Soul Sand Valley/Basalt Deltas).",
-        "Piglins — trading mechanics and AI behavior.",
-        "Netherite — top-tier gear that doesn't burn.",
-        "Ancient Debris for Netherite crafting.", "Hoglins, Zoglins and Striders.", "Respawn Anchor to respawn in the Nether."
-      ], why:"Nether became a rich exploration dimension.", notes:"Many servers stayed on 1.16.x for plugin compatibility." },
-      "1.17": { title:"Minecraft 1.17 — Caves & Cliffs I", meta:"Release: 8 Jun 2021", features:["Axolotls — aquatic companions.","Glow Squid — luminous mob.","Copper ore and oxidation; Spyglass and Lightning Rod.","Amethyst geodes and dripstone mechanics."], why:"Added materials and mobs ahead of terrain overhaul." },
-      "1.18": { title:"Minecraft 1.18 — Caves & Cliffs II", meta:"Release: 30 Nov 2021", features:["World generation overhaul — new mountains and caves.","World height changes and new ore distribution.","Lush caves and dripstone caves."], why:"Changed map generation and exploration mechanics." },
-      "1.19": { title:"Minecraft 1.19 — The Wild Update", meta:"Release: 7 Jun 2022", features:["Deep Dark and Warden boss.","Ancient Cities and unique loot.","Mangrove swamps, frogs and mud."], why:"Late-game threats and atmospheric biomes." },
-      "1.20": { title:"Minecraft 1.20 — Trails & Tales", meta:"Release: 7 Jun 2023", features:["Archaeology and Sniffer mob.","Cherry groves and armor trims.","Camels and new building blocks."], why:"Focus on creativity, story and decoration." }
-    }
-  },
-  ru: { ui:{ hero_title:"Версии и ИИ — Minecraft Sky Realm", hero_lead:"Выберите версию или воспользуйтесь поиском. Замените скриншоты в /images/ (.png).", latest:"Последние", ai:"ИИ в Minecraft", about:"О проекте" }, versions:{} },
-  uk: { ui:{ hero_title:"Версії та ІІ — Minecraft Sky Realm", hero_lead:"Оберіть версію або скористайтеся пошуком.", latest:"Останні", ai:"ІІ в Minecraft", about:"Про проєкт" }, versions:{} },
-  kk: { ui:{ hero_title:"Нұсқалар және ЖИ — Minecraft Sky Realm", hero_lead:"Нұсқаны таңдаңыз немесе іздеуді пайдаланыңыз.", latest:"Жаңа", ai:"ЖИ Minecraft-та", about:"Жоба туралы" }, versions:{} },
-  es: { ui:{ hero_title:"Versiones y IA — Minecraft Sky Realm", hero_lead:"Elige una versión o usa la búsqueda.", latest:"Últimas", ai:"IA en Minecraft", about:"Sobre el proyecto" }, versions:{} }
-};
-/* fallback: copy EN versions into other langs if not provided */
-['ru','uk','kk','es'].forEach(l=>{ if(!DATA[l].versions || Object.keys(DATA[l].versions).length===0) DATA[l].versions = JSON.parse(JSON.stringify(DATA.en.versions)); });
-
-/* DOM refs */
-const langSel = document.getElementById('lang');
-const navBtns = document.querySelectorAll('.top-nav .navbtn');
-const pages = document.querySelectorAll('.page');
-const versionEls = document.querySelectorAll('.version');
-const globalSearch = document.getElementById('globalSearch');
-const bg = document.getElementById('bgLayer');
-
-/* populate features and UI */
-function populate(lang='en'){
-  // UI strings
-  const ui = DATA[lang].ui || DATA.en.ui;
-  document.getElementById('ui_hero_title').textContent = ui.hero_title;
-  document.getElementById('ui_hero_lead').textContent = ui.hero_lead;
-  document.getElementById('ui_latest_title').textContent = ui.latest;
-  document.getElementById('ui_ai_title').textContent = ui.ai;
-  document.getElementById('ui_about_title').textContent = ui.about;
-  // versions
-  Object.keys(DATA[lang].versions).forEach(k=>{
-    const v = DATA[lang].versions[k];
-    const id = 'v' + k;
-    const root = document.getElementById(id);
-    if(!root) return;
-    const title = root.querySelector('h3');
-    if(title) title.textContent = v.title || '';
-    const meta = root.querySelector('.meta');
-    if(meta) meta.textContent = v.meta || '';
-    const ul = root.querySelector('ul');
-    if(ul){
-      ul.innerHTML = '';
-      v.features.forEach(f=>{ const li = document.createElement('li'); li.textContent = f; ul.appendChild(li); });
-    }
-    const why = root.querySelector('[id$="_why"]');
-    if(why) why.textContent = v.why || '';
-    const notes = root.querySelector('.notes');
-    if(notes) notes.textContent = v.notes || '';
-  });
-}
-populate('en');
-
-/* navigation with heavy transitions */
-let currentVersion = null;
-async function showPage(pageId){
-  // hide all pages for non-versions
-  if(!pageId || !pageId.startsWith('v')){
-    // animate out current version if any
-    if(currentVersion){
-      const from = document.getElementById(currentVersion);
-      from.classList.add('anim-out');
-      await new Promise(r=>from.addEventListener('animationend', r, {once:true}));
-      from.classList.remove('anim-out','active');
-      currentVersion = null;
-    }
-    // show normal page
-    pages.forEach(p => p.classList.remove('active'));
-    const el = document.getElementById(pageId || 'home');
-    if(el) { el.classList.add('active'); el.scrollIntoView({behavior:'smooth'}); }
-    return;
-  }
-  const to = document.getElementById(pageId);
-  if(!to) return;
-  // if there's a current version, animate out
-  if(currentVersion){
-    const from = document.getElementById(currentVersion);
-    if(from){
-      from.classList.add('anim-out');
-      await new Promise(r=>from.addEventListener('animationend', r, {once:true}));
-      from.classList.remove('anim-out','active');
-    }
-  } else {
-    // hide other pages (home/versions) to focus version
-    pages.forEach(p=>p.classList.remove('active'));
-  }
-  // animate in
-  to.classList.add('active','anim-in');
-  await new Promise(r=>to.addEventListener('animationend', r, {once:true}));
-  to.classList.remove('anim-in');
-  currentVersion = pageId;
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-
-/* nav button listeners */
-navBtns.forEach(b=>b.addEventListener('click', ()=> showPage(b.dataset.page)));
-
-/* quick version tile clicks */
-document.querySelectorAll('.version-tile, .btn[data-target]').forEach(el=>{
-  el.addEventListener('click', ()=> {
-    const target = el.dataset.target || el.getAttribute('data-target');
-    if(!target) return;
-    showPage(target);
-  });
-});
-
-/* version internal nav */
-document.querySelectorAll('.actions [data-target]').forEach(b=> b.addEventListener('click', ()=> { const t=b.getAttribute('data-target'); showPage(t==='home'?'home':t); }));
-
-/* language switch */
-langSel.addEventListener('change', ()=> {
-  const lang = langSel.value;
-  populate(lang);
-});
-
-/* Search (Enter -> navigate to first matching version) */
-globalSearch.addEventListener('keydown', (e)=>{ if(e.key === 'Enter') doSearch(globalSearch.value.trim()); });
-function doSearch(q){
-  if(!q) return;
-  const lang = langSel.value;
-  const s = q.toLowerCase();
-  for(const k of Object.keys(DATA[lang].versions)){
-    const v = DATA[lang].versions[k];
-    const hay = (v.title + ' ' + v.features.join(' ') + ' ' + (v.meta||'')).toLowerCase();
-    if(hay.includes(s)){ showPage('v'+k); return; }
-  }
-  alert(lang === 'ru' ? 'Ничего не найдено' : (lang==='en'?'No results found':'Ничего не найдено'));
-}
-
-/* scroll & mouse parallax for background */
-document.addEventListener('mousemove', (ev)=>{
-  const w = window.innerWidth, h = window.innerHeight;
-  const nx = (ev.clientX - w/2) / (w/2);
-  const ny = (ev.clientY - h/2) / (h/2);
-  const tx = nx * 8, ty = ny * 8;
-  bg.style.transform = `translate3d(${tx}px, ${ty}px, 0) scale(1.02)`;
-});
-window.addEventListener('scroll', ()=> {
-  const st = window.scrollY;
-  bg.style.transform = `translate3d(0, ${st * 0.06}px, 0) scale(1.01)`;
-  // lazy reveal on scroll is handled below
-});
-
-/* scroll reveal using IntersectionObserver */
-const reveals = document.querySelectorAll('.reveal');
-const io = new IntersectionObserver((entries)=>{
-  entries.forEach(ent=>{
-    if(ent.isIntersecting){ ent.target.classList.add('visible'); io.unobserve(ent.target); }
-  });
-},{threshold:0.12});
-revealInit();
-function revealInit(){ reveals.forEach(r=> io.observe(r)); }
-
-/* populate feature lists for current default lang (already done for EN) */
-populate(langSel.value || 'en');
-
-/* deep-linking by hash */
-if(location.hash){
-  const h = location.hash.replace('#','');
-  if(h) setTimeout(()=> showPage(h),150);
-}
-</script>
+  <script src="scripts.js" defer></script>
 </body>
 </html>
