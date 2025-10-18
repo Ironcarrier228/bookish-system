@@ -8,41 +8,70 @@
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="container">
-    <h1 class="title">История версий Minecraft</h1>
-    
-    <div class="author-box">
-      <p>Автор проекта: <strong>Ironcarrier</strong></p>
-      <p class="intro">Добро пожаловать в хронику великих обновлений Minecraft!  
-      Здесь вы найдёте краткий обзор ключевых изменений в каждой крупной версии —  
-      от адских глубин Nether Update до поэтических тропинок Trails & Tales.</p>
-    </div>
+  <!-- Боковая панель -->
+  <aside class="sidebar">
+    <div class="sidebar-content">
+      <h2 class="sidebar-title">Minecraft<br>Хроники</h2>
+      <p class="author">Автор: <strong>Ironcarrier</strong></p>
+      <p class="desc">Изучи эволюцию мира блоков — от Незера до древних городов.</p>
 
-    <div class="updates">
-      <a href="1.16.html" class="update-card">
-        <h2>Minecraft 1.16</h2>
-        <p class="subtitle">Nether Update</p>
-      </a>
-      <a href="1.17.html" class="update-card">
-        <h2>Minecraft 1.17</h2>
-        <p class="subtitle">Caves & Cliffs: Part I</p>
-      </a>
-      <a href="1.18.html" class="update-card">
-        <h2>Minecraft 1.18</h2>
-        <p class="subtitle">Caves & Cliffs: Part II</p>
-      </a>
-      <a href="1.19.html" class="update-card">
-        <h2>Minecraft 1.19</h2>
-        <p class="subtitle">The Wild Update</p>
-      </a>
-      <a href="1.20.html" class="update-card">
-        <h2>Minecraft 1.20</h2>
-        <p class="subtitle">Trails & Tales</p>
-      </a>
+      <nav class="sidebar-nav">
+        <a href="index.html" class="nav-link active">Главная</a>
+        <!-- Можно добавить позже -->
+        <!-- <a href="#" class="nav-link">О проекте</a> -->
+        <!-- <a href="https://github.com/ваш-профиль" target="_blank" class="nav-link">GitHub</a> -->
+      </nav>
+
+      <!-- Опционально: переключатель темы -->
+      <!--
+      <div class="theme-toggle">
+        <button id="theme-btn">🌙 / ☀️</button>
+      </div>
+      -->
     </div>
-    <footer class="footer">
-      <p>Создано с ❤️ для любителей Minecraft • Автор: Ironcarrier</p>
-    </footer>
-  </div>
+  </aside>
+
+  <!-- Основной контент -->
+  <main class="main-content">
+    <div class="container">
+      <h1 class="title">История версий Minecraft</h1>
+
+      <div class="updates">
+        <a href="1.16.html" class="update-card">
+          <h2>Minecraft 1.16</h2>
+          <p class="subtitle">Nether Update</p>
+        </a>
+        <a href="1.17.html" class="update-card">
+          <h2>Minecraft 1.17</h2>
+          <p class="subtitle">Caves & Cliffs: Part I</p>
+        </a>
+        <a href="1.18.html" class="update-card">
+          <h2>Minecraft 1.18</h2>
+          <p class="subtitle">Caves & Cliffs: Part II</p>
+        </a>
+        <a href="1.19.html" class="update-card">
+          <h2>Minecraft 1.19</h2>
+          <p class="subtitle">The Wild Update</p>
+        </a>
+        <a href="1.20.html" class="update-card">
+          <h2>Minecraft 1.20</h2>
+          <p class="subtitle">Trails & Tales</p>
+        </a>
+      </div>
+      <footer class="footer">
+        <p>Создано с ❤️ для любителей Minecraft • Автор: Ironcarrier</p>
+      </footer>
+    </div>
+  </main>
+
+  <script>
+    // Опционально: переключатель темы
+    /*
+    const themeBtn = document.getElementById('theme-btn');
+    themeBtn?.addEventListener('click', () => {
+      document.body.classList.toggle('light-theme');
+    });
+    */
+  </script>
 </body>
 </html>
