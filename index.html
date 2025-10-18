@@ -1,72 +1,27 @@
 <!DOCTYPE html>
-<html lang="ru" data-theme="auto">
+<html lang="ru">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Minecraft Sky Realm — версии 1.16–1.20</title>
-  <meta name="description" content="Каталог версий Minecraft Sky Realm 1.16–1.20, поиск, таймлайн, светлая/тёмная тема." />
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8">
+  <title>Minecraft Sky Realm — История версий</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <h1 class="brand">
-        <span class="brand-accent">Minecraft</span> Sky Realm
-        <span class="author">Автор: <strong>Ironcarrier</strong></span>
-      </h1>
-      <button class="theme-toggle" aria-label="Переключить тему" title="Светлая/тёмная тема">🌓</button>
-    </div>
+  <header>
+    <h1>История версий Minecraft</h1>
+  </header>
 
-  <main class="container">
-    <section class="intro">
-      <p>Версии 1.16–1.20. Пользуйся поиском и сортировкой. Скриншоты лежат в <code>/images</code> (.png).</p>
-    </section>
-
-    <section class="controls">
-      <div class="search">
-        <label for="search-input" class="sr-only">Поиск версий</label>
-        <input id="search-input" type="search" placeholder="Например: 1.16, Nether, Forge…" autocomplete="off" />
-      </div>
-      <div class="filters">
-        <select id="sort-select" aria-label="Сортировка">
-          <option value="newest">Сначала новые</option>
-          <option value="oldest">Сначала старые</option>
-          <option value="name">По названию</option>
-        </select>
-      </div>
-    </section>
-
-    <section class="grid" id="version-grid" aria-live="polite">
-      <!-- Карточки версий генерируются из scripts.js -->
-    </section>
-
-    <section class="history">
-      <h2>История версий 1.16–1.20</h2>
-      <ul class="timeline" id="timeline">
-        <!-- Заполняется из scripts.js -->
-      </ul>
-    </section>
+  <main>
+    <ul>
+      <li><a href="1.16.html">Minecraft 1.16 — Nether Update</a></li>
+      <li><a href="1.17.html">Minecraft 1.17 — Caves &amp; Cliffs: Part I</a></li>
+      <li><a href="1.18.html">Minecraft 1.18 — Caves &amp; Cliffs: Part II</a></li>
+      <li><a href="1.19.html">Minecraft 1.19 — The Wild Update</a></li>
+      <li><a href="1.20.html">Minecraft 1.20 — Trails &amp; Tales</a></li>
+    </ul>
   </main>
 
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <small>Фан‑проект. Тексты и изображения редактируются вручную.</small>
-      <nav class="footer-nav">
-        <span class="author-inline">Автор: <strong>Ironcarrier</strong></span>
-        <a href="about.html">О проекте</a>
-        <a href="news.html">Новости</a>
-      </nav>
-    </div>
+  <footer>
+    <p>&copy; 2025 Minecraft Sky Realm</p>
   </footer>
-
-  <!-- Модальное окно -->
-  <dialog id="modal" class="modal">
-    <form method="dialog" class="modal-content">
-      <button class="modal-close" aria-label="Закрыть">✕</button>
-      <div id="modal-body"></div>
-    </form>
-  </dialog>
-
-  <script src="scripts.js" defer></script>
 </body>
 </html>
