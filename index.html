@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>История версий Minecraft</title>
+  <title>Minecraft Хроники</title>
+  <link rel="icon" href="favicon.png" type="image/x-icon">
   <link rel="stylesheet" href="styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
@@ -11,23 +12,18 @@
   <!-- Боковая панель -->
   <aside class="sidebar">
     <div class="sidebar-content">
-      <h2 class="sidebar-title">Minecraft<br>Хроники</h2>
+      <img src="logo.png" alt="Minecraft Хроники" class="logo">
       <p class="author">Автор: <strong>Ironcarrier</strong></p>
       <p class="desc">Изучи эволюцию мира блоков — от Незера до древних городов.</p>
 
       <nav class="sidebar-nav">
         <a href="index.html" class="nav-link active">Главная</a>
-        <!-- Можно добавить позже -->
-        <!-- <a href="#" class="nav-link">О проекте</a> -->
-        <!-- <a href="https://github.com/ваш-профиль" target="_blank" class="nav-link">GitHub</a> -->
+        <a href="1.16.html" class="nav-link">1.16 — Nether Update</a>
+        <a href="1.17.html" class="nav-link">1.17 — Caves & Cliffs I</a>
+        <a href="1.18.html" class="nav-link">1.18 — Caves & Cliffs II</a>
+        <a href="1.19.html" class="nav-link">1.19 — The Wild Update</a>
+        <a href="1.20.html" class="nav-link">1.20 — Trails & Tales</a>
       </nav>
-
-      <!-- Опционально: переключатель темы -->
-      <!--
-      <div class="theme-toggle">
-        <button id="theme-btn">🌙 / ☀️</button>
-      </div>
-      -->
     </div>
   </aside>
 
@@ -63,15 +59,5 @@
       </footer>
     </div>
   </main>
-
-  <script>
-    // Опционально: переключатель темы
-    /*
-    const themeBtn = document.getElementById('theme-btn');
-    themeBtn?.addEventListener('click', () => {
-      document.body.classList.toggle('light-theme');
-    });
-    */
-  </script>
 </body>
 </html>

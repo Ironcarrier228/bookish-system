@@ -1,4 +1,4 @@
-/* styles.css — с улучшенной читаемостью */
+/* styles.css — с увеличенным текстом, логотипом и фиксом favicon */
 
 :root {
   --bg-dark: #0d1b2a;
@@ -46,16 +46,17 @@ body {
   gap: 1.2rem;
 }
 
-.sidebar-title {
-  font-family: 'Press Start 2P', cursive;
-  font-size: 1.35rem;
-  color: var(--accent-gold);
-  text-shadow: 0 0 8px rgba(212, 175, 55, 0.7);
-  line-height: 1.3;
+.logo {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .author {
-  font-size: 1.05rem; /* ↑ увеличено */
+  font-size: 1.05rem;
   color: #b0c0d0;
 }
 
@@ -65,7 +66,7 @@ body {
 }
 
 .desc {
-  font-size: 1rem; /* ↑ увеличено */
+  font-size: 1rem;
   color: #d0d5e0;
   font-style: italic;
   line-height: 1.5;
@@ -84,7 +85,7 @@ body {
   color: var(--text-light);
   border-radius: 6px;
   transition: all 0.3s ease;
-  font-size: 1.05rem; /* ↑ увеличено */
+  font-size: 1.05rem;
   font-family: 'Caveat', cursive;
 }
 
@@ -110,7 +111,7 @@ body {
 
 .title {
   font-family: 'Press Start 2P', cursive;
-  font-size: 2.1rem; /* ↑ увеличено с 1.8rem */
+  font-size: 2.1rem;
   color: var(--accent-gold);
   margin: 0 0 2rem;
   text-shadow: 0 0 12px rgba(212, 175, 55, 0.8);
@@ -135,7 +136,7 @@ body {
   background: var(--bg-card);
   border: 2px solid var(--accent-gold);
   border-radius: 14px;
-  padding: 1.6rem; /* ↑ увеличено */
+  padding: 1.6rem;
   text-decoration: none;
   color: inherit;
   transition: all 0.4s ease;
@@ -144,15 +145,15 @@ body {
 }
 
 .update-card h2 {
-  font-size: 1.7rem; /* ↑ было 1.4rem — теперь ЧЁТКО видно! */
+  font-size: 1.7rem;
   margin-bottom: 0.6rem;
   color: white;
-  font-family: 'Press Start 2P', cursive; /* игровой шрифт для заголовков */
+  font-family: 'Press Start 2P', cursive;
   letter-spacing: 0.5px;
 }
 
 .update-card .subtitle {
-  font-size: 1.35rem; /* ↑ увеличено */
+  font-size: 1.35rem;
   color: var(--accent-gold);
   margin: 0;
   font-family: 'Caveat', cursive;
@@ -166,10 +167,66 @@ body {
   border-color: var(--accent-red);
 }
 
+/* Баннер */
+.banner {
+  margin: 1.5rem 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+  background: #000;
+}
+
+.banner img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.banner img:hover {
+  transform: scale(1.02);
+}
+
+/* Контент страницы версии */
+.content {
+  background: var(--bg-card);
+  padding: 1.8rem;
+  border-radius: 12px;
+  margin: 1.5rem 0;
+  font-size: 1.1rem;
+}
+
+.content ul {
+  padding-left: 1.8rem;
+  margin-top: 1rem;
+}
+
+.content li {
+  margin-bottom: 0.7rem;
+}
+
+/* Ссылка "Назад" */
+.back-link {
+  display: inline-block;
+  color: var(--accent-gold);
+  text-decoration: none;
+  margin-bottom: 1.5rem;
+  font-weight: bold;
+  transition: color 0.3s;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.9rem;
+}
+
+.back-link:hover {
+  color: var(--accent-red);
+  text-decoration: underline;
+}
+
+/* Футер */
 .footer {
   text-align: center;
   margin-top: 2.8rem;
-  font-size: 1.05rem; /* ↑ увеличено */
+  font-size: 1.05rem;
   color: #b0b5c0;
   font-family: 'Caveat', cursive;
 }
@@ -218,5 +275,9 @@ body {
 
   .author, .desc, .nav-link {
     font-size: 1rem;
+  }
+
+  .logo {
+    max-width: 160px;
   }
 }
