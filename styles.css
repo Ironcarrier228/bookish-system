@@ -233,8 +233,8 @@ body.light-theme #search {
 /* Только 5-я карточка (1.20) с терминалом */
 .update-card:nth-child(5) {
   position: relative;
-  animation: commandSummon 1.5s ease-out forwards;
-  animation-delay: 1s;
+  animation: commandSummon 1s ease-out forwards;
+  animation-delay: 3.5s;
   opacity: 0;
 }
 
@@ -601,115 +601,83 @@ body.light-theme .mech-card h2 {
   }
 }
 
-/* Анимации для терминала */
+/* Анимация печатания команды */
+@keyframes typeCommand {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
 @keyframes blinkCursor {
   50% {
     border-right-color: transparent;
   }
 }
 
-@keyframes typeCommand {
-  0% {
-    width: 0;
-  }
-  100% {
-    width: 100%;
-  }
-}
-
 @keyframes terminalAppear {
   from {
     opacity: 0;
-    transform: translateX(-50%) translateY(10px);
+    transform: translateX(-50%) scale(0.9);
   }
   to {
     opacity: 1;
-    transform: translateX(-50%) translateY(0);
+    transform: translateX(-50%) scale(1);
   }
 }
 
 @keyframes terminalDisappear {
   from {
     opacity: 1;
-    transform: translateX(-50%) translateY(0);
+    transform: translateX(-50%) scale(1);
   }
   to {
     opacity: 0;
-    transform: translateX(-50%) translateY(-10px);
+    transform: translateX(-50%) scale(0.9);
   }
 }
 
-/* Терминал Minecraft для 5-й карточки */
+/* Терминал input для 5-й карточки */
 .update-card:nth-child(5)::before {
   content: '/summon minecraft:version_1.20';
   position: absolute;
-  bottom: calc(100% + 45px);
+  bottom: calc(100% + 30px);
   left: 50%;
   transform: translateX(-50%);
-  background-color: #1a1a1a;
-  color: #0f0;
-  font-family: "Courier New", Courier, monospace;
-  font-size: 13px;
-  padding: 2.8em 1.5em 1.2em;
-  width: 320px;
-  border: 0.15em solid #333;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
-  border-radius: 6px;
-  box-sizing: border-box;
-  z-index: 100;
+  
+  /* Стиль из вашего примера */
+  background-color: #383838;
+  border: 1ex solid transparent;
+  border-top: 2.5em solid #383838;
+  margin: 0;
+  padding: 15px 20px;
+  color: #00ff00;
+  word-wrap: break-word;
+  outline: 10px solid #383838;
+  height: 50px;
+  font-size: 20px;
+  text-align: center;
+  font-weight: bold;
+  font-family: 'Courier New', Courier, monospace;
+  
+  width: 0;
+  min-width: 400px;
+  max-width: 400px;
   white-space: nowrap;
   overflow: hidden;
-  border-right: 0.15em solid #0f0;
-  pointer-events: none;
-  
-  /* Анимация: появление терминала -> печать команды -> исчезновение */
-  animation:
-    terminalAppear 0.5s ease-out 0s forwards,
-    typeCommand 2s steps(33) 0.5s forwards,
-    blinkCursor 0.5s step-end 0.5s infinite alternate,
-    terminalDisappear 0.5s ease-out 3s forwards;
-  opacity: 0;
-  width: 0;
-  padding-right: 1.5em;
-}
-
-/* Заголовок терминала с кнопками */
-.update-card:nth-child(5)::after {
-  content: 'Terminal';
-  position: absolute;
-  bottom: calc(100% + 45px);
-  left: 50%;
-  transform: translateX(-50%);
-  width: 320px;
-  height: 2.5em;
-  background-color: #333;
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
+  border-right: 0.15em solid #00ff00;
   box-sizing: border-box;
-  z-index: 101;
-  color: #eee;
-  font-family: "Courier New", Courier, monospace;
-  font-size: 11px;
-  line-height: 2.5em;
-  padding-left: 1em;
   pointer-events: none;
+  z-index: 100;
   
-  /* Кнопки через background */
-  background-image: 
-    radial-gradient(circle, #e33 40%, transparent 40%),
-    radial-gradient(circle, #ee0 40%, transparent 40%),
-    radial-gradient(circle, #0b0 40%, transparent 40%);
-  background-size: 0.8em 0.8em;
-  background-position: 
-    calc(100% - 3.5em) center,
-    calc(100% - 2.2em) center,
-    calc(100% - 0.9em) center;
-  background-repeat: no-repeat;
-  
-  /* Синхронизируем с терминалом */
+  /* Анимация */
   animation:
     terminalAppear 0.5s ease-out 0s forwards,
-    terminalDisappear 0.5s ease-out 3s forwards;
+    typeCommand 3s steps(33) 0.5s forwards,
+    blinkCursor 0.5s step-end 0.5s infinite alternate,
+    terminalDisappear 0.5s ease-out 4s forwards;
   opacity: 0;
 }
 
