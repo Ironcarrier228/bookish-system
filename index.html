@@ -21,23 +21,23 @@
     </div>
 
     <div class="updates" id="versions-list">
-      <a href="1.16.html" class="update-card" data-title="Nether Update">
+      <a href="1.16.html" class="update-card" data-version="1.16" data-title="Nether Update">
         <h2>Minecraft 1.16</h2>
         <p class="subtitle">Nether Update</p>
       </a>
-      <a href="1.17.html" class="update-card" data-title="Caves & Cliffs: Part I">
+      <a href="1.17.html" class="update-card" data-version="1.17" data-title="Caves & Cliffs: Part I">
         <h2>Minecraft 1.17</h2>
         <p class="subtitle">Caves & Cliffs: Part I</p>
       </a>
-      <a href="1.18.html" class="update-card" data-title="Caves & Cliffs: Part II">
+      <a href="1.18.html" class="update-card" data-version="1.18" data-title="Caves & Cliffs: Part II">
         <h2>Minecraft 1.18</h2>
         <p class="subtitle">Caves & Cliffs: Part II</p>
       </a>
-      <a href="1.19.html" class="update-card" data-title="The Wild Update">
+      <a href="1.19.html" class="update-card" data-version="1.19" data-title="The Wild Update">
         <h2>Minecraft 1.19</h2>
         <p class="subtitle">The Wild Update</p>
       </a>
-      <a href="1.20.html" class="update-card" data-title="Trails & Tales">
+      <a href="1.20.html" class="update-card" data-version="1.20" data-title="Trails & Tales">
         <h2>Minecraft 1.20</h2>
         <p class="subtitle">Trails & Tales</p>
       </a>
@@ -53,17 +53,28 @@
       const input = document.getElementById('search');
       const filter = input.value.toLowerCase();
       const cards = document.querySelectorAll('.update-card');
+      
       cards.forEach(card => {
+        // Использование data-атрибутов для более надежной фильтрации
         const title = card.getAttribute('data-title').toLowerCase();
-        const version = card.querySelector('h2').textContent.toLowerCase();
+        const version = card.getAttribute('data-version').toLowerCase(); 
+        
+        // Отображение/скрытие карточки
         card.style.display = (title.includes(filter) || version.includes(filter)) ? 'block' : 'none';
+        
+        // Если карточка должна быть скрыта, останавливаем анимацию. 
+        // В данном случае, просто скрываем, что достаточно.
       });
     }
 
     function randomVersion() {
       const cards = document.querySelectorAll('.update-card');
-      const randomIndex = Math.floor(Math.random() * cards.length);
-      window.location.href = cards[randomIndex].href;
+      const visibleCards = Array.from(cards).filter(card => card.style.display !== 'none');
+      
+      if (visibleCards.length > 0) {
+        const randomIndex = Math.floor(Math.random() * visibleCards.length);
+        window.location.href = visibleCards[randomIndex].href;
+      }
     }
 
     function toggleTheme() {
@@ -79,12 +90,15 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
+      // Инициализация темы при загрузке
       if (localStorage.getItem('theme') === 'light') {
         document.body.classList.add('light-theme');
         document.getElementById('theme-toggle').textContent = '☀️';
       }
+      
+      // ИЗМЕНЕНИЕ: Убран вызов filterVersions, чтобы все карточки были видны при загрузке.
+      // addEventListener('DOMContentLoaded', filterVersions); // УДАЛЕНО
     });
-    addEventListener('DOMContentLoaded', filterVersions);
   </script>
 </body>
 </html>

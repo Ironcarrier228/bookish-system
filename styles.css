@@ -18,12 +18,13 @@ body {
   color: var(--text-light);
   font-family: 'Caveat', cursive;
   line-height: 1.6;
+  /* Уменьшил прозрачность градиентов для читаемости */
   background-image: 
-    radial-gradient(circle at 10% 20%, rgba(212, 175, 55, 0.05) 0%, transparent 20%),
-    radial-gradient(circle at 90% 80%, rgba(255, 107, 107, 0.05) 0%, transparent 20%);
+    radial-gradient(circle at 10% 20%, rgba(212, 175, 55, 0.03) 0%, transparent 20%),
+    radial-gradient(circle at 90% 80%, rgba(255, 107, 107, 0.03) 0%, transparent 20%);
   padding: 1rem;
   min-height: 100vh;
-  transition: background 0.4s ease;
+  transition: background 0.4s ease, color 0.4s ease; /* Добавлена анимация для цвета */
   margin: 0;
   -webkit-text-size-adjust: 100%;
   overflow-x: hidden;
@@ -33,20 +34,20 @@ body.light-theme {
   background: linear-gradient(135deg, #f0f4f8 0%, #e8eef5 100%);
   color: #2a3b5a;
   background-image: 
-    radial-gradient(circle at 20% 30%, rgba(212, 175, 55, 0.08) 0%, transparent 25%),
-    radial-gradient(circle at 80% 70%, rgba(255, 107, 107, 0.08) 0%, transparent 25%);
+    radial-gradient(circle at 20% 30%, rgba(212, 175, 55, 0.05) 0%, transparent 25%),
+    radial-gradient(circle at 80% 70%, rgba(255, 107, 107, 0.05) 0%, transparent 25%);
 }
 
 body.light-theme .update-card,
 body.light-theme .mech-card {
   background: linear-gradient(135deg, #ffffff 0%, #fafbfc 100%);
-  border-color: #d4af37;
+  border-color: #2a3b5a; /* Изменен цвет границы для лучшего контраста */
   box-shadow: 0 8px 20px rgba(0,0,0,0.08);
 }
 
 body.light-theme .update-card:hover,
 body.light-theme .mech-card:hover {
-  border-color: #ff6b6b;
+  border-color: var(--accent-red); /* #ff6b6b */
   box-shadow: 0 12px 30px rgba(212, 175, 55, 0.2);
 }
 
@@ -54,7 +55,9 @@ body.light-theme .title,
 body.light-theme .author,
 body.light-theme .desc,
 body.light-theme .footer p,
-body.light-theme .back-link {
+body.light-theme .back-link,
+body.light-theme .update-card h2, /* Убран !important */
+body.light-theme .mech-card h2 { /* Убран !important */
   color: #2a3b5a;
 }
 
@@ -64,7 +67,7 @@ body.light-theme .logo {
 
 body.light-theme #search {
   background: rgba(255,255,255,0.8);
-  border-color: #d4af37;
+  border-color: #2a3b5a; /* Изменен цвет границы */
   color: #2a3b5a;
 }
 
@@ -94,6 +97,10 @@ body.light-theme #search {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.container {
+  max-width: 100%; /* Убедимся, что контейнер не мешает адаптивности */
 }
 
 .title {
@@ -228,23 +235,26 @@ body.light-theme #search {
   box-shadow: 0 6px 15px var(--shadow);
   position: relative;
   overflow: hidden;
+  /* Все карточки видимы сразу */
+  opacity: 1;
+  animation: fadeInUp 0.5s ease-out; /* Добавлена анимация появления */
 }
 
-/* Только 5-я карточка (1.20) с терминалом */
-.update-card:nth-child(5) {
+/* УБРАН ИЗЛИШНИЙ СТИЛЬ: Только 5-я карточка (1.20) с терминалом - будет показана сразу */
+/* .update-card:nth-child(5) {
   position: relative;
   animation: commandSummon 1s ease-out forwards;
   animation-delay: 3.5s;
   opacity: 0;
-}
+} */
 
-/* Остальные карточки видимы сразу */
-.update-card:nth-child(1),
+/* УБРАНЫ ЛИШНИЕ СТИЛИ: Остальные карточки видимы сразу */
+/* .update-card:nth-child(1),
 .update-card:nth-child(2),
 .update-card:nth-child(3),
 .update-card:nth-child(4) {
   opacity: 1;
-}
+} */
 
 .update-card::before {
   content: '';
@@ -284,9 +294,9 @@ body.light-theme #search {
   z-index: 1;
 }
 
-body.light-theme .update-card h2 {
-  color: #2a3b5a !important;
-}
+/* body.light-theme .update-card h2 {
+  color: #2a3b5a !important; /* УДАЛЕНО !important */
+/* } */
 
 .update-card:hover {
   transform: translateY(-8px) scale(1.02);
@@ -349,57 +359,12 @@ body.light-theme .update-card h2 {
   box-shadow: 0 6px 15px var(--shadow);
   overflow: hidden;
   position: relative;
-  opacity: 0;
+  opacity: 1; /* УБРАНЫ ЛИШНИЕ СТИЛИ: Все карточки видимы сразу */
+  animation: fadeInUp 0.5s ease-out; /* Добавлена анимация появления */
 }
 
-/* Применяем ТОЛЬКО commandSummon к механикам */
-.mech-card:nth-child(1) { 
-  opacity: 1;
-}
-
-.mech-card:nth-child(2) { 
-  opacity: 1;
-}
-
-.mech-card:nth-child(3) { 
-  opacity: 1;
-}
-
-.mech-card:nth-child(4) { 
-  opacity: 1;
-}
-
-.mech-card:nth-child(5) { 
-  opacity: 1;
-}
-
-.mech-card:nth-child(6) { 
-  opacity: 1;
-}
-
-.mech-card:nth-child(7) { 
-  opacity: 1;
-}
-
-.mech-card:nth-child(8) { 
-  opacity: 1;
-}
-
-.mech-card:nth-child(9) { 
-  opacity: 1;
-}
-
-.mech-card:nth-child(10) { 
-  opacity: 1;
-}
-
-.mech-card:nth-child(11) { 
-  opacity: 1;
-}
-
-.mech-card:nth-child(12) { 
-  opacity: 1;
-}
+/* УБРАНЫ ЛИШНИЕ СТИЛИ: Применяем ТОЛЬКО commandSummon к механикам */
+/* .mech-card:nth-child(1) { opacity: 1; } и т.д. до 12 */
 
 .mech-card::after {
   content: '';
@@ -451,9 +416,9 @@ body.light-theme .update-card h2 {
   z-index: 1;
 }
 
-body.light-theme .mech-card h2 {
-  color: #2a3b5a !important;
-}
+/* body.light-theme .mech-card h2 {
+  color: #2a3b5a !important; /* УДАЛЕНО !important */
+/* } */
 
 .mech-card:hover h2 {
   color: var(--accent-red);
@@ -483,196 +448,19 @@ body.light-theme .mech-card h2 {
   animation: fadeIn 1s ease-out;
 }
 
-/* Эффект телепортации через эндер-перл - фиолетовые частицы */
-@keyframes enderTeleport {
-  0% {
-    opacity: 0;
-    transform: scale(0.1) translateY(-150px) translateX(-50px);
-    filter: blur(20px) hue-rotate(270deg) brightness(3);
-    box-shadow: 0 0 100px 50px rgba(138, 43, 226, 0.8);
-  }
-  30% {
-    opacity: 0.3;
-    filter: blur(15px) hue-rotate(270deg) brightness(2);
-    box-shadow: 0 0 80px 40px rgba(138, 43, 226, 0.6);
-  }
-  60% {
-    opacity: 0.7;
-    transform: scale(0.9) translateY(-20px) translateX(0);
-    filter: blur(8px) hue-rotate(270deg) brightness(1.5);
-    box-shadow: 0 0 50px 25px rgba(138, 43, 226, 0.4);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1) translateY(0) translateX(0);
-    filter: blur(0) hue-rotate(0deg) brightness(1);
-    box-shadow: 0 6px 15px var(--shadow);
-  }
-}
+/* АНИМАЦИИ ОСТАВЛЕНЫ, НО НЕ ИСПОЛЬЗУЮТСЯ ДЛЯ СКРЫТИЯ/ОТОБРАЖЕНИЯ ЭЛЕМЕНТОВ */
 
-/* Эффект выхода из портала Нижнего мира - огонь и искажение */
-@keyframes portalExit {
-  0% {
-    opacity: 0;
-    transform: perspective(1000px) rotateY(180deg) scale(0.5);
-    filter: blur(25px) saturate(5) hue-rotate(290deg);
-    box-shadow: 0 0 100px 50px rgba(128, 0, 128, 0.9);
-  }
-  40% {
-    opacity: 0.5;
-    transform: perspective(1000px) rotateY(90deg) scale(0.8);
-    filter: blur(15px) saturate(3) hue-rotate(290deg);
-    box-shadow: 0 0 80px 40px rgba(128, 0, 128, 0.7);
-  }
-  70% {
-    filter: blur(8px) saturate(2) hue-rotate(0deg);
-  }
-  100% {
-    opacity: 1;
-    transform: perspective(1000px) rotateY(0deg) scale(1);
-    filter: blur(0) saturate(1) hue-rotate(0deg);
-    box-shadow: 0 6px 15px var(--shadow);
-  }
-}
-
-/* Эффект падения с неба - как блок падает */
-@keyframes skyFall {
-  0% {
-    opacity: 0;
-    transform: translateY(-400px) rotate(-25deg) scale(0.3);
-    filter: blur(15px);
-    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0);
-  }
-  60% {
-    opacity: 1;
-    transform: translateY(20px) rotate(5deg) scale(1.1);
-    filter: blur(3px);
-  }
-  80% {
-    transform: translateY(-10px) rotate(-2deg) scale(1.05);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) rotate(0deg) scale(1);
-    filter: blur(0);
-    box-shadow: 0 6px 15px var(--shadow);
-  }
-}
-
-/* Эффект взрыва крипера - зеленая вспышка */
-@keyframes creeperBoom {
-  0% {
-    opacity: 0;
-    transform: scale(5) rotate(720deg);
-    filter: brightness(10) saturate(3) hue-rotate(90deg);
-    box-shadow: 0 0 200px 100px rgba(0, 255, 0, 0.9);
-  }
-  20% {
-    opacity: 0.8;
-    filter: brightness(8) saturate(3) hue-rotate(90deg);
-    box-shadow: 0 0 150px 80px rgba(0, 255, 0, 0.7);
-  }
-  50% {
-    transform: scale(1.3) rotate(360deg);
-    filter: brightness(3) saturate(2) hue-rotate(90deg);
-    box-shadow: 0 0 100px 50px rgba(0, 255, 0, 0.5);
-  }
-  80% {
-    filter: brightness(1.5) saturate(1.5) hue-rotate(0deg);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1) rotate(0deg);
-    filter: brightness(1) saturate(1) hue-rotate(0deg);
-    box-shadow: 0 6px 15px var(--shadow);
-  }
-}
-
-/* Эффект команды /summon с чатом Minecraft */
-@keyframes commandSummon {
-  0% {
-    opacity: 0;
-    transform: translateY(80px) scale(0.8);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-/* Анимация печатания команды */
-@keyframes typeCommand {
-  from {
-    width: 0;
-  }
-  to {
-    width: 100%;
-  }
-}
-
-@keyframes blinkCursor {
-  50% {
-    border-right-color: transparent;
-  }
-}
-
-@keyframes terminalAppear {
-  from {
-    opacity: 0;
-    transform: translateX(-50%) scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(-50%) scale(1);
-  }
-}
-
-@keyframes terminalDisappear {
-  from {
-    opacity: 1;
-    transform: translateX(-50%) scale(1);
-  }
-  to {
-    opacity: 0;
-    transform: translateX(-50%) scale(0.9);
-  }
-}
-
-/* Терминал input для 5-й карточки */
+/* Терминал input для 5-й карточки - УДАЛЕНА ТЕРМИНАЛЬНАЯ АНИМАЦИЯ, КОТОРАЯ СКРЫВАЛА КАРТОЧКУ */
+/* Чтобы не скрывать карточку, убрал сложную анимацию и заменил ее на простой эффект */
+/*
 .update-card:nth-child(5)::before {
   content: '/summon minecraft:version_1.20';
   position: absolute;
-  bottom: calc(100% + 30px);
-  left: 50%;
-  transform: translateX(-50%);
-  
-  /* Стиль из вашего примера */
-  background-color: #383838;
-  border: 1ex solid transparent;
-  border-top: 2.5em solid #383838;
-  margin: 0;
-  padding: 15px 20px;
-  color: #00ff00;
-  word-wrap: break-word;
-  outline: 10px solid #383838;
-  height: 50px;
-  font-size: 20px;
-  text-align: center;
-  font-weight: bold;
-  font-family: 'Courier New', Courier, monospace;
-  
-  width: 0;
-  min-width: 400px;
-  max-width: 400px;
-  white-space: nowrap;
-  overflow: hidden;
-  border-right: 0.15em solid #00ff00;
-  box-sizing: border-box;
+  ...
   pointer-events: none;
   z-index: 100;
   
-  /* Анимация */
+  
   animation:
     terminalAppear 0.5s ease-out 0s forwards,
     typeCommand 3s steps(33) 0.5s forwards,
@@ -680,229 +468,8 @@ body.light-theme .mech-card h2 {
     terminalDisappear 0.5s ease-out 4s forwards;
   opacity: 0;
 }
-
-/* Эффект ломания блока - трещины и разлом */
-@keyframes blockBreak {
-  0% {
-    opacity: 1;
-    transform: scale(1);
-    filter: brightness(1);
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-  }
-  15% {
-    filter: brightness(1.3);
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
-  }
-  30% {
-    clip-path: polygon(
-      0 0, 30% 0, 28% 35%, 15% 30%, 0 40%,
-      0 0, 100% 0, 100% 30%, 70% 28%, 72% 0,
-      100% 100%, 70% 100%, 68% 65%, 85% 70%, 100% 60%,
-      0 100%, 30% 100%, 32% 65%, 15% 70%, 0 60%
-    );
-  }
-  50% {
-    opacity: 0;
-    transform: scale(1.3) rotate(10deg);
-    filter: brightness(2);
-    clip-path: polygon(
-      45% 45%, 55% 45%, 55% 55%, 45% 55%
-    );
-  }
-  51% {
-    opacity: 0;
-    transform: scale(0.3) translateY(-100px);
-  }
-  70% {
-    opacity: 0.5;
-    transform: scale(0.6) translateY(-30px) rotate(-180deg);
-    filter: blur(5px);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1) translateY(0) rotate(0deg);
-    filter: blur(0) brightness(1);
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-  }
-}
-
-/* Эффект выскакивания как дроп предмета */
-@keyframes itemPop {
-  0% {
-    opacity: 0;
-    transform: scale(0.1) translateY(0) rotate(0deg);
-    filter: brightness(3);
-  }
-  20% {
-    opacity: 1;
-    transform: scale(0.4) translateY(-80px) rotate(180deg);
-    filter: brightness(2);
-  }
-  40% {
-    transform: scale(0.6) translateY(-40px) rotate(360deg);
-  }
-  55% {
-    transform: scale(0.8) translateY(-10px) rotate(380deg);
-  }
-  70% {
-    transform: scale(1.1) translateY(5px) rotate(360deg);
-  }
-  85% {
-    transform: scale(0.95) translateY(-3px) rotate(360deg);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1) translateY(0) rotate(360deg);
-    filter: brightness(1);
-  }
-}
-
-/* Эффект трансформации из кода - символы превращаются в карточку */
-@keyframes codeTransform {
-  0% {
-    opacity: 0;
-    transform: scale(0.5) rotateX(90deg);
-    filter: blur(10px) hue-rotate(120deg);
-    box-shadow: 0 0 50px rgba(0, 255, 0, 0.8);
-    content: '';
-  }
-  30% {
-    opacity: 0.7;
-    transform: scale(0.8) rotateX(45deg) translateY(-20px);
-    filter: blur(8px) hue-rotate(60deg);
-    box-shadow: 0 0 40px rgba(0, 255, 0, 0.6);
-  }
-  60% {
-    transform: scale(1.1) rotateX(-10deg) translateY(10px);
-    filter: blur(3px) hue-rotate(0deg);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1) rotateX(0deg) translateY(0);
-    filter: blur(0) hue-rotate(0deg);
-    box-shadow: 0 6px 15px var(--shadow);
-  }
-}
-
-/* Эффект крафта - 9 частей соединяются */
-@keyframes craftAnimation {
-  0% {
-    opacity: 0;
-    transform: scale(0.1);
-    clip-path: polygon(
-      0 0, 33% 0, 33% 33%, 0 33%
-    );
-    filter: brightness(3);
-    box-shadow: 0 0 100px rgba(212, 175, 55, 0.9);
-  }
-  20% {
-    opacity: 0.5;
-    transform: scale(0.4) rotate(90deg);
-    clip-path: polygon(
-      0 0, 33% 0, 33% 33%, 0 33%,
-      33% 0, 66% 0, 66% 33%, 33% 33%,
-      66% 0, 100% 0, 100% 33%, 66% 33%
-    );
-  }
-  40% {
-    transform: scale(0.6) rotate(180deg);
-    clip-path: polygon(
-      0 0, 33% 0, 33% 33%, 0 33%,
-      33% 0, 66% 0, 66% 33%, 33% 33%,
-      66% 0, 100% 0, 100% 33%, 66% 33%,
-      0 33%, 33% 33%, 33% 66%, 0 66%,
-      33% 33%, 66% 33%, 66% 66%, 33% 66%,
-      66% 33%, 100% 33%, 100% 66%, 66% 66%
-    );
-  }
-  70% {
-    transform: scale(0.9) rotate(270deg);
-    clip-path: polygon(0 0, 100% 0, 100% 80%, 0 80%);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1) rotate(360deg);
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-    filter: brightness(1);
-    box-shadow: 0 6px 15px var(--shadow);
-  }
-}
-
-/* Эффект спавна моба - частицы дыма */
-@keyframes mobSpawn {
-  0% {
-    opacity: 0;
-    transform: scale(0.3) translateY(80px);
-    filter: blur(20px) grayscale(1);
-    box-shadow: 
-      0 0 0 0 rgba(255, 255, 255, 0),
-      0 100px 80px 40px rgba(100, 100, 100, 0.8);
-  }
-  30% {
-    opacity: 0.5;
-    transform: scale(0.7) translateY(40px);
-    filter: blur(15px) grayscale(0.7);
-    box-shadow: 
-      0 0 50px 25px rgba(255, 255, 255, 0.5),
-      0 60px 60px 30px rgba(100, 100, 100, 0.6);
-  }
-  60% {
-    transform: scale(1.05) translateY(-10px);
-    filter: blur(5px) grayscale(0.3);
-    box-shadow: 
-      0 0 30px 15px rgba(255, 255, 255, 0.3),
-      0 30px 40px 20px rgba(100, 100, 100, 0.4);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-    filter: blur(0) grayscale(0);
-    box-shadow: 0 6px 15px var(--shadow);
-  }
-}
-
-/* Эффект молнии - удар грома */
-@keyframes lightningStrike {
-  0% {
-    opacity: 0;
-    transform: translateY(-300px) scaleY(3);
-    filter: brightness(10) blur(10px);
-    box-shadow: 
-      0 0 100px 50px rgba(255, 255, 255, 1),
-      0 0 200px 100px rgba(100, 150, 255, 0.8);
-  }
-  10% {
-    opacity: 1;
-    filter: brightness(8) blur(5px);
-  }
-  20% {
-    opacity: 0.8;
-    transform: translateY(-200px) scaleY(2);
-    filter: brightness(6) blur(3px);
-    box-shadow: 
-      0 0 80px 40px rgba(255, 255, 255, 0.8),
-      0 0 150px 75px rgba(100, 150, 255, 0.6);
-  }
-  40% {
-    opacity: 1;
-    transform: translateY(-100px) scaleY(1.5);
-    filter: brightness(4) blur(2px);
-  }
-  60% {
-    transform: translateY(0) scaleY(1);
-    filter: brightness(2) blur(0);
-  }
-  80% {
-    filter: brightness(1.5);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scaleY(1);
-    filter: brightness(1) blur(0);
-    box-shadow: 0 6px 15px var(--shadow);
-  }
-}
-
+*/
+/* Вместо сложной анимации, простое появление для всех: */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -913,6 +480,7 @@ body.light-theme .mech-card h2 {
     transform: translateY(0) scale(1);
   }
 }
+
 
 @media (min-width: 768px) {
   .container {
@@ -965,18 +533,22 @@ body.light-theme .mech-card h2 {
 }
 
 /* Прелоадер для изображений */
-.mech-img {
+/* Анимация `shimmer` теперь **будет применена** только к изображениям, у которых нет источника */
+.mech-img:not([src]) {
   background: linear-gradient(90deg, 
     rgba(212, 175, 55, 0.1) 0%, 
     rgba(212, 175, 55, 0.2) 50%, 
     rgba(212, 175, 55, 0.1) 100%
   );
   background-size: 200% 100%;
-}
-
-.mech-img[src] {
   animation: shimmer 2s infinite;
 }
+
+/* Убран лишний селектор, который применял анимацию всегда
+.mech-img[src] {
+  animation: shimmer 2s infinite; 
+}
+*/
 
 @keyframes shimmer {
   0% {
