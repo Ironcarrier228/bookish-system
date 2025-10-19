@@ -1,152 +1,74 @@
-/* styles.css — в стиле Minecraft (2025, но как в игре) */
-
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
-:root {
-  /* Цвета из Minecraft */
-  --mc-sky: #70abcc;       /* Небо */
-  --mc-grass: #79c053;     /* Трава */
-  --mc-dirt: #a78454;      /* Земля */
-  --mc-wood: #bd9065;      /* Дерево */
-  --mc-stone: #8f8f8f;     /* Камень */
-  --mc-text: #333333;      /* Основной текст */
-  --mc-panel: #d2b48c;     /* Фон панелей (как книга или верстак) */
-  --mc-border: #5d4037;    /* Тёмная рамка */
-}
-
+/* Сброс */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* Цвета из Minecraft GUI */
+:root {
+  --mc-bg: #373737;         /* Фон меню */
+  --mc-panel: #2d2d2d;      /* Фон панелей */
+  --mc-border: #525252;     /* Серая рамка */
+  --mc-text: #e0e0e0;       /* Белый текст */
+  --mc-gold: #ffaa00;       /* Золотой (как в названиях) */
+  --mc-red: #ff5555;        /* Красный (акцент) */
+}
+
 body {
-  background-color: var(--mc-sky);
+  background-color: var(--mc-bg);
   color: var(--mc-text);
   font-family: 'Press Start 2P', monospace;
   font-size: 12px;
-  line-height: 1.4;
-  padding: 20px;
+  line-height: 1.5;
+  padding: 24px 16px;
   min-height: 100vh;
-  /* Отключаем сглаживание для пиксельного вида */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Пиксельный рендеринг */
   image-rendering: pixelated;
   image-rendering: -moz-crisp-edges;
   image-rendering: crisp-edges;
 }
 
 .container {
-  max-width: 800px;
-  margin: 0 auto;
   background-color: var(--mc-panel);
-  border: 6px solid var(--mc-border);
-  padding: 16px;
-  /* Имитация "деревянной" рамки */
-  box-shadow: 0 0 0 3px var(--mc-wood);
-}
-
-.logo {
+  border: 3px solid var(--mc-border);
+  padding: 20px;
+  max-width: 600px;
   width: 100%;
-  max-width: 240px;
-  height: auto;
-  margin: 0 auto 16px;
-  display: block;
-  image-rendering: pixelated;
+  text-align: center;
 }
 
-.title {
+h1 {
   font-size: 16px;
-  text-align: center;
-  margin-bottom: 16px;
-  color: var(--mc-text);
+  color: var(--mc-gold);
+  margin-bottom: 24px;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
-.controls {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 16px;
-  flex-wrap: wrap;
-  justify-content: center;
+ul {
+  list-style: none;
+  text-align: left;
 }
 
-#search {
-  width: 100%;
-  max-width: 220px;
-  padding: 6px 8px;
-  font-family: 'Press Start 2P', monospace;
-  font-size: 10px;
-  background-color: var(--mc-panel);
-  border: 2px solid var(--mc-border);
+li {
+  padding: 8px 0;
+  font-size: 11px;
   color: var(--mc-text);
 }
 
-.controls button {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 10px;
-  padding: 6px 10px;
-  background-color: var(--mc-grass);
-  color: white;
-  border: 2px solid var(--mc-border);
-  cursor: pointer;
-  text-transform: uppercase;
-}
-
-.controls button:hover {
-  background-color: var(--mc-dirt);
-}
-
-.updates {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.update-card {
-  background-color: #c8b49a; /* Светлая земля */
-  border: 2px solid var(--mc-border);
-  padding: 12px;
-  text-decoration: none;
-  color: var(--mc-text);
-  display: block;
-}
-
-.update-card h2 {
-  font-size: 12px;
-  margin-bottom: 4px;
-}
-
-.update-card .subtitle {
-  font-size: 10px;
-  color: var(--mc-grass);
-  font-family: 'Press Start 2P', monospace;
-}
-
-.back-link {
-  display: inline-block;
-  font-size: 10px;
-  color: var(--mc-grass);
-  text-decoration: none;
-  margin-bottom: 16px;
-  text-transform: uppercase;
-}
-
-.back-link:hover {
-  color: var(--mc-dirt);
-  text-decoration: underline;
-}
-
-.footer {
-  text-align: center;
-  margin-top: 20px;
-  font-size: 8px;
-  color: var(--mc-text);
+li::before {
+  content: "» ";
+  color: var(--mc-gold);
 }
 
 /* Адаптив */
-@media (min-width: 768px) {
-  .title { font-size: 18px; }
-  .update-card h2 { font-size: 14px; }
-  .update-card .subtitle { font-size: 12px; }
-  #search, .controls button { font-size: 12px; }
+@media (min-width: 600px) {
+  h1 { font-size: 18px; }
+  li { font-size: 12px; }
 }
