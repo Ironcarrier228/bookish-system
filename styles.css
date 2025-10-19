@@ -27,7 +27,7 @@ body {
   margin: 0;
   -webkit-text-size-adjust: 100%;
   overflow-x: hidden;
-  position: relative; /* Для правильного позиционирования метабола */
+  position: relative; 
 }
 
 /* --- СТИЛИ СВЕТЛОЙ ТЕМЫ (LIGHT-THEME) --- */
@@ -211,13 +211,26 @@ body.light-theme #search {
   overflow: hidden;
   opacity: 0; /* Скрываем все карточки по умолчанию */
   animation: none;
-  z-index: 10; /* Для отображения над метаболом */
+  z-index: 10; 
 }
 
-/* Плавное появление для 1.16, 1.17, 1.18 */
-.update-card.fade-in {
+/* Прыгающая анимация для 1.16, 1.17, 1.18 */
+.update-card.bouncing {
     opacity: 1; 
-    animation: fadeInUp 0.5s ease-out forwards;
+    animation: bounceCard 1.5s ease-in-out forwards; /* 1.5s общая длительность */
+}
+
+/* Для 1.16, 1.17 - они должны остановиться в нужной точке */
+.update-card.bouncing:not(.final) {
+    animation-iteration-count: infinite; /* Повторяем, пока не удалит JS */
+    animation-duration: 0.8s; /* Более быстрая итерация */
+}
+
+/* Стиль для остановки: 1.18 - завершает анимацию, 1.16/1.17 - JS удалит класс bouncing */
+.update-card.stopped {
+    animation: none;
+    opacity: 1;
+    transform: translateY(0) scale(1.0);
 }
 
 .update-card::before {
@@ -339,22 +352,6 @@ body.light-theme #search {
   animation: fadeInUp 0.5s ease-out;
 }
 
-.mech-card::after {
-  content: '';
-  position: absolute;
-  top: -50%;
-  right: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(255, 107, 107, 0.1) 0%, transparent 70%);
-  transform: scale(0);
-  transition: transform 0.6s ease;
-}
-
-.mech-card:hover::after {
-  transform: scale(1);
-}
-
 .mech-card:hover {
   transform: translateY(-10px) scale(1.03);
   box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4);
@@ -465,76 +462,13 @@ body.light-theme #search {
   animation: terminalDisappear 0.5s ease-in forwards;
 }
 
-/* --- АНИМАЦИЯ МЕТАБОЛА (Metaball Animation) --- */
-
-.metaball-animation {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -35%); 
-  width: 100%;
-  max-width: 700px;
-  height: 700px;
-  z-index: 5; /* Помещаем под карточки */
-  opacity: 0.3; 
-  pointer-events: none;
-  overflow: visible; 
-  transition: opacity 0.5s ease;
-}
-
-body.light-theme .metaball-animation {
-    opacity: 0.1;
-}
-
-.segment {
-  stroke: rgba(255, 255, 255, 0.4); 
-  stroke-width: 10;
-  stroke-linecap: round;
-}
-
-.joint {
-  fill: rgba(255, 215, 0, 0.9);
-  stroke-width: 5px;
-}
-
-#mir {
-  scale: -0.25;
-}
-
-.arm {
-  filter: url("#metaball"); 
-  scale: 0.25;
-  transform-origin: 250px 250px;
-  animation: rotate 31s ease-in-out infinite;
-}
-
-.arm1 {
-  transform-origin: 300px 200px;
-  animation: rotate 23s ease-in-out infinite;
-}
-
-.arm2 {
-  transform-origin: 400px 200px;
-  animation: rotate 17s ease-in-out infinite;
-}
-
-.arm3 {
-  transform-origin: 490px 200px;
-  animation: rotate 11s ease-in-out infinite;
-}
-
 /* --- КЛЮЧЕВЫЕ КАДРЫ АНИМАЦИЙ --- */
 
-/* Общее плавное появление (для 1.16-1.18) */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+/* Анимация прыжка для 1.16, 1.17, 1.18 */
+@keyframes bounceCard {
+  0% { opacity: 0; transform: translateY(50px) scale(0.95); }
+  50% { opacity: 1; transform: translateY(-10px) scale(1.05); } /* Прыжок вверх */
+  100% { opacity: 1; transform: translateY(0) scale(1.0); } /* Остановка на месте */
 }
 
 /* Анимация спавна моба (для 1.19) */
@@ -612,16 +546,6 @@ body.light-theme .metaball-animation {
   }
 }
 
-/* Анимация вращения метабола */
-@keyframes rotate {
-  0% { transform: rotate(-90deg); }
-  25% { transform: rotate(360deg); }
-  50% { transform: rotate(90deg); }
-  75% { transform: rotate(-360deg); }
-  100% { transform: rotate(-90deg); }
-}
-
-
 /* Старые анимации */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(-20px); }
@@ -637,7 +561,6 @@ body.light-theme .metaball-animation {
   from { text-shadow: 0 0 5px var(--accent-gold), 0 0 10px var(--accent-gold); }
   to { text-shadow: 0 0 15px var(--accent-gold), 0 0 25px var(--accent-red), 0 0 35px rgba(212, 175, 55, 0.4); }
 }
-
 
 /* --- МЕДИАЗАПРОСЫ (ADAPTIVE) --- */
 @media (min-width: 768px) {
