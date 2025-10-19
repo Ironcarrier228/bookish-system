@@ -603,7 +603,7 @@ body.light-theme .mech-card h2 {
   }
 }
 
-@keyframes typeAndDelete {
+@keyframes typeCommand {
   0%, 10% {
     width: 0;
   }
@@ -615,78 +615,80 @@ body.light-theme .mech-card h2 {
   }
 }
 
-/* Терминал Minecraft для 11-й карточки */
-.update-card:nth-child(11)::before {
-  content: '';
-  position: absolute;
-  bottom: calc(100% + 20px);
-  left: 50%;
-  transform: translateX(-50%);
-  border: 0.15em solid #333;
-  background-color: #1a1a1a;
-  color: #0f0;
-  font-family: "Courier New", Courier, monospace;
-  font-size: 14px;
-  padding: 2.5em 1.2em 1.2em;
-  width: 280px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
-  border-radius: 6px;
-  overflow: hidden;
-  box-sizing: border-box;
-  z-index: 100;
-  animation: terminalAppear 0.5s ease-out forwards;
-  animation-delay: 3s;
-  opacity: 0;
-}
-
 @keyframes terminalAppear {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(10px);
+  }
   to {
     opacity: 1;
+    transform: translateX(-50%) translateY(0);
   }
 }
 
-/* Заголовок терминала */
-.update-card:nth-child(11)::after {
-  content: '';
+/* Терминал Minecraft для 5-й карточки */
+.update-card:nth-child(5)::before {
+  content: '/summon minecraft:update_1.20';
   position: absolute;
-  bottom: calc(100% + 20px);
+  bottom: calc(100% + 45px);
   left: 50%;
   transform: translateX(-50%);
-  width: 280px;
-  height: 2em;
+  background-color: #1a1a1a;
+  color: #0f0;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 13px;
+  padding: 2.8em 1.5em 1.2em;
+  width: 320px;
+  border: 0.15em solid #333;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  border-radius: 6px;
+  box-sizing: border-box;
+  z-index: 100;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 0.15em solid #0f0;
+  animation:
+    terminalAppear 0.5s ease-out forwards,
+    typeCommand 6s steps(30) 0.5s infinite,
+    blinkCursor 0.5s step-end 0.5s infinite alternate;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Заголовок терминала с кнопками */
+.update-card:nth-child(5)::after {
+  content: 'Terminal';
+  position: absolute;
+  bottom: calc(100% + 45px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 320px;
+  height: 2.5em;
   background-color: #333;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
   box-sizing: border-box;
   z-index: 101;
-  animation: terminalAppear 0.5s ease-out forwards;
-  animation-delay: 3s;
-  opacity: 0;
-}
-
-/* Текст команды с печатанием */
-.update-card:nth-child(11) {
-  position: relative;
-}
-
-.update-card:nth-child(11) .update-card::before {
-  content: '/summon minecraft:update_1.21';
-  display: inline-block;
-  white-space: nowrap;
-  overflow: hidden;
-  border-right: 0.2em solid #0f0;
-  animation:
-    typeAndDelete 6s steps(30) infinite,
-    blinkCursor 0.5s step-end infinite alternate;
-  position: absolute;
-  bottom: calc(100% + 40px);
-  left: 50%;
-  transform: translateX(-50%);
-  color: #0f0;
+  color: #eee;
   font-family: "Courier New", Courier, monospace;
-  font-size: 14px;
-  z-index: 102;
-  padding-left: 10px;
+  font-size: 11px;
+  line-height: 2.5em;
+  padding-left: 1em;
+  animation: terminalAppear 0.5s ease-out forwards;
+  opacity: 0;
+  pointer-events: none;
+  
+  /* Добавляем кнопки через background */
+  background-image: 
+    radial-gradient(circle, #e33 40%, transparent 40%),
+    radial-gradient(circle, #ee0 40%, transparent 40%),
+    radial-gradient(circle, #0b0 40%, transparent 40%);
+  background-size: 0.8em 0.8em;
+  background-position: 
+    calc(100% - 3.5em) center,
+    calc(100% - 2.2em) center,
+    calc(100% - 0.9em) center;
+  background-repeat: no-repeat;
 }
 
 /* Эффект ломания блока - трещины и разлом */
