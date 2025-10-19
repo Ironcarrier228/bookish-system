@@ -4,27 +4,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Minecraft Хроники</title>
-  <link rel="icon" href="favicon.png" type="image/x-icon">
+  <link rel="icon" href="favicon.png" type="image/png">
   <link rel="stylesheet" href="styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="container">
-
-    <!-- Логотип -->
     <img src="logo.png" alt="Minecraft Хроники" class="logo">
-
-    <!-- Заголовок -->
     <h1 class="title">История версий Minecraft</h1>
 
-    <!-- Функционал: поиск + случайная версия + тема -->
     <div class="controls">
       <input type="text" id="search" placeholder="Поиск по версии или названию..." onkeyup="filterVersions()">
       <button onclick="randomVersion()">🎲 Случайная</button>
+      <button onclick="window.location.href='mechanics.html'">⚙️ Механики</button>
       <button id="theme-toggle" onclick="toggleTheme()">🌙 / ☀️</button>
     </div>
 
-    <!-- Список версий -->
     <div class="updates" id="versions-list">
       <a href="1.16.html" class="update-card" data-title="Nether Update">
         <h2>Minecraft 1.16</h2>
@@ -48,56 +43,48 @@
       </a>
     </div>
 
-    <!-- Автор -->
     <footer class="footer">
       <p>Создано с ❤️ для любителей Minecraft • Автор: Ironcarrier</p>
     </footer>
   </div>
 
   <script>
-    // Поиск по версиям
     function filterVersions() {
       const input = document.getElementById('search');
       const filter = input.value.toLowerCase();
       const cards = document.querySelectorAll('.update-card');
-
       cards.forEach(card => {
         const title = card.getAttribute('data-title').toLowerCase();
         const version = card.querySelector('h2').textContent.toLowerCase();
-
-        if (title.includes(filter) || version.includes(filter)) {
-          card.style.display = 'block';
-        } else {
-          card.style.display = 'none';
-        }
+        card.style.display = (title.includes(filter) || version.includes(filter)) ? 'block' : 'none';
       });
     }
 
-    // Случайная версия
     function randomVersion() {
       const cards = document.querySelectorAll('.update-card');
       const randomIndex = Math.floor(Math.random() * cards.length);
       window.location.href = cards[randomIndex].href;
     }
 
-    // Переключение темы
     function toggleTheme() {
       document.body.classList.toggle('light-theme');
       const btn = document.getElementById('theme-toggle');
       if (document.body.classList.contains('light-theme')) {
         btn.textContent = '☀️';
+        localStorage.setItem('theme', 'light');
       } else {
         btn.textContent = '🌙';
+        localStorage.setItem('theme', 'dark');
       }
     }
 
-    // При загрузке — восстанавливаем тему из localStorage
     document.addEventListener('DOMContentLoaded', () => {
       if (localStorage.getItem('theme') === 'light') {
         document.body.classList.add('light-theme');
         document.getElementById('theme-toggle').textContent = '☀️';
       }
     });
+    addEventListener('DOMContentLoaded', filterVersions);
   </script>
 </body>
 </html>
