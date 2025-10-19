@@ -21,15 +21,15 @@
         </div>
 
         <div class="updates" id="versions-list">
-            <a href="1.16.html" class="update-card" data-version="1.16" data-title="Nether Update">
+            <a href="1.16.html" class="update-card fade-in" data-version="1.16" data-title="Nether Update">
                 <h2>Minecraft 1.16</h2>
                 <p class="subtitle">Nether Update</p>
             </a>
-            <a href="1.17.html" class="update-card" data-version="1.17" data-title="Caves & Cliffs: Part I">
+            <a href="1.17.html" class="update-card fade-in" data-version="1.17" data-title="Caves & Cliffs: Part I">
                 <h2>Minecraft 1.17</h2>
                 <p class="subtitle">Caves & Cliffs: Part I</p>
             </a>
-            <a href="1.18.html" class="update-card" data-version="1.18" data-title="Caves & Cliffs: Part II">
+            <a href="1.18.html" class="update-card fade-in" data-version="1.18" data-title="Caves & Cliffs: Part II">
                 <h2>Minecraft 1.18</h2>
                 <p class="subtitle">Caves & Cliffs: Part II</p>
             </a>
@@ -55,7 +55,6 @@
     </div>
     <script>
         function filterVersions() {
-            // ... (функция filterVersions остается без изменений) ...
             const input = document.getElementById('search');
             const filter = input.value.toLowerCase();
             const cards = document.querySelectorAll('.update-card');
@@ -63,12 +62,16 @@
             cards.forEach(card => {
                 const title = card.getAttribute('data-title').toLowerCase();
                 const version = card.getAttribute('data-version').toLowerCase(); 
+                // Убедимся, что карточки, управляемые JS (1.19, 1.20), не скрываются, если они уже появились
+                if (card.classList.contains('spawned') || card.classList.contains('summoned')) {
+                     card.style.display = (title.includes(filter) || version.includes(filter)) ? 'block' : 'none';
+                     return;
+                }
                 card.style.display = (title.includes(filter) || version.includes(filter)) ? 'block' : 'none';
             });
         }
 
         function randomVersion() {
-            // ... (функция randomVersion остается без изменений) ...
             const cards = document.querySelectorAll('.update-card');
             const visibleCards = Array.from(cards).filter(card => card.style.display !== 'none');
             
@@ -79,7 +82,6 @@
         }
 
         function toggleTheme() {
-            // ... (функция toggleTheme остается без изменений) ...
             document.body.classList.toggle('light-theme');
             const btn = document.getElementById('theme-toggle');
             if (document.body.classList.contains('light-theme')) {
@@ -91,37 +93,54 @@
             }
         }
         
-        // НОВАЯ ФУНКЦИЯ: Управление анимацией призыва версии
+        // НОВАЯ ФУНКЦИЯ: Появление карточки 1.19 с эффектом спавна моба
+        function spawnVersion119() {
+            const card119 = document.querySelector('.update-card[data-version="1.19"]');
+            if (card119 && !card119.classList.contains('spawned')) {
+                card119.classList.add('spawned');
+            }
+        }
+        
+        // ФУНКЦИЯ: Призыв карточки 1.20 через терминал
         function summonVersion120() {
             const chat = document.getElementById('version-summon-chat');
             const card120 = document.querySelector('.update-card[data-version="1.20"]');
             
-            // Если карточка уже отображена (например, после обновления страницы), ничего не делаем
-            if (card120.classList.contains('summoned')) {
+            if (!card120 || card120.classList.contains('summoned')) {
                 return;
             }
 
             // 1. Появление чата (терминала)
             chat.classList.add('is-active');
 
-            // 2. Определение длительности печати (3 секунды, как в CSS)
+            // 2. Длительность печати и исчезновения
             const typingDuration = 3000; 
+            const disappearDuration = 500;
+            const totalChatTime = typingDuration + 1000; // 4 секунды (печать + задержка)
             
-            // 3. Исчезновение чата после печати (3с) + задержка (1с) + время появления (0.5с) = 4.5с
+            // 3. Исчезновение чата
             setTimeout(() => {
                 chat.classList.remove('is-active');
                 chat.classList.add('is-disappearing');
-            }, typingDuration + 1000); // 4 секунды
+            }, totalChatTime); 
 
-            // 4. Появление карточки 1.20 после исчезновения чата
+            // 4. Появление карточки 1.20
             setTimeout(() => {
-                // Удаляем класс исчезновения чата для чистоты
                 chat.classList.remove('is-disappearing');
-                
-                // Запускаем анимацию появления карточки
                 card120.classList.add('summoned');
+            }, totalChatTime + disappearDuration); // 4.5 секунды
+        }
+        
+        // ФУНКЦИЯ: Управление последовательностью появления
+        function initializeVersionSequence() {
+            // 1. Анимация появления для 1.16, 1.17, 1.18. 
+            // Это уже управляется CSS-классом .fade-in и его animation-delay.
 
-            }, typingDuration + 1000 + 500); // 4.5 секунды
+            // 2. Появление 1.19 (Mob Spawn) через 2 секунды после загрузки
+            setTimeout(spawnVersion119, 2000); 
+
+            // 3. Появление 1.20 (Summon Command) через 5 секунд после загрузки
+            setTimeout(summonVersion120, 5000);
         }
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -130,9 +149,8 @@
                 document.getElementById('theme-toggle').textContent = '☀️';
             }
             
-            // Запускаем анимацию при загрузке страницы
-            // Будет выполнено действие: чат → печать → исчезновение → появление карточки 1.20
-            summonVersion120(); 
+            // Запускаем последовательность появления
+            initializeVersionSequence(); 
         });
     </script>
 </body>
