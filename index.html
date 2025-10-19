@@ -1,104 +1,139 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Minecraft Хроники</title>
-  <link rel="icon" href="favicon.png" type="image/png">
-  <link rel="stylesheet" href="styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Minecraft Хроники</title>
+    <link rel="icon" href="favicon.png" type="image/png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="container">
-    <img src="logo.png" alt="Minecraft Хроники" class="logo">
-    <h1 class="title">История версий Minecraft</h1>
+    <div class="container">
+        <img src="logo.png" alt="Minecraft Хроники" class="logo">
+        <h1 class="title">История версий Minecraft</h1>
 
-    <div class="controls">
-      <input type="text" id="search" placeholder="Поиск по версии или названию..." onkeyup="filterVersions()">
-      <button onclick="randomVersion()">🎲 Случайная</button>
-      <button onclick="window.location.href='mechanics.html'">⚙️ Механики</button>
-      <button id="theme-toggle" onclick="toggleTheme()">🌙 / ☀️</button>
+        <div class="controls">
+            <input type="text" id="search" placeholder="Поиск по версии или названию..." onkeyup="filterVersions()">
+            <button onclick="randomVersion()">🎲 Случайная</button>
+            <button onclick="window.location.href='mechanics.html'">⚙️ Механики</button>
+            <button id="theme-toggle" onclick="toggleTheme()">🌙 / ☀️</button>
+        </div>
+
+        <div class="updates" id="versions-list">
+            <a href="1.16.html" class="update-card" data-version="1.16" data-title="Nether Update">
+                <h2>Minecraft 1.16</h2>
+                <p class="subtitle">Nether Update</p>
+            </a>
+            <a href="1.17.html" class="update-card" data-version="1.17" data-title="Caves & Cliffs: Part I">
+                <h2>Minecraft 1.17</h2>
+                <p class="subtitle">Caves & Cliffs: Part I</p>
+            </a>
+            <a href="1.18.html" class="update-card" data-version="1.18" data-title="Caves & Cliffs: Part II">
+                <h2>Minecraft 1.18</h2>
+                <p class="subtitle">Caves & Cliffs: Part II</p>
+            </a>
+            <a href="1.19.html" class="update-card" data-version="1.19" data-title="The Wild Update">
+                <h2>Minecraft 1.19</h2>
+                <p class="subtitle">The Wild Update</p>
+            </a>
+            <a href="1.20.html" class="update-card" data-version="1.20" data-title="Trails & Tales">
+                <h2>Minecraft 1.20</h2>
+                <p class="subtitle">Trails & Tales</p>
+            </a>
+        </div>
+
+        <footer class="footer">
+            <p>Создано с ❤️ для любителей Minecraft • Автор: Ironcarrier</p>
+        </footer>
     </div>
-
-    <div class="updates" id="versions-list">
-      <a href="1.16.html" class="update-card" data-version="1.16" data-title="Nether Update">
-        <h2>Minecraft 1.16</h2>
-        <p class="subtitle">Nether Update</p>
-      </a>
-      <a href="1.17.html" class="update-card" data-version="1.17" data-title="Caves & Cliffs: Part I">
-        <h2>Minecraft 1.17</h2>
-        <p class="subtitle">Caves & Cliffs: Part I</p>
-      </a>
-      <a href="1.18.html" class="update-card" data-version="1.18" data-title="Caves & Cliffs: Part II">
-        <h2>Minecraft 1.18</h2>
-        <p class="subtitle">Caves & Cliffs: Part II</p>
-      </a>
-      <a href="1.19.html" class="update-card" data-version="1.19" data-title="The Wild Update">
-        <h2>Minecraft 1.19</h2>
-        <p class="subtitle">The Wild Update</p>
-      </a>
-      <a href="1.20.html" class="update-card" data-version="1.20" data-title="Trails & Tales">
-        <h2>Minecraft 1.20</h2>
-        <p class="subtitle">Trails & Tales</p>
-      </a>
+    
+    <div class="terminal-chat" id="version-summon-chat">
+        <div class="terminal-input typing-animation">
+            /summon minecraft:version_1.20
+        </div>
     </div>
+    <script>
+        function filterVersions() {
+            // ... (функция filterVersions остается без изменений) ...
+            const input = document.getElementById('search');
+            const filter = input.value.toLowerCase();
+            const cards = document.querySelectorAll('.update-card');
+            
+            cards.forEach(card => {
+                const title = card.getAttribute('data-title').toLowerCase();
+                const version = card.getAttribute('data-version').toLowerCase(); 
+                card.style.display = (title.includes(filter) || version.includes(filter)) ? 'block' : 'none';
+            });
+        }
 
-    <footer class="footer">
-      <p>Создано с ❤️ для любителей Minecraft • Автор: Ironcarrier</p>
-    </footer>
-  </div>
+        function randomVersion() {
+            // ... (функция randomVersion остается без изменений) ...
+            const cards = document.querySelectorAll('.update-card');
+            const visibleCards = Array.from(cards).filter(card => card.style.display !== 'none');
+            
+            if (visibleCards.length > 0) {
+                const randomIndex = Math.floor(Math.random() * visibleCards.length);
+                window.location.href = visibleCards[randomIndex].href;
+            }
+        }
 
-  <script>
-    function filterVersions() {
-      const input = document.getElementById('search');
-      const filter = input.value.toLowerCase();
-      const cards = document.querySelectorAll('.update-card');
-      
-      cards.forEach(card => {
-        // Использование data-атрибутов для более надежной фильтрации
-        const title = card.getAttribute('data-title').toLowerCase();
-        const version = card.getAttribute('data-version').toLowerCase(); 
+        function toggleTheme() {
+            // ... (функция toggleTheme остается без изменений) ...
+            document.body.classList.toggle('light-theme');
+            const btn = document.getElementById('theme-toggle');
+            if (document.body.classList.contains('light-theme')) {
+                btn.textContent = '☀️';
+                localStorage.setItem('theme', 'light');
+            } else {
+                btn.textContent = '🌙';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
         
-        // Отображение/скрытие карточки
-        card.style.display = (title.includes(filter) || version.includes(filter)) ? 'block' : 'none';
-        
-        // Если карточка должна быть скрыта, останавливаем анимацию. 
-        // В данном случае, просто скрываем, что достаточно.
-      });
-    }
+        // НОВАЯ ФУНКЦИЯ: Управление анимацией призыва версии
+        function summonVersion120() {
+            const chat = document.getElementById('version-summon-chat');
+            const card120 = document.querySelector('.update-card[data-version="1.20"]');
+            
+            // Если карточка уже отображена (например, после обновления страницы), ничего не делаем
+            if (card120.classList.contains('summoned')) {
+                return;
+            }
 
-    function randomVersion() {
-      const cards = document.querySelectorAll('.update-card');
-      const visibleCards = Array.from(cards).filter(card => card.style.display !== 'none');
-      
-      if (visibleCards.length > 0) {
-        const randomIndex = Math.floor(Math.random() * visibleCards.length);
-        window.location.href = visibleCards[randomIndex].href;
-      }
-    }
+            // 1. Появление чата (терминала)
+            chat.classList.add('is-active');
 
-    function toggleTheme() {
-      document.body.classList.toggle('light-theme');
-      const btn = document.getElementById('theme-toggle');
-      if (document.body.classList.contains('light-theme')) {
-        btn.textContent = '☀️';
-        localStorage.setItem('theme', 'light');
-      } else {
-        btn.textContent = '🌙';
-        localStorage.setItem('theme', 'dark');
-      }
-    }
+            // 2. Определение длительности печати (3 секунды, как в CSS)
+            const typingDuration = 3000; 
+            
+            // 3. Исчезновение чата после печати (3с) + задержка (1с) + время появления (0.5с) = 4.5с
+            setTimeout(() => {
+                chat.classList.remove('is-active');
+                chat.classList.add('is-disappearing');
+            }, typingDuration + 1000); // 4 секунды
 
-    document.addEventListener('DOMContentLoaded', () => {
-      // Инициализация темы при загрузке
-      if (localStorage.getItem('theme') === 'light') {
-        document.body.classList.add('light-theme');
-        document.getElementById('theme-toggle').textContent = '☀️';
-      }
-      
-      // ИЗМЕНЕНИЕ: Убран вызов filterVersions, чтобы все карточки были видны при загрузке.
-      // addEventListener('DOMContentLoaded', filterVersions); // УДАЛЕНО
-    });
-  </script>
+            // 4. Появление карточки 1.20 после исчезновения чата
+            setTimeout(() => {
+                // Удаляем класс исчезновения чата для чистоты
+                chat.classList.remove('is-disappearing');
+                
+                // Запускаем анимацию появления карточки
+                card120.classList.add('summoned');
+
+            }, typingDuration + 1000 + 500); // 4.5 секунды
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('theme') === 'light') {
+                document.body.classList.add('light-theme');
+                document.getElementById('theme-toggle').textContent = '☀️';
+            }
+            
+            // Запускаем анимацию при загрузке страницы
+            // Будет выполнено действие: чат → печать → исчезновение → появление карточки 1.20
+            summonVersion120(); 
+        });
+    </script>
 </body>
 </html>

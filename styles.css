@@ -24,12 +24,13 @@ body {
     radial-gradient(circle at 90% 80%, rgba(255, 107, 107, 0.03) 0%, transparent 20%);
   padding: 1rem;
   min-height: 100vh;
-  transition: background 0.4s ease, color 0.4s ease; /* Добавлена анимация для цвета */
+  transition: background 0.4s ease, color 0.4s ease;
   margin: 0;
   -webkit-text-size-adjust: 100%;
   overflow-x: hidden;
 }
 
+/* --- СТИЛИ СВЕТЛОЙ ТЕМЫ (LIGHT-THEME) --- */
 body.light-theme {
   background: linear-gradient(135deg, #f0f4f8 0%, #e8eef5 100%);
   color: #2a3b5a;
@@ -41,13 +42,13 @@ body.light-theme {
 body.light-theme .update-card,
 body.light-theme .mech-card {
   background: linear-gradient(135deg, #ffffff 0%, #fafbfc 100%);
-  border-color: #2a3b5a; /* Изменен цвет границы для лучшего контраста */
+  border-color: #2a3b5a;
   box-shadow: 0 8px 20px rgba(0,0,0,0.08);
 }
 
 body.light-theme .update-card:hover,
 body.light-theme .mech-card:hover {
-  border-color: var(--accent-red); /* #ff6b6b */
+  border-color: var(--accent-red);
   box-shadow: 0 12px 30px rgba(212, 175, 55, 0.2);
 }
 
@@ -56,8 +57,8 @@ body.light-theme .author,
 body.light-theme .desc,
 body.light-theme .footer p,
 body.light-theme .back-link,
-body.light-theme .update-card h2, /* Убран !important */
-body.light-theme .mech-card h2 { /* Убран !important */
+body.light-theme .update-card h2,
+body.light-theme .mech-card h2 {
   color: #2a3b5a;
 }
 
@@ -67,8 +68,13 @@ body.light-theme .logo {
 
 body.light-theme #search {
   background: rgba(255,255,255,0.8);
-  border-color: #2a3b5a; /* Изменен цвет границы */
+  border-color: #2a3b5a;
   color: #2a3b5a;
+}
+
+/* --- ОБЩИЕ ЭЛЕМЕНТЫ И LAYOUT --- */
+.container {
+  max-width: 100%; 
 }
 
 .logo {
@@ -88,21 +94,6 @@ body.light-theme #search {
   box-shadow: 0 12px 35px rgba(212, 175, 55, 0.3);
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.container {
-  max-width: 100%; /* Убедимся, что контейнер не мешает адаптивности */
-}
-
 .title {
   font-family: 'Press Start 2P', cursive;
   font-size: 1.8rem;
@@ -114,26 +105,6 @@ body.light-theme #search {
   animation: glow 2s infinite alternate, slideDown 0.6s ease-out;
 }
 
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes glow {
-  from { 
-    text-shadow: 0 0 5px var(--accent-gold), 0 0 10px var(--accent-gold); 
-  }
-  to { 
-    text-shadow: 0 0 15px var(--accent-gold), 0 0 25px var(--accent-red), 0 0 35px rgba(212, 175, 55, 0.4); 
-  }
-}
-
 .controls {
   display: flex;
   gap: 0.5rem;
@@ -143,6 +114,7 @@ body.light-theme #search {
   animation: fadeIn 0.8s ease-out 0.2s backwards;
 }
 
+/* --- ПОИСК И КНОПКИ --- */
 #search {
   padding: 0.6rem 0.8rem;
   border: 2px solid var(--accent-gold);
@@ -216,6 +188,7 @@ body.light-theme #search {
   transform: translateY(-1px);
 }
 
+/* --- КАРТОЧКИ ОБНОВЛЕНИЙ (.update-card) --- */
 .updates {
   display: flex;
   flex-direction: column;
@@ -235,26 +208,15 @@ body.light-theme #search {
   box-shadow: 0 6px 15px var(--shadow);
   position: relative;
   overflow: hidden;
-  /* Все карточки видимы сразу */
-  opacity: 1;
-  animation: fadeInUp 0.5s ease-out; /* Добавлена анимация появления */
+  opacity: 1; /* Видимы по умолчанию */
+  animation: fadeInUp 0.5s ease-out;
 }
 
-/* УБРАН ИЗЛИШНИЙ СТИЛЬ: Только 5-я карточка (1.20) с терминалом - будет показана сразу */
-/* .update-card:nth-child(5) {
-  position: relative;
-  animation: commandSummon 1s ease-out forwards;
-  animation-delay: 3.5s;
+/* СКРЫВАЕМ КАРТОЧКУ 1.20 для анимации "призыва" */
+.update-card[data-version="1.20"] {
   opacity: 0;
-} */
-
-/* УБРАНЫ ЛИШНИЕ СТИЛИ: Остальные карточки видимы сразу */
-/* .update-card:nth-child(1),
-.update-card:nth-child(2),
-.update-card:nth-child(3),
-.update-card:nth-child(4) {
-  opacity: 1;
-} */
+  animation: none; 
+}
 
 .update-card::before {
   content: '';
@@ -294,10 +256,6 @@ body.light-theme #search {
   z-index: 1;
 }
 
-/* body.light-theme .update-card h2 {
-  color: #2a3b5a !important; /* УДАЛЕНО !important */
-/* } */
-
 .update-card:hover {
   transform: translateY(-8px) scale(1.02);
   box-shadow: 0 15px 35px rgba(212, 175, 55, 0.4);
@@ -313,6 +271,7 @@ body.light-theme #search {
   transform: translateX(5px);
 }
 
+/* --- КАРТОЧКИ МЕХАНИК (.mech-card) --- */
 .back-link {
   display: inline-block;
   color: var(--accent-gold);
@@ -359,12 +318,9 @@ body.light-theme #search {
   box-shadow: 0 6px 15px var(--shadow);
   overflow: hidden;
   position: relative;
-  opacity: 1; /* УБРАНЫ ЛИШНИЕ СТИЛИ: Все карточки видимы сразу */
-  animation: fadeInUp 0.5s ease-out; /* Добавлена анимация появления */
+  opacity: 1; 
+  animation: fadeInUp 0.5s ease-out;
 }
-
-/* УБРАНЫ ЛИШНИЕ СТИЛИ: Применяем ТОЛЬКО commandSummon к механикам */
-/* .mech-card:nth-child(1) { opacity: 1; } и т.д. до 12 */
 
 .mech-card::after {
   content: '';
@@ -416,10 +372,6 @@ body.light-theme #search {
   z-index: 1;
 }
 
-/* body.light-theme .mech-card h2 {
-  color: #2a3b5a !important; /* УДАЛЕНО !important */
-/* } */
-
 .mech-card:hover h2 {
   color: var(--accent-red);
   transform: scale(1.05);
@@ -448,28 +400,59 @@ body.light-theme #search {
   animation: fadeIn 1s ease-out;
 }
 
-/* АНИМАЦИИ ОСТАВЛЕНЫ, НО НЕ ИСПОЛЬЗУЮТСЯ ДЛЯ СКРЫТИЯ/ОТОБРАЖЕНИЯ ЭЛЕМЕНТОВ */
+/* --- СТИЛИ ЧАТА/ТЕРМИНАЛА MINECRAFT (НОВОЕ) --- */
 
-/* Терминал input для 5-й карточки - УДАЛЕНА ТЕРМИНАЛЬНАЯ АНИМАЦИЯ, КОТОРАЯ СКРЫВАЛА КАРТОЧКУ */
-/* Чтобы не скрывать карточку, убрал сложную анимацию и заменил ее на простой эффект */
-/*
-.update-card:nth-child(5)::before {
-  content: '/summon minecraft:version_1.20';
-  position: absolute;
-  ...
+.terminal-chat {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
   pointer-events: none;
-  z-index: 100;
-  
-  
-  animation:
-    terminalAppear 0.5s ease-out 0s forwards,
-    typeCommand 3s steps(33) 0.5s forwards,
-    blinkCursor 0.5s step-end 0.5s infinite alternate,
-    terminalDisappear 0.5s ease-out 4s forwards;
   opacity: 0;
+  transition: opacity 0.5s ease;
+  width: 90%;
+  max-width: 450px;
 }
-*/
-/* Вместо сложной анимации, простое появление для всех: */
+
+.terminal-input {
+  display: block;
+  /* Основной стиль чата Minecraft */
+  background-color: rgba(0, 0, 0, 0.75); 
+  color: #ffffff; 
+  padding: 10px 15px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1.2rem;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.3); 
+  overflow: hidden; 
+  white-space: nowrap; 
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.typing-animation {
+  width: 0; 
+  /* Анимации: typeCommand - печатает, blinkCursor - мигает */
+  animation: 
+    typeCommand 3s steps(32, end) 1s forwards,
+    blinkCursor 0.75s step-end infinite;
+  border-right: 0.15em solid #ffffff; 
+}
+
+.terminal-chat.is-active {
+  opacity: 1;
+  animation: terminalAppear 0.5s ease-out forwards;
+}
+
+.terminal-chat.is-disappearing {
+  animation: terminalDisappear 0.5s ease-in forwards;
+}
+
+/* --- КЛЮЧЕВЫЕ КАДРЫ АНИМАЦИЙ --- */
+
+/* Общее появление карточек */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -481,59 +464,76 @@ body.light-theme #search {
   }
 }
 
-
-@media (min-width: 768px) {
-  .container {
-    max-width: 850px;
-    margin: 0 auto;
-    padding: 2rem 1rem;
+/* Появление карточки 1.20 после "призыва" */
+@keyframes summonCard {
+  from {
+    opacity: 0;
+    transform: translateY(50px) scale(0.9);
+    filter: blur(10px);
   }
-  
-  .logo { 
-    max-width: 300px; 
-  }
-  
-  .title { 
-    font-size: 2.2rem; 
-  }
-  
-  .update-card h2 { 
-    font-size: 1.7rem; 
-  }
-  
-  .update-card .subtitle { 
-    font-size: 1.35rem; 
-  }
-  
-  .mech-card h2 { 
-    font-size: 1.4rem; 
-  }
-  
-  .controls { 
-    flex-direction: row; 
-  }
-  
-  #search { 
-    width: 250px; 
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
   }
 }
 
-@media (max-width: 767px) {
-  .title {
-    font-size: 1.5rem;
+.update-card.summoned {
+  animation: summonCard 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  opacity: 1;
+}
+
+/* Анимация чата/терминала */
+@keyframes typeCommand {
+  from {
+    width: 0;
   }
-  
-  .update-card h2 {
-    font-size: 1.2rem;
-  }
-  
-  .mech-card h2 {
-    font-size: 1.1rem;
+  to {
+    width: 100%;
   }
 }
 
-/* Прелоадер для изображений */
-/* Анимация `shimmer` теперь **будет применена** только к изображениям, у которых нет источника */
+@keyframes blinkCursor {
+  50% {
+    border-right-color: transparent;
+  }
+}
+
+@keyframes terminalAppear {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -40%) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes terminalDisappear {
+  to {
+    opacity: 0;
+    transform: translate(-50%, -60%) scale(0.9);
+  }
+}
+
+/* Старые анимации (оставлены, так как они могут использоваться в других файлах или не мешают) */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 5px var(--accent-gold), 0 0 10px var(--accent-gold); }
+  to { text-shadow: 0 0 15px var(--accent-gold), 0 0 25px var(--accent-red), 0 0 35px rgba(212, 175, 55, 0.4); }
+}
+
+/* Эффекты прелоадера */
 .mech-img:not([src]) {
   background: linear-gradient(90deg, 
     rgba(212, 175, 55, 0.1) 0%, 
@@ -544,17 +544,31 @@ body.light-theme #search {
   animation: shimmer 2s infinite;
 }
 
-/* Убран лишний селектор, который применял анимацию всегда
-.mech-img[src] {
-  animation: shimmer 2s infinite; 
-}
-*/
-
 @keyframes shimmer {
-  0% {
-    background-position: -200% 0;
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+
+/* --- МЕДИАЗАПРОСЫ (ADAPTIVE) --- */
+@media (min-width: 768px) {
+  .container {
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
   }
-  100% {
-    background-position: 200% 0;
-  }
+  
+  .logo { max-width: 300px; }
+  .title { font-size: 2.2rem; }
+  .update-card h2 { font-size: 1.7rem; }
+  .update-card .subtitle { font-size: 1.35rem; }
+  .mech-card h2 { font-size: 1.4rem; }
+  .controls { flex-direction: row; }
+  #search { width: 250px; }
+}
+
+@media (max-width: 767px) {
+  .title { font-size: 1.5rem; }
+  .update-card h2 { font-size: 1.2rem; }
+  .mech-card h2 { font-size: 1.1rem; }
 }
