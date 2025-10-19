@@ -230,137 +230,11 @@ body.light-theme #search {
   overflow: hidden;
 }
 
-/* Применяем анимацию с командой ко всем карточкам */
-.update-card:nth-child(1) {
-  animation: commandSummon 1.5s ease-out forwards;
-  animation-delay: 0.2s;
-  opacity: 0;
-}
-
-.update-card:nth-child(1)::before {
-  animation: typeCommand 1.7s ease-out forwards;
-  animation-delay: 0s;
-}
-
-.update-card:nth-child(2) {
-  animation: commandSummon 1.5s ease-out forwards;
-  animation-delay: 0.5s;
-  opacity: 0;
-}
-
-.update-card:nth-child(2)::before {
-  animation: typeCommand 1.7s ease-out forwards;
-  animation-delay: 0.3s;
-}
-
-.update-card:nth-child(3) {
-  animation: commandSummon 1.5s ease-out forwards;
-  animation-delay: 0.8s;
-  opacity: 0;
-}
-
-.update-card:nth-child(3)::before {
-  animation: typeCommand 1.7s ease-out forwards;
-  animation-delay: 0.6s;
-}
-
-.update-card:nth-child(4) {
-  animation: commandSummon 1.5s ease-out forwards;
-  animation-delay: 1.1s;
-  opacity: 0;
-}
-
-.update-card:nth-child(4)::before {
-  animation: typeCommand 1.7s ease-out forwards;
-  animation-delay: 0.9s;
-}
-
-.update-card:nth-child(5) {
-  animation: commandSummon 1.5s ease-out forwards;
-  animation-delay: 1.4s;
-  opacity: 0;
-}
-
-.update-card:nth-child(5)::before {
-  animation: typeCommand 1.7s ease-out forwards;
-  animation-delay: 1.2s;
-}
-
-.update-card:nth-child(6) {
-  animation: commandSummon 1.5s ease-out forwards;
-  animation-delay: 1.7s;
-  opacity: 0;
-}
-
-.update-card:nth-child(6)::before {
-  animation: typeCommand 1.7s ease-out forwards;
-  animation-delay: 1.5s;
-}
-
-.update-card:nth-child(7) {
-  animation: commandSummon 1.5s ease-out forwards;
-  animation-delay: 2s;
-  opacity: 0;
-}
-
-.update-card:nth-child(7)::before {
-  animation: typeCommand 1.7s ease-out forwards;
-  animation-delay: 1.8s;
-}
-
-.update-card:nth-child(8) {
-  animation: commandSummon 1.5s ease-out forwards;
-  animation-delay: 2.3s;
-  opacity: 0;
-}
-
-.update-card:nth-child(8)::before {
-  animation: typeCommand 1.7s ease-out forwards;
-  animation-delay: 2.1s;
-}
-
-.update-card:nth-child(9) {
-  animation: commandSummon 1.5s ease-out forwards;
-  animation-delay: 2.6s;
-  opacity: 0;
-}
-
-.update-card:nth-child(9)::before {
-  animation: typeCommand 1.7s ease-out forwards;
-  animation-delay: 2.4s;
-}
-
-.update-card:nth-child(10) {
-  animation: commandSummon 1.5s ease-out forwards;
-  animation-delay: 2.9s;
-  opacity: 0;
-}
-
-.update-card:nth-child(10)::before {
-  animation: typeCommand 1.7s ease-out forwards;
-  animation-delay: 2.7s;
-}
-
+/* Только 11-я карточка с терминалом */
 .update-card:nth-child(11) {
-  animation: commandSummon 1.5s ease-out forwards;
-  animation-delay: 3.2s;
-  opacity: 0;
-}
-
-.update-card:nth-child(11)::before {
-  animation: typeCommand 1.7s ease-out forwards;
-  animation-delay: 3s;
-}
-
-.update-card:nth-child(12) {
   animation: commandSummon 1.5s ease-out forwards;
   animation-delay: 3.5s;
   opacity: 0;
-}
-
-.update-card:nth-child(12)::before {
-  animation: typeCommand 1.7s ease-out forwards;
-  animation-delay: 3.3s;
 }
 
 .update-card::before {
@@ -722,59 +596,97 @@ body.light-theme .mech-card h2 {
   }
 }
 
-/* Чат Minecraft - появляется перед карточкой */
-.update-card::before {
-  content: '';
-  position: absolute;
-  bottom: 100%;
-  left: 50%;
-  transform: translateX(-50%) translateY(20px);
-  background: rgba(0, 0, 0, 0.85);
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  padding: 8px 12px;
-  font-family: 'Press Start 2P', monospace;
-  font-size: 11px;
-  color: #ffffff;
-  white-space: nowrap;
-  opacity: 0;
-  pointer-events: none;
-  z-index: 10;
-  border-radius: 4px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+/* Анимации для терминала */
+@keyframes blinkCursor {
+  50% {
+    border-right-color: transparent;
+  }
 }
 
-/* Текст команды для каждой карточки */
-.update-card:nth-child(1)::before { content: '/summon minecraft:version_1'; }
-.update-card:nth-child(2)::before { content: '/summon minecraft:version_2'; }
-.update-card:nth-child(3)::before { content: '/summon minecraft:version_3'; }
-.update-card:nth-child(4)::before { content: '/summon minecraft:version_4'; }
-.update-card:nth-child(5)::before { content: '/summon minecraft:version_5'; }
-.update-card:nth-child(6)::before { content: '/summon minecraft:version_6'; }
-.update-card:nth-child(7)::before { content: '/summon minecraft:version_7'; }
-.update-card:nth-child(8)::before { content: '/summon minecraft:version_8'; }
-.update-card:nth-child(9)::before { content: '/summon minecraft:version_9'; }
-.update-card:nth-child(10)::before { content: '/summon minecraft:version_10'; }
-.update-card:nth-child(11)::before { content: '/summon minecraft:version_11'; }
-.update-card:nth-child(12)::before { content: '/summon minecraft:version_12'; }
+@keyframes typeAndDelete {
+  0%, 10% {
+    width: 0;
+  }
+  45%, 55% {
+    width: 100%;
+  }
+  90%, 100% {
+    width: 0;
+  }
+}
 
-/* Анимация печатания команды */
-@keyframes typeCommand {
-  0% {
-    opacity: 0;
-    transform: translateX(-50%) translateY(20px) scale(0.9);
-  }
-  10% {
+/* Терминал Minecraft для 11-й карточки */
+.update-card:nth-child(11)::before {
+  content: '';
+  position: absolute;
+  bottom: calc(100% + 20px);
+  left: 50%;
+  transform: translateX(-50%);
+  border: 0.15em solid #333;
+  background-color: #1a1a1a;
+  color: #0f0;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 14px;
+  padding: 2.5em 1.2em 1.2em;
+  width: 280px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+  border-radius: 6px;
+  overflow: hidden;
+  box-sizing: border-box;
+  z-index: 100;
+  animation: terminalAppear 0.5s ease-out forwards;
+  animation-delay: 3s;
+  opacity: 0;
+}
+
+@keyframes terminalAppear {
+  to {
     opacity: 1;
-    transform: translateX(-50%) translateY(10px) scale(1);
   }
-  90% {
-    opacity: 1;
-    transform: translateX(-50%) translateY(10px) scale(1);
-  }
-  100% {
-    opacity: 0;
-    transform: translateX(-50%) translateY(0px) scale(0.9);
-  }
+}
+
+/* Заголовок терминала */
+.update-card:nth-child(11)::after {
+  content: '';
+  position: absolute;
+  bottom: calc(100% + 20px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 280px;
+  height: 2em;
+  background-color: #333;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  box-sizing: border-box;
+  z-index: 101;
+  animation: terminalAppear 0.5s ease-out forwards;
+  animation-delay: 3s;
+  opacity: 0;
+}
+
+/* Текст команды с печатанием */
+.update-card:nth-child(11) {
+  position: relative;
+}
+
+.update-card:nth-child(11) .update-card::before {
+  content: '/summon minecraft:update_1.21';
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 0.2em solid #0f0;
+  animation:
+    typeAndDelete 6s steps(30) infinite,
+    blinkCursor 0.5s step-end infinite alternate;
+  position: absolute;
+  bottom: calc(100% + 40px);
+  left: 50%;
+  transform: translateX(-50%);
+  color: #0f0;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 14px;
+  z-index: 102;
+  padding-left: 10px;
 }
 
 /* Эффект ломания блока - трещины и разлом */
