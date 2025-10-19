@@ -230,11 +230,20 @@ body.light-theme #search {
   overflow: hidden;
 }
 
-/* Только 11-я карточка с терминалом */
-.update-card:nth-child(11) {
+/* Только 5-я карточка (1.20) с терминалом */
+.update-card:nth-child(5) {
+  position: relative;
   animation: commandSummon 1.5s ease-out forwards;
-  animation-delay: 3.5s;
+  animation-delay: 1s;
   opacity: 0;
+}
+
+/* Остальные карточки видимы сразу */
+.update-card:nth-child(1),
+.update-card:nth-child(2),
+.update-card:nth-child(3),
+.update-card:nth-child(4) {
+  opacity: 1;
 }
 
 .update-card::before {
@@ -586,10 +595,6 @@ body.light-theme .mech-card h2 {
     opacity: 0;
     transform: translateY(80px) scale(0.8);
   }
-  50% {
-    opacity: 0;
-    transform: translateY(80px) scale(0.8);
-  }
   100% {
     opacity: 1;
     transform: translateY(0) scale(1);
@@ -604,14 +609,11 @@ body.light-theme .mech-card h2 {
 }
 
 @keyframes typeCommand {
-  0%, 10% {
+  0% {
     width: 0;
   }
-  45%, 55% {
+  100% {
     width: 100%;
-  }
-  90%, 100% {
-    width: 0;
   }
 }
 
@@ -626,9 +628,20 @@ body.light-theme .mech-card h2 {
   }
 }
 
+@keyframes terminalDisappear {
+  from {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-10px);
+  }
+}
+
 /* Терминал Minecraft для 5-й карточки */
 .update-card:nth-child(5)::before {
-  content: '/summon minecraft:update_1.20';
+  content: '/summon minecraft:version_1.20';
   position: absolute;
   bottom: calc(100% + 45px);
   left: 50%;
@@ -647,12 +660,17 @@ body.light-theme .mech-card h2 {
   white-space: nowrap;
   overflow: hidden;
   border-right: 0.15em solid #0f0;
-  animation:
-    terminalAppear 0.5s ease-out forwards,
-    typeCommand 6s steps(30) 0.5s infinite,
-    blinkCursor 0.5s step-end 0.5s infinite alternate;
-  opacity: 0;
   pointer-events: none;
+  
+  /* Анимация: появление терминала -> печать команды -> исчезновение */
+  animation:
+    terminalAppear 0.5s ease-out 0s forwards,
+    typeCommand 2s steps(33) 0.5s forwards,
+    blinkCursor 0.5s step-end 0.5s infinite alternate,
+    terminalDisappear 0.5s ease-out 3s forwards;
+  opacity: 0;
+  width: 0;
+  padding-right: 1.5em;
 }
 
 /* Заголовок терминала с кнопками */
@@ -674,11 +692,9 @@ body.light-theme .mech-card h2 {
   font-size: 11px;
   line-height: 2.5em;
   padding-left: 1em;
-  animation: terminalAppear 0.5s ease-out forwards;
-  opacity: 0;
   pointer-events: none;
   
-  /* Добавляем кнопки через background */
+  /* Кнопки через background */
   background-image: 
     radial-gradient(circle, #e33 40%, transparent 40%),
     radial-gradient(circle, #ee0 40%, transparent 40%),
@@ -689,6 +705,12 @@ body.light-theme .mech-card h2 {
     calc(100% - 2.2em) center,
     calc(100% - 0.9em) center;
   background-repeat: no-repeat;
+  
+  /* Синхронизируем с терминалом */
+  animation:
+    terminalAppear 0.5s ease-out 0s forwards,
+    terminalDisappear 0.5s ease-out 3s forwards;
+  opacity: 0;
 }
 
 /* Эффект ломания блока - трещины и разлом */
