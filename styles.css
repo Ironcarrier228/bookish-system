@@ -226,9 +226,69 @@ body.light-theme #search {
   color: inherit;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   box-shadow: 0 6px 15px var(--shadow);
-  animation: fadeInUp 0.6s ease forwards;
   position: relative;
   overflow: hidden;
+}
+
+/* Применяем разные анимации к каждой карточке */
+.update-card:nth-child(1) {
+  animation: enderTeleport 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation-delay: 0.1s;
+  opacity: 0;
+}
+
+.update-card:nth-child(2) {
+  animation: portalExit 1s ease-out forwards;
+  animation-delay: 0.3s;
+  opacity: 0;
+}
+
+.update-card:nth-child(3) {
+  animation: skyFall 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation-delay: 0.5s;
+  opacity: 0;
+}
+
+.update-card:nth-child(4) {
+  animation: creeperBoom 0.7s ease-out forwards;
+  animation-delay: 0.7s;
+  opacity: 0;
+}
+
+.update-card:nth-child(5) {
+  animation: commandSummon 0.8s ease-out forwards;
+  animation-delay: 0.9s;
+  opacity: 0;
+}
+
+.update-card:nth-child(6) {
+  animation: blockSlide 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation-delay: 1.1s;
+  opacity: 0;
+}
+
+.update-card:nth-child(7) {
+  animation: enderTeleport 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation-delay: 1.3s;
+  opacity: 0;
+}
+
+.update-card:nth-child(8) {
+  animation: portalExit 1s ease-out forwards;
+  animation-delay: 1.5s;
+  opacity: 0;
+}
+
+.update-card:nth-child(9) {
+  animation: skyFall 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation-delay: 1.7s;
+  opacity: 0;
+}
+
+.update-card:nth-child(10) {
+  animation: creeperBoom 0.7s ease-out forwards;
+  animation-delay: 1.9s;
+  opacity: 0;
 }
 
 .update-card::before {
@@ -334,15 +394,49 @@ body.light-theme .update-card h2 {
   box-shadow: 0 6px 15px var(--shadow);
   overflow: hidden;
   position: relative;
-  animation: fadeInUp 0.6s ease forwards;
+  opacity: 0;
 }
 
-.mech-card:nth-child(1) { animation-delay: 0.1s; }
-.mech-card:nth-child(2) { animation-delay: 0.2s; }
-.mech-card:nth-child(3) { animation-delay: 0.3s; }
-.mech-card:nth-child(4) { animation-delay: 0.4s; }
-.mech-card:nth-child(5) { animation-delay: 0.5s; }
-.mech-card:nth-child(6) { animation-delay: 0.6s; }
+/* Применяем разные анимации к механикам */
+.mech-card:nth-child(1) { 
+  animation: commandSummon 0.8s ease-out forwards;
+  animation-delay: 0.2s; 
+}
+
+.mech-card:nth-child(2) { 
+  animation: blockSlide 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation-delay: 0.4s; 
+}
+
+.mech-card:nth-child(3) { 
+  animation: enderTeleport 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation-delay: 0.6s; 
+}
+
+.mech-card:nth-child(4) { 
+  animation: portalExit 1s ease-out forwards;
+  animation-delay: 0.8s; 
+}
+
+.mech-card:nth-child(5) { 
+  animation: skyFall 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation-delay: 1s; 
+}
+
+.mech-card:nth-child(6) { 
+  animation: creeperBoom 0.7s ease-out forwards;
+  animation-delay: 1.2s; 
+}
+
+.mech-card:nth-child(7) { 
+  animation: commandSummon 0.8s ease-out forwards;
+  animation-delay: 1.4s; 
+}
+
+.mech-card:nth-child(8) { 
+  animation: blockSlide 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation-delay: 1.6s; 
+}
 
 .mech-card::after {
   content: '';
@@ -424,6 +518,104 @@ body.light-theme .mech-card h2 {
   font-family: 'Caveat', cursive;
   padding: 0.8rem 0;
   animation: fadeIn 1s ease-out;
+}
+
+/* Эффект телепортации через эндер-перл */
+@keyframes enderTeleport {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) translateY(-100px);
+    filter: blur(10px) hue-rotate(270deg);
+  }
+  50% {
+    opacity: 0.5;
+    filter: blur(5px) hue-rotate(270deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0) hue-rotate(0deg);
+  }
+}
+
+/* Эффект выхода из портала */
+@keyframes portalExit {
+  0% {
+    opacity: 0;
+    transform: scale(1.5) rotateY(90deg);
+    filter: blur(15px) saturate(3);
+  }
+  50% {
+    filter: blur(8px) saturate(2);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotateY(0deg);
+    filter: blur(0) saturate(1);
+  }
+}
+
+/* Эффект падения с неба */
+@keyframes skyFall {
+  0% {
+    opacity: 0;
+    transform: translateY(-200px) rotate(-15deg) scale(0.5);
+  }
+  70% {
+    transform: translateY(10px) rotate(2deg) scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+}
+
+/* Эффект взрыва крипера */
+@keyframes creeperBoom {
+  0% {
+    opacity: 0;
+    transform: scale(3) rotate(360deg);
+    filter: brightness(5);
+  }
+  60% {
+    filter: brightness(2);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+    filter: brightness(1);
+  }
+}
+
+/* Эффект призыва командой */
+@keyframes commandSummon {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0);
+  }
+  30% {
+    box-shadow: 0 0 30px 15px rgba(212, 175, 55, 0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    box-shadow: 0 6px 15px var(--shadow);
+  }
+}
+
+/* Эффект слайда из блока */
+@keyframes blockSlide {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%) rotate(-5deg);
+    clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) rotate(0deg);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
 }
 
 @keyframes fadeInUp {
