@@ -1,4 +1,4 @@
-/* styles.css — с увеличенным текстом, логотипом и фиксом favicon */
+/* styles.css — с функционалом, увеличенным текстом и фиксом favicon */
 
 :root {
   --bg-dark: #0d1b2a;
@@ -9,12 +9,6 @@
   --shadow: rgba(0, 0, 0, 0.6);
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 body {
   background: var(--bg-dark);
   color: var(--text-light);
@@ -23,97 +17,57 @@ body {
   background-image: 
     radial-gradient(circle at 10% 20%, rgba(212, 175, 55, 0.05) 0%, transparent 20%),
     radial-gradient(circle at 90% 80%, rgba(255, 107, 107, 0.05) 0%, transparent 20%);
-  display: flex;
+  padding: 2rem 1rem;
   min-height: 100vh;
+  transition: background 0.4s ease;
 }
 
-/* Боковая панель */
-.sidebar {
-  width: 260px;
-  background: rgba(13, 27, 42, 0.94);
-  backdrop-filter: blur(10px);
-  border-right: 1px solid rgba(212, 175, 55, 0.25);
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.5);
-  z-index: 100;
+/* Светлая тема */
+body.light-theme {
+  background: #f0f4f8;
+  color: #2a3b5a;
+  background-image: none;
 }
 
-.sidebar-content {
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
+body.light-theme .update-card {
+  background: #fff;
+  border-color: #d4af37;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
+body.light-theme .update-card:hover {
+  border-color: #ff6b6b;
+}
+
+body.light-theme .title,
+body.light-theme .subtitle,
+body.light-theme .nav-link,
+body.light-theme .author,
+body.light-theme .desc {
+  color: #2a3b5a;
+}
+
+body.light-theme .logo {
+  filter: brightness(0.8);
+}
+
+/* Логотип */
 .logo {
   width: 100%;
-  max-width: 200px;
+  max-width: 300px;
   height: auto;
-  margin-bottom: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-}
-
-.author {
-  font-size: 1.05rem;
-  color: #b0c0d0;
-}
-
-.author strong {
-  color: var(--accent-gold);
-  font-weight: bold;
-}
-
-.desc {
-  font-size: 1rem;
-  color: #d0d5e0;
-  font-style: italic;
-  line-height: 1.5;
-}
-
-.sidebar-nav {
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-}
-
-.nav-link {
+  margin: 0 auto 1.5rem;
   display: block;
-  padding: 0.65rem;
-  text-decoration: none;
-  color: var(--text-light);
-  border-radius: 6px;
-  transition: all 0.3s ease;
-  font-size: 1.05rem;
-  font-family: 'Caveat', cursive;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
-.nav-link:hover,
-.nav-link.active {
-  background: rgba(212, 175, 55, 0.2);
-  color: var(--accent-gold);
-  border-left: 3px solid var(--accent-gold);
-}
-
-/* Основной контент */
-.main-content {
-  flex: 1;
-  padding: 2rem 1.5rem;
-  overflow-y: auto;
-  width: 0;
-}
-
-.container {
-  max-width: 850px;
-  margin: 0 auto;
-}
-
+/* Заголовок */
 .title {
   font-family: 'Press Start 2P', cursive;
-  font-size: 2.1rem;
+  font-size: 2.2rem;
   color: var(--accent-gold);
-  margin: 0 0 2rem;
+  margin: 0 0 1.5rem;
   text-shadow: 0 0 12px rgba(212, 175, 55, 0.8);
   text-align: center;
   letter-spacing: 1px;
@@ -125,10 +79,56 @@ body {
   to { text-shadow: 0 0 18px var(--accent-gold), 0 0 30px var(--accent-red); }
 }
 
+/* Функционал: поиск, кнопки */
+.controls {
+  display: flex;
+  gap: 0.8rem;
+  margin: 1rem 0 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#search {
+  padding: 0.6rem 1rem;
+  border: 2px solid var(--accent-gold);
+  border-radius: 30px;
+  font-size: 1rem;
+  background: rgba(255,255,255,0.05);
+  color: inherit;
+  width: 250px;
+  transition: all 0.3s ease;
+}
+
+#search:focus {
+  outline: none;
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+  background: rgba(255,255,255,0.1);
+}
+
+.controls button {
+  background: var(--accent-gold);
+  color: var(--bg-dark);
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Caveat', cursive;
+  font-size: 1rem;
+}
+
+.controls button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(255,255,255,0.4);
+}
+
+/* Список версий */
 .updates {
   display: flex;
   flex-direction: column;
   gap: 1.4rem;
+  margin-top: 1rem;
 }
 
 .update-card {
@@ -167,61 +167,6 @@ body {
   border-color: var(--accent-red);
 }
 
-/* Баннер */
-.banner {
-  margin: 1.5rem 0;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
-  background: #000;
-}
-
-.banner img {
-  width: 100%;
-  height: auto;
-  display: block;
-  transition: transform 0.4s ease;
-}
-
-.banner img:hover {
-  transform: scale(1.02);
-}
-
-/* Контент страницы версии */
-.content {
-  background: var(--bg-card);
-  padding: 1.8rem;
-  border-radius: 12px;
-  margin: 1.5rem 0;
-  font-size: 1.1rem;
-}
-
-.content ul {
-  padding-left: 1.8rem;
-  margin-top: 1rem;
-}
-
-.content li {
-  margin-bottom: 0.7rem;
-}
-
-/* Ссылка "Назад" */
-.back-link {
-  display: inline-block;
-  color: var(--accent-gold);
-  text-decoration: none;
-  margin-bottom: 1.5rem;
-  font-weight: bold;
-  transition: color 0.3s;
-  font-family: 'Press Start 2P', cursive;
-  font-size: 0.9rem;
-}
-
-.back-link:hover {
-  color: var(--accent-red);
-  text-decoration: underline;
-}
-
 /* Футер */
 .footer {
   text-align: center;
@@ -245,19 +190,8 @@ body {
 
 /* Адаптивность */
 @media (max-width: 768px) {
-  body {
-    flex-direction: column;
-  }
-
-  .sidebar {
-    width: 100%;
-    border-right: none;
-    border-bottom: 1px solid rgba(212, 175, 55, 0.25);
-    padding: 1.2rem;
-  }
-
-  .main-content {
-    padding: 1.5rem 1rem;
+  .logo {
+    max-width: 220px;
   }
 
   .title {
@@ -273,11 +207,12 @@ body {
     font-size: 1.25rem;
   }
 
-  .author, .desc, .nav-link {
-    font-size: 1rem;
+  .controls {
+    flex-direction: column;
+    align-items: stretch;
   }
 
-  .logo {
-    max-width: 160px;
+  #search {
+    width: 100%;
   }
 }
