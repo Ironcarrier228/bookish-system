@@ -1,273 +1,227 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Minecraft Хроники</title>
-    <link rel="icon" href="favicon.png" type="image/png">
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Minecraft Хроники</title>
+    <link rel="icon" href="favicon.png" type="image/png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <img src="logo.png" alt="Minecraft Хроники" class="logo">
-        <h1 class="title">История версий Minecraft</h1>
+    <div class="container">
+        <img src="logo.png" alt="Minecraft Хроники" class="logo">
+        <h1 class="title">История версий Minecraft</h1>
 
-        <div class="controls">
-            <input type="text" id="search" placeholder="Поиск по версии или названию..." onkeyup="filterVersions()">
-            <button onclick="randomVersion()">🎲 Случайная</button>
-            <button onclick="window.location.href='mechanics.html'">⚙️ Механики</button>
-            <button id="theme-toggle" onclick="toggleTheme()">🌙 / ☀️</button>
-        </div>
+        <div class="controls">
+            <input type="text" id="search" placeholder="Поиск по версии или названию..." onkeyup="filterVersions()">
+            <button onclick="randomVersion()">🎲 Случайная</button>
+            <button onclick="window.location.href='mechanics.html'">⚙️ Механики</button>
+            <button id="theme-toggle" onclick="toggleTheme()">🌙 / ☀️</button>
+        </div>
 
-        <div class="updates" id="versions-list">
-            
-                                                            <a href="1.0.html" class="update-card old-version stopped" data-version="1.0" data-title="Adventure Update">
-                <h2>Minecraft 1.0</h2>
-                <p class="subtitle">Adventure Update</p>
-            </a>
-            <a href="1.1.html" class="update-card old-version stopped" data-version="1.1" data-title="Second Adventure Update">
-                <h2>Minecraft 1.1</h2>
-                <p class="subtitle">Second Adventure Update</p>
-            </a>
-            <a href="1.2.html" class="update-card old-version stopped" data-version="1.2" data-title="Jungles and Structures">
-                <h2>Minecraft 1.2.1</h2>
-                <p class="subtitle">Jungles and Structures</p>
-            </a>
-            <a href="1.3.html" class="update-card old-version stopped" data-version="1.3" data-title="Trading and Travel">
-                <h2>Minecraft 1.3.1</h2>
-                <p class="subtitle">Trading and Travel</p>
-            </a>
-            <a href="1.4.html" class="update-card old-version stopped" data-version="1.4" data-title="The Pretty Scary Update">
-                <h2>Minecraft 1.4.2</h2>
-                <p class="subtitle">The Pretty Scary Update</p>
-            </a>
-            <a href="1.5.html" class="update-card old-version stopped" data-version="1.5" data-title="The Redstone Update">
-                <h2>Minecraft 1.5</h2>
-                <p class="subtitle">The Redstone Update</p>
-            </a>
-            <a href="1.6.html" class="update-card old-version stopped" data-version="1.6" data-title="Horse Update">
-                <h2>Minecraft 1.6.1</h2>
-                <p class="subtitle">Horse Update</p>
-            </a>
-            <a href="1.7.html" class="update-card old-version stopped" data-version="1.7" data-title="The Update that Changed the World">
-                <h2>Minecraft 1.7.2</h2>
-                <p class="subtitle">The Update that Changed the World</p>
-            </a>
-            <a href="1.8.html" class="update-card old-version stopped" data-version="1.8" data-title="The Bountiful Update">
-                <h2>Minecraft 1.8</h2>
-                <p class="subtitle">The Bountiful Update</p>
-            </a>
-            <a href="1.9.html" class="update-card old-version stopped" data-version="1.9" data-title="Combat Update">
-                <h2>Minecraft 1.9</h2>
-                <p class="subtitle">Combat Update</p>
-            </a>
-            <a href="1.10.html" class="update-card old-version stopped" data-version="1.10" data-title="Frostburn Update">
-                <h2>Minecraft 1.10</h2>
-                <p class="subtitle">Frostburn Update</p>
-            </a>
-            <a href="1.11.html" class="update-card old-version stopped" data-version="1.11" data-title="Exploration Update">
-                <h2>Minecraft 1.11</h2>
-                <p class="subtitle">Exploration Update</p>
-            </a>
-            <a href="1.12.html" class="update-card old-version stopped" data-version="1.12" data-title="World of Color Update">
-                <h2>Minecraft 1.12</h2>
-                <p class="subtitle">World of Color Update</p>
-            </a>
-            <a href="1.13.html" class="update-card old-version stopped" data-version="1.13" data-title="Aquatic Update">
-                <h2>Minecraft 1.13</h2>
-                <p class="subtitle">Aquatic Update</p>
-            </a>
-            <a href="1.14.html" class="update-card old-version stopped" data-version="1.14" data-title="Village and Pillage">
-                <h2>Minecraft 1.14</h2>
-                <p class="subtitle">Village and Pillage</p>
-            </a>
-            <a href="1.15.html" class="update-card old-version stopped" data-version="1.15" data-title="Buzzy Bees">
-                <h2>Minecraft 1.15</h2>
-                <p class="subtitle">Buzzy Bees</p>
-            </a>
+        <div class="updates" id="versions-list">
+            
+            <a href="1.0.html" class="update-card" data-version="1.0" data-title="Adventure Update">
+                <h2>Minecraft 1.0</h2>
+                <p class="subtitle">Adventure Update</p>
+            </a>
+            <a href="1.1.html" class="update-card" data-version="1.1" data-title="Second Adventure Update">
+                <h2>Minecraft 1.1</h2>
+                <p class="subtitle">Second Adventure Update</p>
+            </a>
+            <a href="1.2.html" class="update-card" data-version="1.2" data-title="Jungles and Structures">
+                <h2>Minecraft 1.2.1</h2>
+                <p class="subtitle">Jungles and Structures</p>
+            </a>
+            <a href="1.3.html" class="update-card" data-version="1.3" data-title="Trading and Travel">
+                <h2>Minecraft 1.3.1</h2>
+                <p class="subtitle">Trading and Travel</p>
+            </a>
+            <a href="1.4.html" class="update-card" data-version="1.4" data-title="The Pretty Scary Update">
+                <h2>Minecraft 1.4.2</h2>
+                <p class="subtitle">The Pretty Scary Update</p>
+            </a>
+            <a href="1.5.html" class="update-card" data-version="1.5" data-title="The Redstone Update">
+                <h2>Minecraft 1.5</h2>
+                <p class="subtitle">The Redstone Update</p>
+            </a>
+            <a href="1.6.html" class="update-card" data-version="1.6" data-title="Horse Update">
+                <h2>Minecraft 1.6.1</h2>
+                <p class="subtitle">Horse Update</p>
+            </a>
+            <a href="1.7.html" class="update-card" data-version="1.7" data-title="The Update that Changed the World">
+                <h2>Minecraft 1.7.2</h2>
+                <p class="subtitle">The Update that Changed the World</p>
+            </a>
+            <a href="1.8.html" class="update-card" data-version="1.8" data-title="The Bountiful Update">
+                <h2>Minecraft 1.8</h2>
+                <p class="subtitle">The Bountiful Update</p>
+            </a>
+            <a href="1.9.html" class="update-card" data-version="1.9" data-title="Combat Update">
+                <h2>Minecraft 1.9</h2>
+                <p class="subtitle">Combat Update</p>
+            </a>
+            <a href="1.10.html" class="update-card" data-version="1.10" data-title="Frostburn Update">
+                <h2>Minecraft 1.10</h2>
+                <p class="subtitle">Frostburn Update</p>
+            </a>
+            <a href="1.11.html" class="update-card" data-version="1.11" data-title="Exploration Update">
+                <h2>Minecraft 1.11</h2>
+                <p class="subtitle">Exploration Update</p>
+            </a>
+            <a href="1.12.html" class="update-card" data-version="1.12" data-title="World of Color Update">
+                <h2>Minecraft 1.12</h2>
+                <p class="subtitle">World of Color Update</p>
+            </a>
+            <a href="1.13.html" class="update-card" data-version="1.13" data-title="Aquatic Update">
+                <h2>Minecraft 1.13</h2>
+                <p class="subtitle">Aquatic Update</p>
+            </a>
+            <a href="1.14.html" class="update-card" data-version="1.14" data-title="Village and Pillage">
+                <h2>Minecraft 1.14</h2>
+                <p class="subtitle">Village and Pillage</p>
+            </a>
+            <a href="1.15.html" class="update-card" data-version="1.15" data-title="Buzzy Bees">
+                <h2>Minecraft 1.15</h2>
+                <p class="subtitle">Buzzy Bees</p>
+            </a>
 
-                                                <a href="1.16.html" class="update-card" data-version="1.16" data-title="Nether Update">
-                <h2>Minecraft 1.16</h2>
-                <p class="subtitle">Nether Update</p>
-            </a>
-            <a href="1.17.html" class="update-card" data-version="1.17" data-title="Caves & Cliffs: Part I">
-                <h2>Minecraft 1.17</h2>
-                <p class="subtitle">Caves & Cliffs: Part I</p>
-            </a>
-            <a href="1.18.html" class="update-card" data-version="1.18" data-title="Caves & Cliffs: Part II">
-                <h2>Minecraft 1.18</h2>
-                <p class="subtitle">Caves & Cliffs: Part II</p>
-            </a>
-            <a href="1.19.html" class="update-card" data-version="1.19" data-title="The Wild Update">
-                <h2>Minecraft 1.19</h2>
-                <p class="subtitle">The Wild Update</p>
-            </a>
-            <a href="1.20.html" class="update-card" data-version="1.20" data-title="Trails & Tales">
-                <h2>Minecraft 1.20</h2>
-                <p class="subtitle">Trails & Tales</p>
-            </a>
-        </div>
+            <a href="1.16.html" class="update-card" data-version="1.16" data-title="Nether Update">
+                <h2>Minecraft 1.16</h2>
+                <p class="subtitle">Nether Update</p>
+            </a>
+            <a href="1.17.html" class="update-card" data-version="1.17" data-title="Caves & Cliffs: Part I">
+                <h2>Minecraft 1.17</h2>
+                <p class="subtitle">Caves & Cliffs: Part I</p>
+            </a>
+            <a href="1.18.html" class="update-card" data-version="1.18" data-title="Caves & Cliffs: Part II">
+                <h2>Minecraft 1.18</h2>
+                <p class="subtitle">Caves & Cliffs: Part II</p>
+            </a>
+            <a href="1.19.html" class="update-card" data-version="1.19" data-title="The Wild Update">
+                <h2>Minecraft 1.19</h2>
+                <p class="subtitle">The Wild Update</p>
+            </a>
+            <a href="1.20.html" class="update-card" data-version="1.20" data-title="Trails & Tales">
+                <h2>Minecraft 1.20</h2>
+                <p class="subtitle">Trails & Tales</p>
+            </a>
+        </div>
 
-        <footer class="footer">
-            <p>Создано с ❤️ для любителей Minecraft • Автор: Ironcarrier</p>
-        </footer>
+        <footer class="footer">
+            <p>Создано с ❤️ для любителей Minecraft • Автор: Ironcarrier</p>
+        </footer>
 
-        <div class="terminal-chat" id="version-summon-chat">
-            <div class="terminal-input typing-animation">
-                /summon minecraft:version_1.20
-            </div>
-        </div>
-        
-    </div>
-    
-    <script>
-        // Общие настройки анимаций
-        const INITIAL_BOUNCE_DURATION = 0.8; // Длительность одного прыжка для 1.16, 1.17
-        const INITIAL_BOUNCE_COUNT = 3; // Сколько раз прыгнут 1.16 и 1.17
-        const CARD_APPEAR_DELAY = 200; // Задержка между появлением 1.16, 1.17, 1.18
+        </div>
+    
+    <script>
+        // Общие настройки анимаций
+        const INITIAL_BOUNCE_DURATION = 0.8; // Длительность одного прыжка для 1.16, 1.17
+        const INITIAL_BOUNCE_COUNT = 3; // Сколько раз прыгнут 1.16 и 1.17
+        const CARD_APPEAR_DELAY = 200; // Задержка между появлением 1.16, 1.17, 1.18
+        
+        // ВСЯ ЛОГИКА СВЯЗАННАЯ С 1.20 (summonVersion120) БЫЛА УДАЛЕНА.
+        // ЛОГИКА СВЯЗАННАЯ С 1.19 (spawnVersion119) БЫЛА УДАЛЕНА.
 
-        function filterVersions() {
-            const input = document.getElementById('search');
-            const filter = input.value.toLowerCase();
-            const cards = document.querySelectorAll('.update-card');
-            
-            cards.forEach(card => {
-                const title = card.getAttribute('data-title').toLowerCase();
-                const version = card.getAttribute('data-version').toLowerCase(); 
-                
-                // Проверяем, появилась ли карточка через CSS/JS (bouncing, spawned, summoned, stopped, old-version)
-                const isAnimated = card.classList.contains('bouncing') || card.classList.contains('spawned') || card.classList.contains('summoned') || card.classList.contains('stopped') || card.classList.contains('old-version');
-                
-                if (isAnimated) {
-                     card.style.display = (title.includes(filter) || version.includes(filter)) ? 'block' : 'none';
-                }
-            });
-        }
+        function filterVersions() {
+            const input = document.getElementById('search');
+            const filter = input.value.toLowerCase();
+            const cards = document.querySelectorAll('.update-card');
+            
+            cards.forEach(card => {
+                const title = card.getAttribute('data-title').toLowerCase();
+                const version = card.getAttribute('data-version').toLowerCase(); 
+                
+                // Проверяем, появилась ли карточка через CSS/JS (bouncing, spawned, summoned)
+                const isAnimated = card.classList.contains('bouncing') || card.classList.contains('spawned') || card.classList.contains('summoned');
+                
+                // Проверка номера версии для старых карт (до 1.16)
+                if (isAnimated || (Number(version) < 1.16 && !isAnimated)) {
+                    card.style.display = (title.includes(filter) || version.includes(filter)) ? 'block' : 'none';
+                }
+            });
+        }
 
-        function randomVersion() {
-            const cards = document.querySelectorAll('.update-card');
-            // Учитываем только те карточки, которые уже появились
-            const visibleCards = Array.from(cards).filter(card => 
-                card.classList.contains('bouncing') || // Добавляем сюда, хотя они скоро остановятся
-                card.classList.contains('stopped') || // Остановленные
-                card.classList.contains('spawned') || 
-                card.classList.contains('summoned') ||
-                card.classList.contains('old-version') // Старые версии
-            );
-            
-            if (visibleCards.length > 0) {
-                const randomIndex = Math.floor(Math.random() * visibleCards.length);
-                window.location.href = visibleCards[randomIndex].href;
-            }
-        }
+        function randomVersion() {
+            const cards = document.querySelectorAll('.update-card');
+            // Учитываем только те карточки, которые уже появились
+            const visibleCards = Array.from(cards).filter(card => 
+                card.classList.contains('bouncing') || 
+                card.classList.contains('stopped') ||
+                card.classList.contains('spawned') ||
+                card.classList.contains('summoned') ||
+                (Number(card.getAttribute('data-version')) < 1.16 && !card.classList.contains('bouncing'))
+            );
+            
+            if (visibleCards.length > 0) {
+                const randomIndex = Math.floor(Math.random() * visibleCards.length);
+                window.location.href = visibleCards[randomIndex].href;
+            }
+        }
 
-        function toggleTheme() {
-            document.body.classList.toggle('light-theme');
-            const btn = document.getElementById('theme-toggle');
-            if (document.body.classList.contains('light-theme')) {
-                btn.textContent = '☀️';
-                localStorage.setItem('theme', 'light');
-            } else {
-                btn.textContent = '🌙';
-                localStorage.setItem('theme', 'dark');
-            }
-        }
-        
-        // Появление карточки 1.19 с эффектом спавна моба
-        function spawnVersion119() {
-            const card119 = document.querySelector('.update-card[data-version="1.19"]');
-            if (card119 && !card119.classList.contains('spawned')) {
-                card119.classList.add('spawned');
-            }
-        }
-        
-        // Призыв карточки 1.20 через терминал
-        function summonVersion120() {
-            const chat = document.getElementById('version-summon-chat');
-            const card120 = document.querySelector('.update-card[data-version="1.20"]');
-            
-            if (!card120 || card120.classList.contains('summoned')) {
-                return;
-            }
+        function toggleTheme() {
+            document.body.classList.toggle('light-theme');
+            const btn = document.getElementById('theme-toggle');
+            if (document.body.classList.contains('light-theme')) {
+                btn.textContent = '☀️';
+                localStorage.setItem('theme', 'light');
+            } else {
+                btn.textContent = '🌙';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+        
+        // Управление последовательностью появления (МОДИФИЦИРОВАНО)
+        function initializeVersionSequence() {
+            // Теперь в этом массиве 1.16, 1.17, 1.18, 1.19, 1.20
+            const cardsToAnimate = [
+                document.querySelector('.update-card[data-version="1.16"]'),
+                document.querySelector('.update-card[data-version="1.17"]'),
+                document.querySelector('.update-card[data-version="1.18"]'),
+                document.querySelector('.update-card[data-version="1.19"]'), // 1.19 добавлен сюда
+                document.querySelector('.update-card[data-version="1.20"]')  // 1.20 добавлен сюда
+            ].filter(card => card !== null);
 
-            // 1. Появление чата (терминала)
-            chat.classList.add('is-active');
+            // Длительность прыжков (1.16 и 1.17 прыгают 3 раза)
+            const stopBounceTime = INITIAL_BOUNCE_DURATION * INITIAL_BOUNCE_COUNT * 1000; // 2.4s
 
-            // 2. Длительность печати и исчезновения
-            const typingDuration = 3000; 
-            const disappearDuration = 500;
-            const totalChatTime = typingDuration + 1000; // 4 секунды (печать + задержка)
-            
-            // 3. Исчезновение чата
-            setTimeout(() => {
-                chat.classList.remove('is-active');
-                chat.classList.add('is-disappearing');
-            }, totalChatTime); 
+            cardsToAnimate.forEach((card, index) => {
+                const initialDelay = index * CARD_APPEAR_DELAY;
+                
+                setTimeout(() => {
+                    // 1.16 и 1.17 — прыжки
+                    if (index < 2) { 
+                        card.classList.add('bouncing');
+                        card.style.animationDelay = '0s';
+                    } 
+                    // 1.18, 1.19, 1.20 — простое появление (класс 'stopped' будет добавлен позже)
+                    else {
+                         // Используем класс 'spawned' для простого появления, если нет других анимаций
+                         card.classList.add('spawned'); 
+                    }
+                }, initialDelay);
+            });
 
-            // 4. Появление карточки 1.20
-            setTimeout(() => {
-                chat.classList.remove('is-disappearing');
-                card120.classList.add('summoned');
-            }, totalChatTime + disappearDuration); // 4.5 секунды
-        }
-        
-        // Управление последовательностью появления
-        function initializeVersionSequence() {
-            const cardsToBounce = [
-                document.querySelector('.update-card[data-version="1.16"]'),
-                document.querySelector('.update-card[data-version="1.17"]'),
-                document.querySelector('.update-card[data-version="1.18"]')
-            ].filter(card => card !== null);
+            // Останавливаем прыжки и фиксируем все карточки, появившиеся в последовательности
+            setTimeout(() => {
+                cardsToAnimate.forEach(card => {
+                    card.classList.remove('bouncing');
+                    card.classList.add('stopped');
+                    card.classList.remove('spawned'); // Убираем 'spawned', чтобы применились стили 'stopped'
+                });
+            }, stopBounceTime + CARD_APPEAR_DELAY * cardsToAnimate.length + 50); // Общее время появления + буфер
+        }
 
-            // Длительность прыжков (1.16 и 1.17 прыгают 3 раза)
-            const stopBounceTime = INITIAL_BOUNCE_DURATION * INITIAL_BOUNCE_COUNT * 1000; // 0.8 * 3 = 2.4s
-
-            cardsToBounce.forEach((card, index) => {
-                // 1. Задаем задержку для последовательного появления с прыжком
-                const initialDelay = index * CARD_APPEAR_DELAY;
-                
-                setTimeout(() => {
-                    // 2. Активируем прыгающую анимацию
-                    card.classList.add('bouncing');
-                    card.style.animationDelay = '0s'; // Начинаем сразу после initialDelay
-                }, initialDelay);
-            });
-
-            // 3. Останавливаем прыжки для 1.16 и 1.17, и запускаем 1.19
-            setTimeout(() => {
-                // 1.16 и 1.17: удаляем класс 'bouncing', чтобы они остановились
-                cardsToBounce.slice(0, 2).forEach(card => {
-                    card.classList.remove('bouncing');
-                    card.classList.add('stopped');
-                });
-                
-                // 1.18: добавляем 'stopped' для фиксации после ее последнего прыжка (у 1.18 нет infinite)
-                cardsToBounce[2].classList.add('stopped');
-                cardsToBounce[2].classList.remove('bouncing');
-
-
-                // 4. Появление 1.19 (Mob Spawn) 
-                spawnVersion119(); 
-                
-                // Длительность анимации mobSpawn для 1.19 = 1.5s
-                const delayBeforeSummon = 1500; 
-
-                // 5. Появление 1.20 (Summon Command) после завершения анимации 1.19
-                setTimeout(summonVersion120, delayBeforeSummon);
-
-            }, stopBounceTime + CARD_APPEAR_DELAY * 2 + 50); // Общее время появления 1.18 + буфер
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            if (localStorage.getItem('theme') === 'light') {
-                document.body.classList.add('light-theme');
-                document.getElementById('theme-toggle').textContent = '☀️';
-            }
-            
-            // Запускаем последовательность появления
-            initializeVersionSequence(); 
-        });
-    </script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('theme') === 'light') {
+                document.body.classList.add('light-theme');
+                document.getElementById('theme-toggle').textContent = '☀️';
+            }
+            
+            // Запускаем последовательность появления
+            initializeVersionSequence(); 
+        });
+    </script>
 </body>
 </html>
