@@ -276,11 +276,11 @@ body.light-theme #search {
 /* --- КАРТОЧКИ ОБНОВЛЕНИЙ (.update-card) --- */
 .updates {
   display: flex;
-  flex-direction: row; /* ИЗМЕНЕНИЕ: Теперь карточки в ряд */
-  flex-wrap: wrap; /* Разрешаем перенос на новую строку */
-  gap: 1.5rem; /* Отступы между карточками */
+  flex-direction: column; /* ИЗМЕНЕНИЕ: Вертикальное расположение */
+  gap: 1.5rem; 
   margin-top: 1.5rem;
-  justify-content: center; /* Центрируем карточки в ряду */
+  justify-content: center;
+  align-items: center; /* Центрируем карточки по центру */
 }
 
 .update-card {
@@ -299,7 +299,7 @@ body.light-theme #search {
   animation: none; 
   z-index: 10; 
   width: 100%;
-  max-width: 350px; /* Ограничиваем ширину для горизонтального ряда */
+  max-width: 600px; /* Ограничение ширины для вертикального списка */
 }
 
 /* Прыгающая анимация для 1.16, 1.17, 1.18 */
@@ -523,10 +523,6 @@ body.light-theme #search {
 .mechanics-grid .mech-card:nth-child(6) { animation-delay: 0.6s; }
 
 
-/* --- УДАЛЕННЫЕ СТИЛИ ЧАТА/ТЕРМИНАЛА --- */
-/* Все стили, связанные с .terminal-chat, .terminal-input и их анимациями, были удалены */
-
-
 /* --- КЛЮЧЕВЫЕ КАДРЫ АНИМАЦИЙ --- */
 
 /* Новая анимация плавного появления карточек */
@@ -564,7 +560,6 @@ body.light-theme #search {
   100% {
     opacity: 1;
     transform: scale(1) translateY(0);
-    filter: blur(0) grayscale(0);
     box-shadow: 0 6px 15px var(--shadow);
   }
 }
