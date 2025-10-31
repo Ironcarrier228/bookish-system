@@ -5,72 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Minecraft Хроники</title>
     <link rel="icon" href="favicon.png" type="image/png">
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
-        /* Minecraft switch made by: csozi | Website: english.csozi.hu */
-        .switch {
-          font-size: 17px;
-          position: relative;
-          display: inline-block;
-          width: 4em;
-          height: 2em;
-          vertical-align: middle;
+        /* --- Minecraft-style toggle switch --- */
+        .switch-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
-
-        .switch input {
-          opacity: 0;
-          width: 0;
-          height: 0;
+        .minecraft-switch {
+            appearance: none;
+            width: 52px;
+            height: 28px;
+            background-color: #444;
+            border: 2px solid #222;
+            border-radius: 4px;
+            position: relative;
+            cursor: pointer;
+            transition: background-color 0.3s;
         }
-
-        .slider {
-          position: absolute;
-          cursor: pointer;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background-color: #ccc;
-          transition: .4s;
-          border-radius: 5px;
+        .minecraft-switch::before {
+            content: "";
+            position: absolute;
+            width: 22px;
+            height: 22px;
+            top: 1px;
+            left: 2px;
+            background: url('moon.png') center/cover no-repeat;
+            transition: all 0.3s;
         }
-
-        .off, .on {
-          position: absolute;
-          height: 2em;
-          width: 2em;
-          background-color: white;
-          transition: .4s;
-          image-rendering: pixelated;
+        .minecraft-switch:checked {
+            background-color: #d0b85c;
         }
-
-        .off { opacity: 1; }
-        .on  { opacity: 0; }
-
-        .switch input:checked + .slider {
-          background-color: #ccc;
-        }
-
-        .switch input:checked ~ .off {
-          transform: translateX(2em);
-          opacity: 0;
-        }
-
-        .switch input:checked ~ .on {
-          transform: translateX(2em);
-          opacity: 1;
-        }
-
-        /* Плавный переход темы */
-        body {
-          transition: background-color 0.6s, color 0.6s;
-        }
-
-        body.light-theme {
-          background-color: #fafafa;
-          color: #222;
+        .minecraft-switch:checked::before {
+            transform: translateX(24px);
+            background: url('sun.png') center/cover no-repeat;
         }
     </style>
 </head>
@@ -84,18 +55,97 @@
             <button onclick="randomVersion()">🎲 Случайная</button>
             <button onclick="window.location.href='mechanics.html'">⚙️ Механики</button>
 
-            <!-- Новый Minecraft переключатель темы -->
-            <label class="switch">
-                <input type="checkbox" id="theme-toggle" onclick="toggleTheme()">
-                <span class="slider"></span>
-                <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAAQABADASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAIG/8QAIxAAAgIABQQDAAAAAAAAAAAAAQMCBAAREiExBUFRcROBsf/EABQBAQAAAAAAAAAAAAAAAAAAAAX/xAAWEQADAAAAAAAAAAAAAAAAAAAAEiL/2gAMAwEAAhEDEQA/AMBTp03dNglMVuttjqnKQ2UPOfntkOThbqVVUJ12BKnogZQZpy+Ucc8knwePWJrWqyqEHVmrTahEBqpbBoAH1n635wt3a9mjN1p8X2pw0qVEbKB/CO/c4OphSVP/2Q==" class="off">
-                <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAAQABADASIAAhEBAxEB/8QAFwAAAwEAAAAAAAAAAAAAAAAAAQIEBf/EACMQAAEDAwQDAQEAAAAAAAAAAAQBAgUDESEAEjFBBlFhMkL/xAAUAQEAAAAAAAAAAAAAAAAAAAAF/8QAGBEAAwEBAAAAAAAAAAAAAAAAABIiMUH/2gAMAwEAAhEDEQA/AM+Bg4mS8coRccMOdNG01qVyH/kRvHPKKmMdr8uujPwUTG+NkRpw1AKWCbvHKa2zTGphc9u9p0q+rLqeMl4kSCGkYgtoE0HTahIz3bWGNanPrdyqWzn7p5ibh5CArnyZNMyVLpK0QSkt2BNXtVX+7ol1wuLJiyaHt+6Kyp//2Q==" class="on">
-            </label>
+            <!-- новый переключатель темы -->
+            <div class="switch-container">
+                <input type="checkbox" id="minecraft-theme-toggle" class="minecraft-switch" onchange="toggleTheme()">
+            </div>
         </div>
 
         <div class="updates" id="versions-list">
-            <!-- Все карточки версий (оставлены без изменений) -->
-            <!-- ... -->
+            <a href="1.0.html" class="update-card" data-version="1.0" data-title="Adventure Update">
+                <h2>Minecraft 1.0</h2>
+                <p class="subtitle">Adventure Update</p>
+            </a>
+            <a href="1.1.html" class="update-card" data-version="1.1" data-title="Second Adventure Update">
+                <h2>Minecraft 1.1</h2>
+                <p class="subtitle">Second Adventure Update</p>
+            </a>
+            <a href="1.2.html" class="update-card" data-version="1.2" data-title="Jungles and Structures">
+                <h2>Minecraft 1.2.1</h2>
+                <p class="subtitle">Jungles and Structures</p>
+            </a>
+            <a href="1.3.html" class="update-card" data-version="1.3" data-title="Trading and Travel">
+                <h2>Minecraft 1.3.1</h2>
+                <p class="subtitle">Trading and Travel</p>
+            </a>
+            <a href="1.4.html" class="update-card" data-version="1.4" data-title="The Pretty Scary Update">
+                <h2>Minecraft 1.4.2</h2>
+                <p class="subtitle">The Pretty Scary Update</p>
+            </a>
+            <a href="1.5.html" class="update-card" data-version="1.5" data-title="The Redstone Update">
+                <h2>Minecraft 1.5</h2>
+                <p class="subtitle">The Redstone Update</p>
+            </a>
+            <a href="1.6.html" class="update-card" data-version="1.6" data-title="Horse Update">
+                <h2>Minecraft 1.6.1</h2>
+                <p class="subtitle">Horse Update</p>
+            </a>
+            <a href="1.7.html" class="update-card" data-version="1.7" data-title="The Update that Changed the World">
+                <h2>Minecraft 1.7.2</h2>
+                <p class="subtitle">The Update that Changed the World</p>
+            </a>
+            <a href="1.8.html" class="update-card" data-version="1.8" data-title="The Bountiful Update">
+                <h2>Minecraft 1.8</h2>
+                <p class="subtitle">The Bountiful Update</p>
+            </a>
+            <a href="1.9.html" class="update-card" data-version="1.9" data-title="Combat Update">
+                <h2>Minecraft 1.9</h2>
+                <p class="subtitle">Combat Update</p>
+            </a>
+            <a href="1.10.html" class="update-card" data-version="1.10" data-title="Frostburn Update">
+                <h2>Minecraft 1.10</h2>
+                <p class="subtitle">Frostburn Update</p>
+            </a>
+            <a href="1.11.html" class="update-card" data-version="1.11" data-title="Exploration Update">
+                <h2>Minecraft 1.11</h2>
+                <p class="subtitle">Exploration Update</p>
+            </a>
+            <a href="1.12.html" class="update-card" data-version="1.12" data-title="World of Color Update">
+                <h2>Minecraft 1.12</h2>
+                <p class="subtitle">World of Color Update</p>
+            </a>
+            <a href="1.13.html" class="update-card" data-version="1.13" data-title="Aquatic Update">
+                <h2>Minecraft 1.13</h2>
+                <p class="subtitle">Aquatic Update</p>
+            </a>
+            <a href="1.14.html" class="update-card" data-version="1.14" data-title="Village and Pillage">
+                <h2>Minecraft 1.14</h2>
+                <p class="subtitle">Village and Pillage</p>
+            </a>
+            <a href="1.15.html" class="update-card" data-version="1.15" data-title="Buzzy Bees">
+                <h2>Minecraft 1.15</h2>
+                <p class="subtitle">Buzzy Bees</p>
+            </a>
+            <a href="1.16.html" class="update-card" data-version="1.16" data-title="Nether Update">
+                <h2>Minecraft 1.16</h2>
+                <p class="subtitle">Nether Update</p>
+            </a>
+            <a href="1.17.html" class="update-card" data-version="1.17" data-title="Caves & Cliffs: Part I">
+                <h2>Minecraft 1.17</h2>
+                <p class="subtitle">Caves & Cliffs: Part I</p>
+            </a>
+            <a href="1.18.html" class="update-card" data-version="1.18" data-title="Caves & Cliffs: Part II">
+                <h2>Minecraft 1.18</h2>
+                <p class="subtitle">Caves & Cliffs: Part II</p>
+            </a>
+            <a href="1.19.html" class="update-card" data-version="1.19" data-title="The Wild Update">
+                <h2>Minecraft 1.19</h2>
+                <p class="subtitle">The Wild Update</p>
+            </a>
+            <a href="1.20.html" class="update-card" data-version="1.20" data-title="Trails & Tales">
+                <h2>Minecraft 1.20</h2>
+                <p class="subtitle">Trails & Tales</p>
+            </a>
         </div>
 
         <footer class="footer">
@@ -104,88 +154,38 @@
     </div>
 
     <script>
-        const INITIAL_BOUNCE_DURATION = 0.8;
-        const INITIAL_BOUNCE_COUNT = 3;
-        const CARD_APPEAR_DELAY = 200;
-
         function filterVersions() {
             const input = document.getElementById('search');
             const filter = input.value.toLowerCase();
             const cards = document.querySelectorAll('.update-card');
             cards.forEach(card => {
                 const title = card.getAttribute('data-title').toLowerCase();
-                const version = card.getAttribute('data-version').toLowerCase(); 
-                const isAnimated = card.classList.contains('bouncing') || card.classList.contains('spawned') || card.classList.contains('summoned');
-                if (isAnimated || (Number(version) < 1.16 && !isAnimated)) {
-                    card.style.display = (title.includes(filter) || version.includes(filter)) ? 'block' : 'none';
-                }
+                const version = card.getAttribute('data-version').toLowerCase();
+                card.style.display = (title.includes(filter) || version.includes(filter)) ? 'block' : 'none';
             });
         }
 
         function randomVersion() {
-            const cards = document.querySelectorAll('.update-card');
-            const visibleCards = Array.from(cards).filter(card => 
-                card.classList.contains('bouncing') || 
-                card.classList.contains('stopped') ||
-                card.classList.contains('spawned') ||
-                card.classList.contains('summoned') ||
-                (Number(card.getAttribute('data-version')) < 1.16 && !card.classList.contains('bouncing'))
-            );
-            if (visibleCards.length > 0) {
-                const randomIndex = Math.floor(Math.random() * visibleCards.length);
-                window.location.href = visibleCards[randomIndex].href;
+            const cards = Array.from(document.querySelectorAll('.update-card'));
+            if (cards.length) {
+                const randomCard = cards[Math.floor(Math.random() * cards.length)];
+                window.location.href = randomCard.href;
             }
         }
 
         function toggleTheme() {
-            document.body.classList.toggle('light-theme');
-            const checkbox = document.getElementById('theme-toggle');
-            if (document.body.classList.contains('light-theme')) {
-                checkbox.checked = true;
-                localStorage.setItem('theme', 'light');
-            } else {
-                checkbox.checked = false;
-                localStorage.setItem('theme', 'dark');
-            }
-        }
-
-        function initializeVersionSequence() {
-            const cardsToAnimate = [
-                document.querySelector('.update-card[data-version="1.16"]'),
-                document.querySelector('.update-card[data-version="1.17"]'),
-                document.querySelector('.update-card[data-version="1.18"]'),
-                document.querySelector('.update-card[data-version="1.19"]'),
-                document.querySelector('.update-card[data-version="1.20"]')
-            ].filter(card => card !== null);
-
-            const stopBounceTime = INITIAL_BOUNCE_DURATION * INITIAL_BOUNCE_COUNT * 1000;
-
-            cardsToAnimate.forEach((card, index) => {
-                const initialDelay = index * CARD_APPEAR_DELAY;
-                setTimeout(() => {
-                    if (index < 2) { 
-                        card.classList.add('bouncing');
-                    } else {
-                        card.classList.add('spawned'); 
-                    }
-                }, initialDelay);
-            });
-
-            setTimeout(() => {
-                cardsToAnimate.forEach(card => {
-                    card.classList.remove('bouncing');
-                    card.classList.add('stopped');
-                    card.classList.remove('spawned');
-                });
-            }, stopBounceTime + CARD_APPEAR_DELAY * cardsToAnimate.length + 50);
+            const body = document.body;
+            const toggle = document.getElementById('minecraft-theme-toggle');
+            body.classList.toggle('light-theme');
+            localStorage.setItem('theme', body.classList.contains('light-theme') ? 'light' : 'dark');
+            toggle.checked = body.classList.contains('light-theme');
         }
 
         document.addEventListener('DOMContentLoaded', () => {
             if (localStorage.getItem('theme') === 'light') {
                 document.body.classList.add('light-theme');
-                document.getElementById('theme-toggle').checked = true;
+                document.getElementById('minecraft-theme-toggle').checked = true;
             }
-            initializeVersionSequence();
         });
     </script>
 </body>
